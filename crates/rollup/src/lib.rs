@@ -1,7 +1,6 @@
 //#![deny(missing_docs)]
 //#![doc = include_str!("../README.md")]
 
-use anyhow::Error;
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
@@ -39,7 +38,7 @@ impl RollupTemplate for StarterRollup {
         storage: &<Self::NativeContext as Spec>::Storage,
         ledger_db: &LedgerDB,
         da_service: &Self::DaService,
-    ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
+    ) -> anyhow::Result<jsonrpsee::RpcModule<()>> {
         register_rpc::<Self::NativeRuntime, Self::NativeContext, Self::DaService>(
             storage, ledger_db, da_service,
         )
@@ -52,7 +51,7 @@ impl RollupTemplate for StarterRollup {
         MockDaService::new(rollup_config.da.sender_address)
     }
 
-    fn create_storage_manager(&self, rollup_config: &RollupConfig<Self::DaConfig>) -> Result<Self::StorageManager, Error> {
+    fn create_storage_manager(&self, rollup_config: &RollupConfig<Self::DaConfig>) -> anyhow::Result<Self::StorageManager> {
         let storage_config = StorageConfig {
             path: rollup_config.storage.path.clone(),
         };
