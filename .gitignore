@@ -1,0 +1,4 @@
+/target/
+/rollup-starter-data/
+/crates/provers/risc0/guest-mock/target
+Cargo.lock

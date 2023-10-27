@@ -1,0 +1,29 @@
+name: Rust
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: Swatinem/rust-cache@v2
+      - name: Install cargo-risc0 # Risc0 v0.17 and higher require a cargo extension to build the guest code
+        run: cargo install cargo-risczero
+      - name: Install risc0-zkvm toolchain # Use the risc0 cargo extension to install the risc0 std library for the current toolchain
+        run: cargo risczero install
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: cargo build --verbose
+      - name: Run tests
+        run: cargo test --verbose

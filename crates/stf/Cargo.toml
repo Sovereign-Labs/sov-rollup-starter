@@ -1,0 +1,46 @@
+[package]
+name = "stf-starter"
+version = { workspace = true }
+edition = { workspace = true }
+resolver = "2"
+authors = { workspace = true }
+license = { workspace = true }
+homepage = "sovereign.xyz"
+publish = false
+
+[dependencies]
+sov-modules-api = { workspace = true }
+sov-state = { workspace = true }
+sov-accounts = { workspace = true }
+sov-bank = { workspace = true }
+sov-sequencer-registry = { workspace = true }
+sov-modules-stf-template = { workspace = true }
+sov-stf-runner = { workspace = true }
+sov-sequencer = { workspace = true, optional = true }
+sov-rollup-interface = { workspace = true }
+tracing = "0.1.37"
+
+anyhow = { workspace = true }
+serde = { workspace = true, features = ["derive", "rc"] }
+serde_json = { workspace = true, optional = true }
+jsonrpsee = { workspace = true, features = ["jsonrpsee-types"], optional = true }
+borsh = { workspace = true, features = ["rc", "bytes"] }
+clap = {workspace = true , features = ["derive"], optional = true }
+
+
+
+
+[features]
+default = []
+native = [
+	"sov-modules-api/native",
+	"sov-accounts/native",
+	"sov-bank/native",
+	"sov-sequencer-registry/native",
+	"sov-modules-stf-template/native",
+	"sov-stf-runner/native",
+    "serde_json",
+    "jsonrpsee",
+    "sov-sequencer",
+    "clap",
+]

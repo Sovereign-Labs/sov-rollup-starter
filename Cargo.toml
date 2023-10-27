@@ -1,0 +1,50 @@
+[workspace]
+
+resolver = "2"
+
+members = [
+    "crates/rollup",
+    "crates/stf",
+]
+
+[workspace.package]
+version = "0.3.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+authors = ["Informal Systems <hello@informal.systems>", "Sovereign Labs <info@sovereign.xyz>"]
+publish = false
+rust-version = "1.73"
+
+[workspace.dependencies]
+sov-modules-api             = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-state                   = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-accounts                = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-bank                    = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-ledger-rpc              = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-sequencer-registry      = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-modules-stf-template    = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-modules-rollup-template = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-stf-runner              = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-db                      = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-sequencer               = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-rollup-interface        = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-risc0-adapter           = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-first-read-last-write-cache  = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+sov-cli                          = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", branch = "nightly" }
+stf-starter = { path = "./crates/stf" }
+
+serde = { version = "1.0.188", features = ["derive", "rc"] }
+serde_json = { version = "1.0" }
+
+
+anyhow = "1.0.68"
+clap = { version = "4.2.7", features = ["derive"] }
+async-trait = "0.1.71"
+borsh = { version = "0.10.3", features = ["rc", "bytes"] }
+tracing = "0.1.40"
+tokio = { version = "1", features = ["full"] }
+tempfile = "3.5"
+jsonrpsee = { version = "0.20.1", features = ["jsonrpsee-types"] }
+
+risc0-build = "0.18"
+

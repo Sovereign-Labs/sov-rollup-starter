@@ -1,0 +1,62 @@
+[package]
+name = "sov-rollup-starter"
+version = { workspace = true }
+edition = { workspace = true }
+resolver = "2"
+authors = { workspace = true }
+license = { workspace = true }
+homepage = "sovereign.xyz"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sov-modules-api = { workspace = true, features = ["native"] }
+sov-state = { workspace = true }
+sov-accounts = { workspace = true, features = ["native"] }
+sov-bank = { workspace = true, features = ["native"] }
+sov-ledger-rpc = { workspace = true, features = ["server"] }
+sov-sequencer-registry = { workspace = true, features = ["native"] }
+sov-modules-rollup-template = { workspace = true }
+sov-modules-stf-template = { workspace = true, features = ["native"] }
+sov-stf-runner = { workspace = true, features = ["native"] }
+sov-cli = { workspace = true, optional = true }
+
+sov-db = { workspace = true }
+sov-sequencer = { workspace = true }
+sov-rollup-interface = { workspace = true, features = ["mocks"] }
+
+
+anyhow = { workspace = true }
+async-trait = { workspace = true }
+borsh = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+tracing = { workspace = true }
+serde_json = { workspace = true }
+jsonrpsee = { workspace = true }
+tokio = { workspace = true }
+
+risc0-starter = { path = "../provers/risc0" }
+stf-starter = { path = "../stf", features = ["native"] }
+
+
+sov-risc0-adapter = { workspace = true, features = ["native"] }
+
+# binary dependencies
+tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+
+
+[features]
+default = []
+
+[[bin]]
+name = "node"
+path = "src/bin/node.rs"
+
+[[bin]]
+name = "starter-cli-wallet"
+path = "src/bin/starter_cli_wallet.rs"
