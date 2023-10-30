@@ -1,6 +1,9 @@
 PROJECT_ROOT := $(shell git rev-parse --show-toplevel)
 SOV_CLI_REL_PATH := $(PROJECT_ROOT)/target/debug/starter-cli-wallet
 
+clean-db:
+	rm -rf ../../rollup-starter-data
+
 build-sov-cli:
 	cargo build --bin starter-cli-wallet
 
