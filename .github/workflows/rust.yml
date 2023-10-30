@@ -28,4 +28,4 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
       - name: Run README.md
-        run: chmod +x demo-rollup-readme.sh && ./demo-rollup-readme.sh
+        run: chmod +x sov-rollup-starter.sh && ./demo-rollup-readme.sh

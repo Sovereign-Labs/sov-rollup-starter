@@ -7,7 +7,7 @@ This package is a convenient starting point for building a rollup using the Sove
 $ cd crates/rollup/
 ```
 
-#### 2. Change the working directory:
+#### 2. Cleanup database:
 ```sh,test-ci
 $ make clean-db
 ```
@@ -32,7 +32,7 @@ $ make test-create-token
 $ make test-bank-supply-of
 ```
 
-#### 6. Verify the Token Supply
+#### 6. The output of the above script:
 
 ```bash,test-ci,bashtestmd:compare-output
 $ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":["sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"],"id":1}' http://127.0.0.1:12345
