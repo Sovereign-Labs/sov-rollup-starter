@@ -1,5 +1,5 @@
-//#![deny(missing_docs)]
-//#![doc = include_str!("../README.md")]
+#![deny(missing_docs)]
+//! StarterRollup provides a minimal self-contained rollup implementation
 
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
@@ -42,7 +42,7 @@ impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
     /// Runtime for the Native environment.
     type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
 
-    /// This method generates RPC methods for the rollup, allowing for extension with custom endpoints.
+    /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
         &self,
         storage: &<Self::NativeContext as Spec>::Storage,
@@ -91,5 +91,5 @@ impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
     }
 }
 
-// Here we get `free` Wallet implementation.
+// Here we get a `free` Wallet implementation.
 impl sov_modules_rollup_template::WalletTemplate for StarterRollup {}
