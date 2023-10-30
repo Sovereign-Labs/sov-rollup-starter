@@ -5,7 +5,6 @@ use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Spec;
-use sov_modules_rollup_template::{register_rpc, RollupTemplate, WalletTemplate};
 use sov_risc0_adapter::host::Risc0Host;
 use sov_rollup_interface::mocks::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_rollup_interface::services::da::DaService;
@@ -17,32 +16,47 @@ use stf_starter::Runtime;
 /// Rollup with [`MockDaService`].
 pub struct StarterRollup {}
 
+/// This is the place, where all the rollup components come together and
+/// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl RollupTemplate for StarterRollup {
+impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
+    /// This component defines the Data Availability layer.
     type DaService = MockDaService;
+    /// DaSpec & DaConfig are derived from DaService.
     type DaSpec = MockDaSpec;
-
     type DaConfig = MockDaConfig;
+
+    /// The concrete ZkVm used in the rollup.
     type Vm = Risc0Host<'static>;
 
+    /// Context for the Zero Knowledge environment.
     type ZkContext = ZkDefaultContext;
+    /// Context for the ZNative environment.
     type NativeContext = DefaultContext;
 
+    /// Manager for the native storage lifecycle.
     type StorageManager = sov_state::storage_manager::ProverStorageManager<DefaultStorageSpec>;
-    type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
 
+    /// Runtime for the Zero Knowledge environment.
+    type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
+    /// Runtime for the Native environment.
     type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
 
+    /// This method generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
         &self,
         storage: &<Self::NativeContext as Spec>::Storage,
         ledger_db: &LedgerDB,
         da_service: &Self::DaService,
     ) -> anyhow::Result<jsonrpsee::RpcModule<()>> {
-        register_rpc::<Self::NativeRuntime, Self::NativeContext, Self::DaService>(
-            storage, ledger_db, da_service,
-        )
+        sov_modules_rollup_template::register_rpc::<
+            Self::NativeRuntime,
+            Self::NativeContext,
+            Self::DaService,
+        >(storage, ledger_db, da_service)
     }
+
+    // Below, we provide the methods for setting up dependencies for the Rollup.
 
     async fn create_da_service(
         &self,
@@ -51,7 +65,10 @@ impl RollupTemplate for StarterRollup {
         MockDaService::new(rollup_config.da.sender_address)
     }
 
-    fn create_storage_manager(&self, rollup_config: &RollupConfig<Self::DaConfig>) -> anyhow::Result<Self::StorageManager> {
+    fn create_storage_manager(
+        &self,
+        rollup_config: &RollupConfig<Self::DaConfig>,
+    ) -> anyhow::Result<Self::StorageManager> {
         let storage_config = StorageConfig {
             path: rollup_config.storage.path.clone(),
         };
@@ -74,4 +91,5 @@ impl RollupTemplate for StarterRollup {
     }
 }
 
-impl WalletTemplate for StarterRollup {}
+// Here we get `free` Wallet implementation.
+impl sov_modules_rollup_template::WalletTemplate for StarterRollup {}
