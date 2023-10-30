@@ -1,7 +1,7 @@
 This package is a convenient starting point for building a rollup using the Sovereign SDK:
 
 # The repo structure:
-- `crates/stf`:  The STF is derived from the `Runtime`` and is used in the `rollup` and `provers`` crates.
+- `crates/stf`:  The `STF` is derived from the `Runtime` and is used in the `rollup` and `provers` crates.
 - `crates/provers`: This crate is responsible for creating proofs for the `STF`.
 - `crates/rollup`: This crate runs the `STF` and offers additional full-node functionalities.
 
