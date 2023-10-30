@@ -1,5 +1,10 @@
 This package is a convenient starting point for building a rollup using the Sovereign SDK:
 
+# The repo structure:
+- `crates/stf`:  The STF is derived from the `Runtime`` and is used in the `rollup` and `provers`` crates.
+- `crates/provers`: This crate is responsible for creating proofs for the `STF`.
+- `crates/rollup`: This crate runs the `STF` and offers additional full-node functionalities.
+
 # How to run the sov-rollup-starter:
 #### 1. Change the working directory:
 
@@ -7,26 +12,27 @@ This package is a convenient starting point for building a rollup using the Sove
 $ cd crates/rollup/
 ```
 
-#### 2. Cleanup database:
+#### 2. If you want to run a fresh rollup, clean the database:
+
 ```sh,test-ci
 $ make clean-db
 ```
 
-#### 3. Starting the node:
-If you want to run a fresh rollup remove the `rollup-starter-data` folder.
+#### 3. Start the rollup node:
+
 This will compile and start the rollup node:
 
 ```shell,test-ci,bashtestmd:long-running,bashtestmd:wait-until=RPC
 $ cargo run --bin node
 ```
 
-#### 4. In another shell run:
+#### 4. Submit a token creation transaction to the `bank` module:
 
 ```sh,test-ci
 $ make test-create-token
 ```
 
-#### 5. Test if token creation succeeded
+#### 5. Test if token creation succeeded:
 
 ```sh,test-ci
 $ make test-bank-supply-of
