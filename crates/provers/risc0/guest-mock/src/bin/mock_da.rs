@@ -15,7 +15,8 @@ risc0_zkvm::guest::entry!(main);
 pub fn main() {
     let guest = Risc0Guest::new();
     let storage = ZkStorage::new();
-    let app: AppTemplate<ZkDefaultContext, _, _, Runtime<_, _>> = AppTemplate::new();
+    let app: AppTemplate<ZkDefaultContext, _, _, Runtime<_, _>, BasicKernel<_>> =
+        AppTemplate::new();
 
     let mut stf_verifier = AppVerifier::new(app, MockDaVerifier {});
 
