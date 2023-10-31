@@ -52,20 +52,34 @@
             '';
         };
 
-        rollup-guest = nixpkgs.rustPlatform.buildRustPackage {
-            name = "hello-guest";
-
+        rollup-guest-src = nixpkgs.stdenv.mkDerivation {
+            name = "rollup-guest-src";
             src = ./.;
+            dontBuild = true;
 
-            buildAndTestSubdir = "crates/provers/risc0/guest-mock";
+            installPhase = ''
+              mkdir -p $out
+              cp -r crates $out/
+              cp Cargo.toml constants.json $out/
+            '';
+        };
+
+        rollup-guest = nixpkgs.rustPlatform.buildRustPackage {
+            name = "rollup-guest";
+
+            src = rollup-guest-src;
+
+            sourceRoot = "rollup-guest-src/crates/provers/risc0/guest-mock";
 
             cargoLock = {
                 lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
                 outputHashes = {
-                  "sha2-0.10.6" = "";
-                  "sov-accounts-0.3.0" = "";
+                  "sha2-0.10.6" = "sha256-1dDg6mujDC+vp9buyErWKq+pml2+xsjifxDDyiuoq8M=";
+                  "sov-accounts-0.3.0" = "sha256-AnF5Ly5dWFgRSt1DDBX2GXE0WtHsctCVojgAkAqs7HM=";
                 };
             };
+
+            cargoSha256 = "";
 
             nativeBuildInputs = [
                 rust-bin
@@ -77,12 +91,12 @@
             buildPhase = ''
                 RUSTC=${risc0-rust}/bin/rustc \
                     CARGO_ENCODED_RUSTFLAGS=$'-C\x1fpasses=loweratomic\x1f-C\x1flink-arg=-Ttext=0x00200800\x1f-C\x1flink-arg=--fatal-warnings\x1f-C\x1fpanic=abort\x1f-C\x1flinker=lld' \
-                    cargo build --release --target riscv32im-risc0-zkvm-elf -p risc0-guest
+                    cargo build --release --target riscv32im-risc0-zkvm-elf -p guest-mock-starter
             '';
 
             installPhase = ''
                 mkdir -p $out
-                cp target/riscv32im-risc0-zkvm-elf/release/guest-mock $out/
+                cp target/riscv32im-risc0-zkvm-elf/release/mock_da $out/
             '';
         };
     in {
