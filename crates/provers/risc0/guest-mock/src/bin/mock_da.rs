@@ -3,6 +3,7 @@
 //! of the zkvm in order to generate proofs for the rollup.
 
 use sov_modules_api::default_context::ZkDefaultContext;
+use sov_modules_stf_template::kernels::basic::BasicKernel;
 use sov_modules_stf_template::AppTemplate;
 use sov_risc0_adapter::guest::Risc0Guest;
 use sov_rollup_interface::mocks::MockDaVerifier;
