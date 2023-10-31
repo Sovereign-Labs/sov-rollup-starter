@@ -59,7 +59,13 @@
 
             buildAndTestSubdir = "crates/provers/risc0/guest-mock";
 
-            cargoSha256 = "sha256-VFABeUFCQsnxAoHIv9zVqh1h+kXLdu/ymUTtmqh9niw=";
+            cargoLock = {
+                lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
+                outputHashes = {
+                  "sha2-0.10.6" = "";
+                  "sov-accounts-0.3.0" = "";
+                };
+            };
 
             nativeBuildInputs = [
                 rust-bin

@@ -903,9 +903,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.107"
+version = "1.0.108"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6b420ce6e3d8bd882e9b243c6eed35dbc9a6110c9769e74b584e0d68d1f20c65"
+checksum = "3d1c7e3eac408d115102c4c24ad393e0821bb3a5df4d506a80f85f7a742a526b"
 dependencies = [
  "itoa",
  "ryu",
@@ -941,7 +941,7 @@ checksum = "5e1788eed21689f9cf370582dfc467ef36ed9c707f073528ddafa8d83e3b8500"
 [[package]]
 name = "sov-accounts"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -954,7 +954,7 @@ dependencies = [
 [[package]]
 name = "sov-bank"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -968,7 +968,7 @@ dependencies = [
 [[package]]
 name = "sov-first-read-last-write-cache"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "thiserror",
 ]
@@ -976,7 +976,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-api"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "bech32",
@@ -997,7 +997,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-macros"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -1011,7 +1011,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-stf-template"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -1028,7 +1028,7 @@ dependencies = [
 [[package]]
 name = "sov-risc0-adapter"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "bincode",
@@ -1043,7 +1043,7 @@ dependencies = [
 [[package]]
 name = "sov-rollup-interface"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1061,7 +1061,7 @@ dependencies = [
 [[package]]
 name = "sov-sequencer-registry"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -1074,7 +1074,7 @@ dependencies = [
 [[package]]
 name = "sov-state"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "bcs",
@@ -1092,7 +1092,7 @@ dependencies = [
 [[package]]
 name = "sov-stf-runner"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "anyhow",
  "borsh",
@@ -1105,7 +1105,7 @@ dependencies = [
 [[package]]
 name = "sov-zk-cycle-utils"
 version = "0.3.0"
-source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#bd469c70fc1227a7785fb177a34de21bb6d5eb08"
+source = "git+https://github.com/Sovereign-Labs/sovereign-sdk.git?branch=nightly#dc3d236c499598b15fbf64c8e78b7f6018b5f13d"
 dependencies = [
  "risc0-zkvm",
  "risc0-zkvm-platform",
