@@ -10,16 +10,12 @@ pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
 use sov_modules_api::capabilities::{BlobRefOrOwned, BlobSelector};
-use sov_modules_api::default_context::ZkDefaultContext;
 use sov_modules_api::macros::DefaultRuntime;
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
 use sov_modules_api::{Context, DaSpec, DispatchCall, Genesis, MessageCodec};
-use sov_modules_stf_template::AppTemplate;
-use sov_rollup_interface::da::DaVerifier;
 #[cfg(feature = "native")]
 pub use sov_sequencer_registry::{SequencerRegistryRpcImpl, SequencerRegistryRpcServer};
-use sov_stf_runner::verifier::StateTransitionVerifier;
 
 #[cfg(feature = "native")]
 use crate::genesis_config::GenesisPaths;
@@ -112,15 +108,3 @@ impl<C: Context, Da: DaSpec> BlobSelector<Da> for Runtime<C, Da> {
         Ok(current_blobs.into_iter().map(BlobRefOrOwned::Ref).collect())
     }
 }
-
-/// A verifier for the rollup
-pub type RollupVerifier<DA, Zk> = StateTransitionVerifier<
-    AppTemplate<
-        ZkDefaultContext,
-        <DA as DaVerifier>::Spec,
-        Zk,
-        Runtime<ZkDefaultContext, <DA as DaVerifier>::Spec>,
-    >,
-    DA,
-    Zk,
->;

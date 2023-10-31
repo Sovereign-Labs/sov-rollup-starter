@@ -5,6 +5,7 @@ use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Spec;
+use sov_modules_stf_template::kernels::basic::BasicKernel;
 use sov_risc0_adapter::host::Risc0Host;
 use sov_rollup_interface::mocks::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_rollup_interface::services::da::DaService;
@@ -41,6 +42,9 @@ impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
     type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
     /// Runtime for the Native environment.
     type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
+    /// Kernels.
+    type NativeKernel = BasicKernel<Self::NativeContext>;
+    type ZkKernel = BasicKernel<Self::ZkContext>;
 
     /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
