@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 trap 'jobs -p | xargs -r kill' EXIT
-echo 'Running: '\''cd crates/rollup/'\'''
-cd crates/rollup/
+echo 'Running: `cd crates/rollup/`'
+cd crates/rollup/ || exit
 if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
