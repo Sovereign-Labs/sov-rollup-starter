@@ -1,7 +1,7 @@
 use std::net::SocketAddr;
 
 use sov_modules_rollup_template::{RollupProverConfig, RollupTemplate};
-use sov_rollup_interface::mocks::{MockAddress, MockDaConfig};
+use sov_mock_da::{MockAddress, MockDaConfig};
 use sov_rollup_starter::StarterRollup;
 use sov_stf_runner::{RollupConfig, RpcConfig, RunnerConfig, StorageConfig};
 use stf_starter::genesis_config::GenesisPaths;
@@ -27,7 +27,7 @@ pub async fn start_rollup(
             },
         },
         da: MockDaConfig {
-            sender_address: MockAddress { addr: [0; 32] },
+            sender_address: MockAddress::from([0; 32]),
         },
     };
 

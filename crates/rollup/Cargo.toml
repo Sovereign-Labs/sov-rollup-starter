@@ -24,8 +24,8 @@ sov-cli = { workspace = true, optional = true }
 
 sov-db = { workspace = true }
 sov-sequencer = { workspace = true }
-sov-rollup-interface = { workspace = true, features = ["mocks"] }
-
+sov-rollup-interface = { workspace = true }
+sov-mock-da = { workspace = true, features = ["native"] }
 
 anyhow = { workspace = true }
 async-trait = { workspace = true }
