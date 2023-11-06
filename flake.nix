@@ -75,11 +75,9 @@
                 lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
                 outputHashes = {
                   "sha2-0.10.6" = "sha256-1dDg6mujDC+vp9buyErWKq+pml2+xsjifxDDyiuoq8M=";
-                  "sov-accounts-0.3.0" = "sha256-AnF5Ly5dWFgRSt1DDBX2GXE0WtHsctCVojgAkAqs7HM=";
+                  "sov-accounts-0.3.0" = "sha256-8Dlpm1gw4bSdAJignU2FGAdgMwmis4xwlPpt7ehEVAc=";
                 };
             };
-
-            cargoSha256 = "";
 
             nativeBuildInputs = [
                 rust-bin

@@ -3,11 +3,11 @@
 
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
+use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Spec;
 use sov_modules_stf_template::kernels::basic::BasicKernel;
 use sov_risc0_adapter::host::Risc0Host;
-use sov_rollup_interface::mocks::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_rollup_interface::services::da::DaService;
 use sov_state::config::Config as StorageConfig;
 use sov_state::{DefaultStorageSpec, ZkStorage};

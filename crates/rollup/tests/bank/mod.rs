@@ -3,12 +3,12 @@ use std::net::SocketAddr;
 use borsh::BorshSerialize;
 use jsonrpsee::core::client::{Subscription, SubscriptionClientT};
 use jsonrpsee::rpc_params;
+use sov_mock_da::MockDaSpec;
 use sov_modules_api::default_context::DefaultContext;
 use sov_modules_api::default_signature::private_key::DefaultPrivateKey;
 use sov_modules_api::transaction::Transaction;
 use sov_modules_api::{PrivateKey, Spec};
 use sov_modules_rollup_template::RollupProverConfig;
-use sov_rollup_interface::mocks::MockDaSpec;
 use sov_sequencer::utils::SimpleClient;
 use stf_starter::genesis_config::GenesisPaths;
 use stf_starter::RuntimeCall;
@@ -37,7 +37,7 @@ async fn bank_tx_tests() -> Result<(), anyhow::Error> {
     tokio::select! {
         err = rollup_task => err?,
         res = send_test_create_token_tx(port) => res?,
-    };
+    }
     Ok(())
 }
 

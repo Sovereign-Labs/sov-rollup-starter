@@ -25,7 +25,7 @@ serde = { workspace = true, features = ["derive", "rc"] }
 serde_json = { workspace = true, optional = true }
 jsonrpsee = { workspace = true, features = ["jsonrpsee-types"], optional = true }
 borsh = { workspace = true, features = ["rc", "bytes"] }
-clap = {workspace = true , features = ["derive"], optional = true }
+clap = { workspace = true, features = ["derive"], optional = true }
 
 
 
@@ -33,12 +33,12 @@ clap = {workspace = true , features = ["derive"], optional = true }
 [features]
 default = []
 native = [
-	"sov-modules-api/native",
-	"sov-accounts/native",
-	"sov-bank/native",
-	"sov-sequencer-registry/native",
-	"sov-modules-stf-template/native",
-	"sov-stf-runner/native",
+    "sov-modules-api/native",
+    "sov-accounts/native",
+    "sov-bank/native",
+    "sov-sequencer-registry/native",
+    "sov-modules-stf-template/native",
+    "sov-stf-runner/native",
     "serde_json",
     "jsonrpsee",
     "sov-sequencer",
