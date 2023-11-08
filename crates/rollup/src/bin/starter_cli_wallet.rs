@@ -2,7 +2,7 @@
 //! with the rollup.
 
 use sov_modules_api::cli::{FileNameArg, JsonStringArg};
-use sov_modules_rollup_template::WalletTemplate;
+use sov_modules_rollup_blueprint::WalletBlueprint;
 use sov_rollup_starter::StarterRollup;
 use stf_starter::runtime::RuntimeSubcommand;
 

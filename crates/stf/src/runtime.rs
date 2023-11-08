@@ -42,7 +42,7 @@ use crate::genesis_config::GenesisPaths;
 ///     The `#[derive(Genesis)` macro will generate `Runtime::genesis(config)` method which returns
 ///     `Storage` with the initialized state.
 ///
-/// 2. Calls:      
+/// 2. Calls:
 ///     The `Module` interface defines a `call` method which accepts a module-defined type and triggers the specific `module logic.`
 ///     In general, the point of a call is to change the module state, but if the call throws an error,
 ///     no state is updated (the transaction is reverted).
