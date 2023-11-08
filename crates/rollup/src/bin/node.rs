@@ -2,15 +2,15 @@
 
 use anyhow::Context;
 use clap::Parser;
-use sov_modules_rollup_template::{Rollup, RollupProverConfig, RollupTemplate};
 use sov_mock_da::MockDaConfig;
+use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint, RollupProverConfig};
 use sov_rollup_starter::StarterRollup;
 use sov_stf_runner::{from_toml_path, RollupConfig};
+use std::str::FromStr;
 use stf_starter::genesis_config::GenesisPaths;
 use tracing::info;
 use tracing_subscriber::prelude::*;
 use tracing_subscriber::{fmt, EnvFilter};
-use std::str::FromStr;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

@@ -3,11 +3,11 @@
 
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
+use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Spec;
 use sov_modules_stf_template::kernels::basic::BasicKernel;
 use sov_risc0_adapter::host::Risc0Host;
-use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_rollup_interface::services::da::DaService;
 use sov_state::config::Config as StorageConfig;
 use sov_state::{DefaultStorageSpec, ZkStorage};
@@ -20,7 +20,7 @@ pub struct StarterRollup {}
 /// This is the place, where all the rollup components come together and
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
+impl sov_modules_rollup_blueprint::RollupBlueprint for StarterRollup {
     /// This component defines the Data Availability layer.
     type DaService = MockDaService;
     /// DaSpec & DaConfig are derived from DaService.
@@ -53,7 +53,7 @@ impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
         ledger_db: &LedgerDB,
         da_service: &Self::DaService,
     ) -> anyhow::Result<jsonrpsee::RpcModule<()>> {
-        sov_modules_rollup_template::register_rpc::<
+        sov_modules_rollup_blueprint::register_rpc::<
             Self::NativeRuntime,
             Self::NativeContext,
             Self::DaService,
@@ -96,4 +96,4 @@ impl sov_modules_rollup_template::RollupTemplate for StarterRollup {
 }
 
 // Here we get a `free` Wallet implementation.
-impl sov_modules_rollup_template::WalletTemplate for StarterRollup {}
+impl sov_modules_rollup_blueprint::WalletBlueprint for StarterRollup {}
