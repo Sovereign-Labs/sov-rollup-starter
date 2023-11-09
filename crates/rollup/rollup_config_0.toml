@@ -1,7 +1,7 @@
 [da]
 sender_address = "0000000000000000000000000000000000000000000000000000000000000000"
-celestia_rpc_auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.LRcxbTteW5WY6QNDROFMKGVh_QlyIgLTvv0fGUnw8O4"
-celestia_rpc_address = "http://0.0.0.0:26658"
+celestia_rpc_auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.a4BW6XdIDOtxg6p7KB41og0V8U2onnLcmnkSM7KI5Pc"
+celestia_rpc_address = "http://127.0.0.1:0.0.0.0:26658"
 max_celestia_response_body_size = 104_857_600
 celestia_rpc_timeout_seconds = 60
 
@@ -9,7 +9,7 @@ celestia_rpc_timeout_seconds = 60
 path = "demo_data_0"
 
 [runner]
-start_height = 1
+start_height = 3
 
 [runner.rpc_config]
 bind_host = "127.0.0.1"

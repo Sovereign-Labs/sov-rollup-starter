@@ -2,9 +2,9 @@
 
 use anyhow::Context;
 use clap::Parser;
-use sov_mock_da::MockDaConfig;
+use sov_celestia_adapter::CelestiaConfig;
+use sov_ibc_rollup::StarterRollup;
 use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint, RollupProverConfig};
-use sov_rollup_starter::StarterRollup;
 use sov_stf_runner::{from_toml_path, RollupConfig};
 use std::str::FromStr;
 use stf_starter::genesis_config::GenesisPaths;
@@ -54,7 +54,7 @@ async fn new_rollup_with_mock_da(
 ) -> Result<Rollup<StarterRollup>, anyhow::Error> {
     info!("Reading rollup config from {rollup_config_path:?}");
 
-    let rollup_config: RollupConfig<MockDaConfig> =
+    let rollup_config: RollupConfig<CelestiaConfig> =
         from_toml_path(rollup_config_path).context("Failed to read rollup configuration")?;
 
     let starter_rollup = StarterRollup {};

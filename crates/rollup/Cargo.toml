@@ -1,5 +1,5 @@
 [package]
-name = "sov-rollup-starter"
+name = "sov-ibc-rollup"
 version = { workspace = true }
 edition = { workspace = true }
 resolver = "2"
@@ -25,7 +25,8 @@ sov-cli = { workspace = true, optional = true }
 sov-db = { workspace = true }
 sov-sequencer = { workspace = true }
 sov-rollup-interface = { workspace = true }
-sov-mock-da = { workspace = true, features = ["native"] }
+sov-celestia-adapter = { workspace = true, features = ["native"] }
+sov-mock-da = { workspace = true, features = ["native"], optional = true }
 
 anyhow = { workspace = true }
 async-trait = { workspace = true }
@@ -48,10 +49,13 @@ tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 
 [dev-dependencies]
 tempfile = { workspace = true }
+sov-mock-da = { workspace = true, features = ["native"] }
+sov-ibc-rollup = { path = ".", features = ["mocks"] }
 
 
 [features]
 default = []
+mocks = ["sov-mock-da"]
 
 [[bin]]
 name = "node"

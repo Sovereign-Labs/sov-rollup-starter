@@ -8,10 +8,11 @@ fn main() {
         let methods_path = out_dir.join("methods.rs");
 
         let elf = r#"
+            pub const CELESTIA_DA_ELF: &[u8] = &[];
             pub const MOCK_DA_ELF: &[u8] = &[];
         "#;
 
-        std::fs::write(methods_path, elf).expect("Failed to write mock rollup elf");
+        std::fs::write(methods_path, elf).expect("Failed to write celestia rollup elf");
     } else {
         let guest_pkg_to_options = get_guest_options();
         risc0_build::embed_methods_with_options(guest_pkg_to_options);
