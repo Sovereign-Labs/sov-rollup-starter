@@ -14,7 +14,7 @@ sov-state = { workspace = true }
 sov-accounts = { workspace = true }
 sov-bank = { workspace = true }
 sov-sequencer-registry = { workspace = true }
-sov-modules-stf-template = { workspace = true }
+sov-modules-stf-blueprint = { workspace = true }
 sov-stf-runner = { workspace = true }
 sov-sequencer = { workspace = true, optional = true }
 sov-rollup-interface = { workspace = true }
@@ -37,7 +37,7 @@ native = [
     "sov-accounts/native",
     "sov-bank/native",
     "sov-sequencer-registry/native",
-    "sov-modules-stf-template/native",
+    "sov-modules-stf-blueprint/native",
     "sov-stf-runner/native",
     "serde_json",
     "jsonrpsee",
