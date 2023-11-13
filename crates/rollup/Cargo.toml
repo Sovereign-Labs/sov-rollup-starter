@@ -18,10 +18,10 @@ sov-bank = { workspace = true, features = ["native"] }
 sov-ledger-rpc = { workspace = true, features = ["server"] }
 sov-sequencer-registry = { workspace = true, features = ["native"] }
 sov-modules-rollup-blueprint = { workspace = true }
-sov-modules-stf-template = { workspace = true, features = ["native"] }
+sov-modules-stf-blueprint = { workspace = true, features = ["native"] }
 sov-stf-runner = { workspace = true, features = ["native"] }
 sov-cli = { workspace = true, optional = true }
-sov-demo-rollup = { workspace = true, optional = true }
+#sov-demo-rollup = { workspace = true, optional = true }
 
 sov-db = { workspace = true }
 sov-sequencer = { workspace = true }

@@ -6,7 +6,7 @@ use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint, RollupProverConfig};
 #[cfg(feature = "mock_da")]
 use sov_rollup_starter::mock_rollup::StarterRollup;
 #[cfg(feature = "celestia_da")]
-use sov_rollup_starter::celestia_rollup::CelestiaRollup;
+use sov_rollup_starter::celestia_rollup::StarterRollup;
 #[cfg(feature = "mock_da")]
 use sov_mock_da::MockDaConfig;
 #[cfg(feature = "celestia_da")]
@@ -87,7 +87,7 @@ async fn new_rollup(
     genesis_paths: &GenesisPaths,
     rollup_config_path: &str,
     prover_config: Option<RollupProverConfig>,
-) -> Result<Rollup<CelestiaRollup>, anyhow::Error> {
+) -> Result<Rollup<StarterRollup>, anyhow::Error> {
     info!(
         "Starting celestia rollup with config {}",
         rollup_config_path
@@ -96,7 +96,7 @@ async fn new_rollup(
     let rollup_config: RollupConfig<CelestiaConfig> =
         from_toml_path(rollup_config_path).context("Failed to read rollup configuration")?;
 
-    let celestia_rollup = CelestiaRollup {};
+    let celestia_rollup = StarterRollup {};
     celestia_rollup
         .create_new_rollup(genesis_paths, rollup_config, prover_config)
         .await

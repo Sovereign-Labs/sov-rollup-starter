@@ -7,7 +7,7 @@
 use sov_modules_api::hooks::{ApplyBlobHooks, FinalizeHook, SlotHooks, TxHooks};
 use sov_modules_api::transaction::Transaction;
 use sov_modules_api::{AccessoryWorkingSet, BlobReaderTrait, Context, DaSpec, Spec, WorkingSet};
-use sov_modules_stf_template::SequencerOutcome;
+use sov_modules_stf_blueprint::SequencerOutcome;
 use sov_sequencer_registry::SequencerRegistry;
 use sov_state::Storage;
 use tracing::info;
