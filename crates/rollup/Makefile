@@ -79,7 +79,11 @@ clean-db:
 	rm -rf ../../rollup-starter-data
 
 build-sov-cli:
+ifdef CELESTIA
+	cargo build --bin starter-cli-wallet --no-default-features --features celestia_da
+else
 	cargo build --bin starter-cli-wallet
+endif
 
 set-rpc-url: build-sov-cli
 	$(SOV_CLI_REL_PATH) rpc set-url http://127.0.0.1:12345
