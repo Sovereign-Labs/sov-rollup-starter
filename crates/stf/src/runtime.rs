@@ -70,7 +70,7 @@ pub struct Runtime<C: Context, Da: DaSpec> {
     pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<C, Da>,
 }
 
-impl<C, Da> sov_modules_stf_template::Runtime<C, Da> for Runtime<C, Da>
+impl<C, Da> sov_modules_stf_blueprint::Runtime<C, Da> for Runtime<C, Da>
 where
     C: Context,
     Da: DaSpec,

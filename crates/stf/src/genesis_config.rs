@@ -4,7 +4,7 @@ use anyhow::{bail, Context as _};
 use sov_accounts::AccountConfig;
 use sov_bank::BankConfig;
 use sov_modules_api::{Context, DaSpec};
-use sov_modules_stf_template::Runtime as RuntimeTrait;
+use sov_modules_stf_blueprint::Runtime as RuntimeTrait;
 use sov_sequencer_registry::SequencerConfig;
 use sov_stf_runner::read_json_file;
 
