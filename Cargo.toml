@@ -32,6 +32,8 @@ sov-risc0-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git
 sov-first-read-last-write-cache = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "af459a163208157b36f19708ef6728917c7ce77a" }
 sov-cli = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "af459a163208157b36f19708ef6728917c7ce77a" }
 sov-mock-da = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "af459a163208157b36f19708ef6728917c7ce77a" }
+sov-celestia-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "af459a163208157b36f19708ef6728917c7ce77a" }
+sov-demo-rollup = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "af459a163208157b36f19708ef6728917c7ce77a" }
 stf-starter = { path = "./crates/stf" }
 
 serde = { version = "1.0.188", features = ["derive", "rc"] }
@@ -48,4 +50,3 @@ tempfile = "3.5"
 jsonrpsee = { version = "0.20.1", features = ["jsonrpsee-types"] }
 
 risc0-build = "0.18"
-

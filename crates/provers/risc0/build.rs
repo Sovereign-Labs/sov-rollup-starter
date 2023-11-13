@@ -8,6 +8,7 @@ fn main() {
         let methods_path = out_dir.join("methods.rs");
 
         let elf = r#"
+            pub const ROLLUP_ELF: &[u8] = &[];
             pub const MOCK_DA_ELF: &[u8] = &[];
         "#;
 
