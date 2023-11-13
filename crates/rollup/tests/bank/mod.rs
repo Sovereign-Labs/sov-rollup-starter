@@ -25,7 +25,7 @@ async fn bank_tx_tests() -> Result<(), anyhow::Error> {
     let rollup_task = tokio::spawn(async {
         start_rollup(
             port_tx,
-            GenesisPaths::from_dir("../../test-data/genesis/"),
+            GenesisPaths::from_dir("../../test-data/genesis/mock/"),
             Some(RollupProverConfig::Execute),
         )
         .await;
