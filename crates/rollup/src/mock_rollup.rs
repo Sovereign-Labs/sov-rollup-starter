@@ -15,12 +15,12 @@ use sov_stf_runner::RollupConfig;
 use stf_starter::Runtime;
 
 /// Rollup with [`MockDaService`].
-pub struct StarterRollup {}
+pub struct MockRollup {}
 
 /// This is the place, where all the rollup components come together and
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl sov_modules_rollup_blueprint::RollupBlueprint for StarterRollup {
+impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
     /// This component defines the Data Availability layer.
     type DaService = MockDaService;
     /// DaSpec & DaConfig are derived from DaService.
@@ -94,3 +94,5 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for StarterRollup {
         Default::default()
     }
 }
+
+impl sov_modules_rollup_blueprint::WalletBlueprint for MockRollup {}

@@ -21,7 +21,6 @@ sov-modules-rollup-blueprint = { workspace = true }
 sov-modules-stf-blueprint = { workspace = true, features = ["native"] }
 sov-stf-runner = { workspace = true, features = ["native"] }
 sov-cli = { workspace = true, optional = true }
-#sov-demo-rollup = { workspace = true, optional = true }
 
 sov-db = { workspace = true }
 sov-sequencer = { workspace = true }
