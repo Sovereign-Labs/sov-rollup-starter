@@ -22,12 +22,12 @@ use sov_celestia_adapter::verifier::{CelestiaSpec, CelestiaVerifier, RollupParam
 const ROLLUP_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-celest");
 
 /// Rollup with [`MockDaService`].
-pub struct CelestiaRollup {}
+pub struct StarterRollup {}
 
 /// This is the place, where all the rollup components come together and
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl sov_modules_rollup_blueprint::RollupBlueprint for CelestiaRollup {
+impl sov_modules_rollup_blueprint::RollupBlueprint for StarterRollup {
     type DaService = CelestiaService;
     type DaSpec = CelestiaSpec;
     type DaConfig = CelestiaConfig;
@@ -107,6 +107,3 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for CelestiaRollup {
         }
     }
 }
-
-// Here we get a `free` Wallet implementation.
-impl sov_modules_rollup_blueprint::WalletBlueprint for CelestiaRollup {}

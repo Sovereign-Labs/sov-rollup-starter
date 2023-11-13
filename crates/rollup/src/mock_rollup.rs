@@ -94,6 +94,3 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for StarterRollup {
         Default::default()
     }
 }
-
-// Here we get a `free` Wallet implementation.
-impl sov_modules_rollup_blueprint::WalletBlueprint for StarterRollup {}
