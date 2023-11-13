@@ -25,7 +25,8 @@ sov-cli = { workspace = true, optional = true }
 sov-db = { workspace = true }
 sov-sequencer = { workspace = true }
 sov-rollup-interface = { workspace = true }
-sov-mock-da = { workspace = true, features = ["native"] }
+sov-mock-da = { workspace = true, features = ["native"], optional=true }
+sov-celestia-adapter = { workspace = true, features = ["native"], optional=true }
 
 anyhow = { workspace = true }
 async-trait = { workspace = true }
@@ -49,9 +50,10 @@ tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 [dev-dependencies]
 tempfile = { workspace = true }
 
-
 [features]
-default = []
+default = ["mock_da"] # set mock_da as the default feature
+mock_da = ["sov-mock-da"]
+celestia_da = ["sov-celestia-adapter"]
 
 [[bin]]
 name = "node"

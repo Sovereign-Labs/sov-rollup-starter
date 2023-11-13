@@ -2,7 +2,7 @@ use std::net::SocketAddr;
 
 use sov_mock_da::{MockAddress, MockDaConfig};
 use sov_modules_rollup_blueprint::{RollupBlueprint, RollupProverConfig};
-use sov_rollup_starter::StarterRollup;
+use sov_rollup_starter::mock_rollup::MockRollup;
 use sov_stf_runner::{RollupConfig, RpcConfig, RunnerConfig, StorageConfig};
 use stf_starter::genesis_config::GenesisPaths;
 use tokio::sync::oneshot;
@@ -31,9 +31,9 @@ pub async fn start_rollup(
         },
     };
 
-    let starter_rollup = StarterRollup {};
+    let mock_rollup = MockRollup {};
 
-    let rollup = starter_rollup
+    let rollup = mock_rollup
         .create_new_rollup(&genesis_paths, rollup_config, rollup_prover_config)
         .await
         .unwrap();
