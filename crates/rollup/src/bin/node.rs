@@ -22,13 +22,13 @@ use tracing_subscriber::{fmt, EnvFilter};
 #[cfg(feature = "mock_da")]
 const DEFAULT_CONFIG_PATH: &str = "../../rollup_config.toml";
 #[cfg(feature = "mock_da")]
-const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock-da/";
+const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock/";
 
 // config and genesis for local docker celestia
 #[cfg(feature = "celestia_da")]
 const DEFAULT_CONFIG_PATH: &str = "../../celestia_rollup_config.toml";
 #[cfg(feature = "celestia_da")]
-const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/celestia-da/";
+const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/celestia/";
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
