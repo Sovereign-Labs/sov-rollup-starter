@@ -1,8 +1,9 @@
 use std::net::SocketAddr;
 
 use sov_mock_da::{MockAddress, MockDaConfig};
-use sov_modules_rollup_blueprint::{RollupBlueprint, RollupProverConfig};
+use sov_modules_rollup_blueprint::RollupBlueprint;
 use sov_rollup_starter::mock_rollup::MockRollup;
+use sov_stf_runner::RollupProverConfig;
 use sov_stf_runner::{RollupConfig, RpcConfig, RunnerConfig, StorageConfig};
 use stf_starter::genesis_config::GenesisPaths;
 use tokio::sync::oneshot;
