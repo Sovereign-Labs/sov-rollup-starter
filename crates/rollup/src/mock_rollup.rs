@@ -7,14 +7,18 @@ use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Spec;
 use sov_modules_stf_blueprint::kernels::basic::BasicKernel;
+use sov_modules_stf_blueprint::StfBlueprint;
 use sov_risc0_adapter::host::Risc0Host;
-use sov_rollup_interface::services::da::DaService;
+use sov_rollup_interface::zk::ZkvmHost;
 use sov_state::config::Config as StorageConfig;
+use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
+use sov_stf_runner::BlockingProver;
 use sov_stf_runner::RollupConfig;
+use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
-
 /// Rollup with [`MockDaService`].
+
 pub struct MockRollup {}
 
 /// This is the place, where all the rollup components come together and
@@ -45,6 +49,21 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
     /// Kernels.
     type NativeKernel = BasicKernel<Self::NativeContext>;
     type ZkKernel = BasicKernel<Self::ZkContext>;
+
+    /// Prover service.
+    type ProverService = BlockingProver<
+        <<Self::NativeContext as Spec>::Storage as Storage>::Root,
+        <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
+        Self::DaService,
+        Self::Vm,
+        StfBlueprint<
+            Self::ZkContext,
+            Self::DaSpec,
+            <Self::Vm as ZkvmHost>::Guest,
+            Self::ZkRuntime,
+            Self::ZkKernel,
+        >,
+    >;
 
     /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
@@ -79,19 +98,18 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
         sov_state::storage_manager::ProverStorageManager::new(storage_config)
     }
 
-    fn create_zk_storage(
+    async fn create_prover_service(
         &self,
-        _rollup_config: &RollupConfig<Self::DaConfig>,
-    ) -> <Self::ZkContext as Spec>::Storage {
-        ZkStorage::new()
-    }
 
-    fn create_vm(&self) -> Self::Vm {
-        Risc0Host::new(risc0_starter::MOCK_DA_ELF)
-    }
+        prover_config: Option<RollupProverConfig>,
+        _da_service: &Self::DaService,
+    ) -> Self::ProverService {
+        let vm = Risc0Host::new(risc0_starter::MOCK_DA_ELF);
+        let zk_stf = StfBlueprint::new();
+        let zk_storage = ZkStorage::new();
+        let da_verifier = Default::default();
 
-    fn create_verifier(&self) -> <Self::DaService as DaService>::Verifier {
-        Default::default()
+        BlockingProver::new(vm, zk_stf, da_verifier, prover_config, zk_storage)
     }
 }
 

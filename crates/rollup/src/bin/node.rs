@@ -2,15 +2,16 @@
 
 use anyhow::Context;
 use clap::Parser;
-use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint, RollupProverConfig};
+#[cfg(feature = "celestia_da")]
+use sov_celestia_adapter::CelestiaConfig;
 #[cfg(feature = "mock_da")]
-use sov_rollup_starter::mock_rollup::MockRollup;
+use sov_mock_da::MockDaConfig;
+use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint};
 #[cfg(feature = "celestia_da")]
 use sov_rollup_starter::celestia_rollup::CelestiaRollup;
 #[cfg(feature = "mock_da")]
-use sov_mock_da::MockDaConfig;
-#[cfg(feature = "celestia_da")]
-use sov_celestia_adapter::CelestiaConfig;
+use sov_rollup_starter::mock_rollup::MockRollup;
+use sov_stf_runner::RollupProverConfig;
 use sov_stf_runner::{from_toml_path, RollupConfig};
 use std::str::FromStr;
 use stf_starter::genesis_config::GenesisPaths;
