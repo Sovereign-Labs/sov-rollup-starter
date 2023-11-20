@@ -57,10 +57,7 @@ use crate::genesis_config::GenesisPaths;
 )]
 #[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
-#[cfg_attr(
-    feature = "native",
-    serialization(serde::Serialize, serde::Deserialize)
-)]
+#[cfg_attr(feature = "serde", serialization(serde::Serialize, serde::Deserialize))]
 pub struct Runtime<C: Context, Da: DaSpec> {
     /// The `accounts` module is responsible for managing user accounts and their nonces
     pub accounts: sov_accounts::Accounts<C>,

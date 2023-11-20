@@ -14,6 +14,7 @@ sov-state = { workspace = true }
 sov-accounts = { workspace = true }
 sov-bank = { workspace = true }
 sov-sequencer-registry = { workspace = true }
+sov-mock-da = { workspace = true }
 sov-modules-stf-blueprint = { workspace = true }
 sov-stf-runner = { workspace = true }
 sov-sequencer = { workspace = true, optional = true }
@@ -31,16 +32,23 @@ clap = { workspace = true, features = ["derive"], optional = true }
 
 
 [features]
-default = []
+default = ["serde"]
 native = [
     "sov-modules-api/native",
     "sov-accounts/native",
     "sov-bank/native",
     "sov-sequencer-registry/native",
+    "sov-mock-da/native",
     "sov-modules-stf-blueprint/native",
     "sov-stf-runner/native",
     "serde_json",
     "jsonrpsee",
     "sov-sequencer",
     "clap",
+]
+serde = [
+    "sov-accounts/serde",
+    "sov-bank/serde",
+    "sov-modules-api/serde",
+    "sov-sequencer-registry/serde",
 ]
