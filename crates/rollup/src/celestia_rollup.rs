@@ -17,7 +17,7 @@ use sov_state::config::Config as StorageConfig;
 use sov_state::storage_manager::ProverStorageManager;
 use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
-use sov_stf_runner::BlockingProver;
+use sov_stf_runner::ParallelProverService;
 use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
@@ -48,7 +48,7 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for CelestiaRollup {
     type NativeKernel = BasicKernel<Self::NativeContext>;
     type ZkKernel = BasicKernel<Self::ZkContext>;
 
-    type ProverService = BlockingProver<
+    type ProverService = ParallelProverService<
         <<Self::NativeContext as Spec>::Storage as Storage>::Root,
         <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
         Self::DaService,
@@ -110,7 +110,7 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for CelestiaRollup {
 
     async fn create_prover_service(
         &self,
-        prover_config: Option<RollupProverConfig>,
+        prover_config: RollupProverConfig,
         _da_service: &Self::DaService,
     ) -> Self::ProverService {
         let vm = Risc0Host::new(risc0_starter::ROLLUP_ELF);
@@ -121,7 +121,7 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for CelestiaRollup {
             rollup_namespace: ROLLUP_NAMESPACE,
         };
 
-        BlockingProver::new(vm, zk_stf, da_verifier, prover_config, zk_storage)
+        ParallelProverService::new(vm, zk_stf, da_verifier, prover_config, zk_storage)
     }
 }
 
