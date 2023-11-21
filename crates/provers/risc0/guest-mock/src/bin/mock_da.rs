@@ -19,7 +19,7 @@ pub fn main() {
     let app: StfBlueprint<ZkDefaultContext, _, _, Runtime<_, _>, BasicKernel<_>> =
     StfBlueprint::new();
 
-    let mut stf_verifier = StfVerifier::new(app, MockDaVerifier {});
+    let stf_verifier = StfVerifier::new(app, MockDaVerifier {});
 
     stf_verifier
         .run_block(guest, storage)

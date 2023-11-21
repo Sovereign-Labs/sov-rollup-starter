@@ -60,7 +60,7 @@ async fn main() -> Result<(), anyhow::Error> {
     let rollup = new_rollup(
         &GenesisPaths::from_dir(genesis_paths),
         rollup_config_path,
-        Some(RollupProverConfig::Execute),
+        RollupProverConfig::Execute,
     )
     .await?;
     rollup.run().await
@@ -70,7 +70,7 @@ async fn main() -> Result<(), anyhow::Error> {
 async fn new_rollup(
     genesis_paths: &GenesisPaths,
     rollup_config_path: &str,
-    prover_config: Option<RollupProverConfig>,
+    prover_config: RollupProverConfig,
 ) -> Result<Rollup<MockRollup>, anyhow::Error> {
     info!("Reading rollup config from {rollup_config_path:?}");
 
@@ -87,7 +87,7 @@ async fn new_rollup(
 async fn new_rollup(
     genesis_paths: &GenesisPaths,
     rollup_config_path: &str,
-    prover_config: Option<RollupProverConfig>,
+    prover_config: RollupProverConfig,
 ) -> Result<Rollup<CelestiaRollup>, anyhow::Error> {
     info!(
         "Starting celestia rollup with config {}",

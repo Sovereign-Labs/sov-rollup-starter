@@ -9,7 +9,7 @@
 pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
-use sov_modules_api::capabilities::{BlobRefOrOwned, BlobSelector};
+use sov_modules_api::runtime::capabilities::{BlobRefOrOwned, BlobSelector};
 use sov_modules_api::macros::DefaultRuntime;
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
