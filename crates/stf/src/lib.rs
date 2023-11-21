@@ -12,3 +12,5 @@ use sov_stf_runner::verifier::StateTransitionVerifier;
 /// Alias for StateTransitionVerifier.
 pub type StfVerifier<DA, Vm, ZkContext, RT, K> =
     StateTransitionVerifier<StfBlueprint<ZkContext, <DA as DaVerifier>::Spec, Vm, RT, K>, DA, Vm>;
+
+pub use sov_mock_da::MockDaSpec;
