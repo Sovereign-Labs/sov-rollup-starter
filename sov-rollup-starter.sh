@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 trap 'jobs -p | xargs -r kill' EXIT
-echo 'Running: `cd crates/rollup/`'
-cd crates/rollup/ || exit
+echo 'Running: '\''cd crates/rollup/'\'''
+cd crates/rollup/
 if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
@@ -17,6 +17,12 @@ cargo run --bin node &
 sleep 20
 echo 'Running: '\''make test-create-token'\'''
 make test-create-token
+if [ $? -ne 0 ]; then
+    echo "Expected exit code 0, got $?"
+    exit 1
+fi
+echo 'Running: '\''make wait-five-seconds'\'''
+make wait-five-seconds
 if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
