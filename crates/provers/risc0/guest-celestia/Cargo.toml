@@ -20,10 +20,6 @@ sov-modules-stf-blueprint = { git = "https://github.com/Sovereign-Labs/sovereign
 sov-risc0-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "6aaf68e715723bfdb50485232ebd0a0546a979f3" }
 sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "6aaf68e715723bfdb50485232ebd0a0546a979f3" }
 
-[patch.crates-io]
-sha2 = { git = "https://github.com/risc0/RustCrypto-hashes", tag = "sha2/v0.10.6-risc0" }
-
-
 [profile.dev]
 opt-level = 3
 

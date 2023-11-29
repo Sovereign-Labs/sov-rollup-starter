@@ -64,8 +64,8 @@
             '';
         };
 
-        rollup-guest = nixpkgs.rustPlatform.buildRustPackage {
-            name = "rollup-guest";
+        rollup-guest-mock = nixpkgs.rustPlatform.buildRustPackage {
+            name = "rollup-guest-mock";
 
             src = rollup-guest-src;
 
@@ -98,9 +98,48 @@
                 cp target/riscv32im-risc0-zkvm-elf/release/mock_da $out/
             '';
         };
+
+
+        rollup-guest-celestia = nixpkgs.rustPlatform.buildRustPackage {
+            name = "rollup-guest-celestia";
+
+            src = rollup-guest-src;
+
+            sourceRoot = "rollup-guest-src/crates/provers/risc0/guest-celestia";
+
+            cargoLock = {
+                lockFile = ./crates/provers/risc0/guest-celestia/Cargo.lock;
+                outputHashes = {
+                  "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
+                  "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
+                  "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
+                  "sov-accounts-0.3.0" = "sha256-nRJkW0xAyh94W7EVepzNvKKBrDJDBHZh3KZb3jDxYVQ=";
+                  "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
+                };
+            };
+
+            nativeBuildInputs = [
+                rust-bin
+                nixpkgs.lld
+                nixpkgs.protobuf
+            ];
+
+            doCheck = false;
+
+            buildPhase = ''
+                RUSTC=${risc0-rust}/bin/rustc \
+                    CARGO_ENCODED_RUSTFLAGS=$'-C\x1fpasses=loweratomic\x1f-C\x1flink-arg=-Ttext=0x00200800\x1f-C\x1flink-arg=--fatal-warnings\x1f-C\x1fpanic=abort\x1f-C\x1flinker=lld' \
+                    cargo build --release --target riscv32im-risc0-zkvm-elf -p sov-demo-prover-guest-celestia
+            '';
+
+            installPhase = ''
+                mkdir -p $out
+                cp target/riscv32im-risc0-zkvm-elf/release/rollup $out/
+            '';
+        };
     in {
       packages = {
-        inherit risc0-rust rollup-guest;
+        inherit risc0-rust rollup-guest-mock rollup-guest-celestia;
       };
     });
 }
