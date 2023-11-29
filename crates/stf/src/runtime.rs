@@ -9,8 +9,8 @@
 pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
-use sov_modules_api::capabilities::{BlobRefOrOwned, BlobSelector};
 use sov_modules_api::macros::DefaultRuntime;
+use sov_modules_api::runtime::capabilities::{BlobRefOrOwned, BlobSelector};
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
 use sov_modules_api::{Context, DaSpec, DispatchCall, Genesis, MessageCodec};
@@ -57,10 +57,7 @@ use crate::genesis_config::GenesisPaths;
 )]
 #[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
-#[cfg_attr(
-    feature = "native",
-    serialization(serde::Serialize, serde::Deserialize)
-)]
+#[cfg_attr(feature = "serde", serialization(serde::Serialize, serde::Deserialize))]
 pub struct Runtime<C: Context, Da: DaSpec> {
     /// The `accounts` module is responsible for managing user accounts and their nonces
     pub accounts: sov_accounts::Accounts<C>,
@@ -70,7 +67,7 @@ pub struct Runtime<C: Context, Da: DaSpec> {
     pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<C, Da>,
 }
 
-impl<C, Da> sov_modules_stf_template::Runtime<C, Da> for Runtime<C, Da>
+impl<C, Da> sov_modules_stf_blueprint::Runtime<C, Da> for Runtime<C, Da>
 where
     C: Context,
     Da: DaSpec,
