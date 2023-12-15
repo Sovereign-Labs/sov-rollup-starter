@@ -96,7 +96,7 @@ import-keys: build-sov-cli
 
 
 test-generate-create-token-tx: build-sov-cli
-	$(SOV_CLI_REL_PATH) transactions import from-file bank --path ../../test-data/requests/create_token.json
+	$(SOV_CLI_REL_PATH) transactions import from-file bank --chain-id 0 --path ../../test-data/requests/create_token.json
 
 
 test-create-token: set-rpc-url test-generate-create-token-tx import-keys
