@@ -13,6 +13,7 @@ use sov_sequencer::utils::SimpleClient;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::genesis_config::GenesisPaths;
 use stf_starter::RuntimeCall;
+use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 
 const TOKEN_SALT: u64 = 0;
 const TOKEN_NAME: &str = "test_token";
@@ -25,6 +26,9 @@ async fn bank_tx_tests() -> Result<(), anyhow::Error> {
         start_rollup(
             port_tx,
             GenesisPaths::from_dir("../../test-data/genesis/mock/"),
+            BasicKernelGenesisPaths {
+                chain_state: "../../test-data/genesis/mock/chain_state.json".into(),
+            },
             RollupProverConfig::Execute,
         )
         .await;
@@ -59,15 +63,16 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
         minter_address: user_address,
         authorized_minters: vec![],
     });
-
     let chain_id = 0;
     let gas_tip = 0;
+    let gas_limit = 0;
     let nonce = 0;
     let tx = Transaction::<DefaultContext>::new_signed_tx(
         &key,
         msg.try_to_vec().unwrap(),
         chain_id,
         gas_tip,
+        gas_limit,
         nonce,
     );
 
