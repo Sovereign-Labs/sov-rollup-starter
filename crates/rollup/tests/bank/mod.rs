@@ -9,11 +9,11 @@ use sov_modules_api::default_context::DefaultContext;
 use sov_modules_api::default_signature::private_key::DefaultPrivateKey;
 use sov_modules_api::transaction::Transaction;
 use sov_modules_api::{PrivateKey, Spec};
+use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 use sov_sequencer::utils::SimpleClient;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::genesis_config::GenesisPaths;
 use stf_starter::RuntimeCall;
-use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 
 const TOKEN_SALT: u64 = 0;
 const TOKEN_NAME: &str = "test_token";

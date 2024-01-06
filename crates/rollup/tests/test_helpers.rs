@@ -2,15 +2,14 @@ use std::net::SocketAddr;
 
 use sov_mock_da::{MockAddress, MockDaConfig};
 use sov_modules_rollup_blueprint::RollupBlueprint;
+use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisConfig;
+use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 use sov_rollup_starter::mock_rollup::MockRollup;
+use sov_stf_runner::ProverServiceConfig;
 use sov_stf_runner::RollupProverConfig;
 use sov_stf_runner::{RollupConfig, RpcConfig, RunnerConfig, StorageConfig};
 use stf_starter::genesis_config::GenesisPaths;
 use tokio::sync::oneshot;
-use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisConfig;
-use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
-use sov_stf_runner::ProverServiceConfig;
-
 
 pub async fn start_rollup(
     rpc_reporting_channel: oneshot::Sender<SocketAddr>,
@@ -51,14 +50,14 @@ pub async fn start_rollup(
     };
 
     let rollup = mock_rollup
-    .create_new_rollup(
-        &rt_genesis_paths,
-        kernel_genesis,
-        rollup_config,
-        rollup_prover_config,
-    )
-    .await
-    .unwrap();
+        .create_new_rollup(
+            &rt_genesis_paths,
+            kernel_genesis,
+            rollup_config,
+            rollup_prover_config,
+        )
+        .await
+        .unwrap();
     rollup
         .run_and_report_rpc_port(Some(rpc_reporting_channel))
         .await

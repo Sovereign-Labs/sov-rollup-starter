@@ -2,18 +2,19 @@
 //! StarterRollup provides a minimal self-contained rollup implementation
 
 use async_trait::async_trait;
-use sov_db::ledger_db::LedgerDB;
 use sov_celestia_adapter::types::Namespace;
 use sov_celestia_adapter::verifier::{CelestiaSpec, CelestiaVerifier, RollupParams};
 use sov_celestia_adapter::{CelestiaConfig, CelestiaService};
 use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
+use sov_modules_api::Address;
 use sov_modules_api::Spec;
+use sov_modules_rollup_blueprint::RollupBlueprint;
 use sov_modules_stf_blueprint::kernels::basic::BasicKernel;
 use sov_modules_stf_blueprint::StfBlueprint;
+use sov_prover_storage_manager::ProverStorageManager;
 use sov_risc0_adapter::host::Risc0Host;
 use sov_rollup_interface::zk::ZkvmHost;
 use sov_state::config::Config as StorageConfig;
-use sov_prover_storage_manager::ProverStorageManager;
 use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
 use sov_stf_runner::ParallelProverService;
@@ -21,8 +22,11 @@ use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
 
-/// The namespace for the rollup on Celestia. Must be kept in sync with the "rollup/src/lib.rs"
+/// The namespace for the rollup on Celestia.
 const ROLLUP_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-celest");
+
+/// The rollup stores the zk proofs in the namespace b"sov-test-p" on Celestia.
+const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-test-p");
 
 /// Rollup with [`CelestiaDaService`].
 pub struct CelestiaRollup {}
@@ -30,7 +34,7 @@ pub struct CelestiaRollup {}
 /// This is the place, where all the rollup components come together and
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl RollupBlueprint for CelestiaDemoRollup {
+impl RollupBlueprint for CelestiaRollup {
     type DaService = CelestiaService;
     type DaSpec = CelestiaSpec;
     type DaConfig = CelestiaConfig;
@@ -94,7 +98,7 @@ impl RollupBlueprint for CelestiaDemoRollup {
         CelestiaService::new(
             rollup_config.da.clone(),
             RollupParams {
-                rollup_batch_namespace: ROLLUP_BATCH_NAMESPACE,
+                rollup_batch_namespace: ROLLUP_NAMESPACE,
                 rollup_proof_namespace: ROLLUP_PROOF_NAMESPACE,
             },
         )
@@ -107,12 +111,12 @@ impl RollupBlueprint for CelestiaDemoRollup {
         rollup_config: &RollupConfig<Self::DaConfig>,
         _da_service: &Self::DaService,
     ) -> Self::ProverService {
-        let vm = Risc0Host::new(risc0::ROLLUP_ELF);
+        let vm = Risc0Host::new(risc0_starter::ROLLUP_ELF);
         let zk_stf = StfBlueprint::new();
         let zk_storage = ZkStorage::new();
 
         let da_verifier = CelestiaVerifier {
-            rollup_namespace: ROLLUP_BATCH_NAMESPACE,
+            rollup_namespace: ROLLUP_NAMESPACE,
         };
 
         ParallelProverService::new_with_default_workers(
