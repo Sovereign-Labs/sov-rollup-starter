@@ -13,6 +13,7 @@ publish = false
 [dependencies]
 sov-modules-api = { workspace = true, features = ["native"] }
 sov-state = { workspace = true }
+sov-prover-storage-manager = { workspace = true }
 sov-accounts = { workspace = true, features = ["native"] }
 sov-bank = { workspace = true, features = ["native"] }
 sov-ledger-rpc = { workspace = true, features = ["server"] }

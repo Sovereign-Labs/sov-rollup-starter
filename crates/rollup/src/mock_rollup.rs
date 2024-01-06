@@ -11,46 +11,39 @@ use sov_modules_stf_blueprint::StfBlueprint;
 use sov_risc0_adapter::host::Risc0Host;
 use sov_rollup_interface::zk::ZkvmHost;
 use sov_state::config::Config as StorageConfig;
+use sov_prover_storage_manager::ProverStorageManager;
 use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
 use sov_stf_runner::ParallelProverService;
 use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
-/// Rollup with [`MockDaService`].
+use sov_modules_rollup_blueprint::RollupBlueprint;
+use sov_modules_api::Address;
 
+/// Rollup with [`MockDaService`].
 pub struct MockRollup {}
 
 /// This is the place, where all the rollup components come together and
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
-impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
-    /// This component defines the Data Availability layer.
+impl RollupBlueprint for MockRollup {
     type DaService = MockDaService;
-    /// DaSpec & DaConfig are derived from DaService.
     type DaSpec = MockDaSpec;
     type DaConfig = MockDaConfig;
-
-    /// The concrete ZkVm used in the rollup.
     type Vm = Risc0Host<'static>;
 
-    /// Context for the Zero Knowledge environment.
     type ZkContext = ZkDefaultContext;
-    /// Context for the ZNative environment.
     type NativeContext = DefaultContext;
 
-    /// Manager for the native storage lifecycle.
-    type StorageManager = sov_state::storage_manager::ProverStorageManager<DefaultStorageSpec>;
+    type StorageManager = ProverStorageManager<MockDaSpec, DefaultStorageSpec>;
 
-    /// Runtime for the Zero Knowledge environment.
     type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
-    /// Runtime for the Native environment.
     type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
-    /// Kernels.
-    type NativeKernel = BasicKernel<Self::NativeContext>;
-    type ZkKernel = BasicKernel<Self::ZkContext>;
 
-    /// Prover service.
+    type NativeKernel = BasicKernel<Self::NativeContext, Self::DaSpec>;
+    type ZkKernel = BasicKernel<Self::ZkContext, Self::DaSpec>;
+
     type ProverService = ParallelProverService<
         <<Self::NativeContext as Spec>::Storage as Storage>::Root,
         <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
@@ -65,21 +58,31 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
         >,
     >;
 
-    /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
         &self,
         storage: &<Self::NativeContext as Spec>::Storage,
         ledger_db: &LedgerDB,
         da_service: &Self::DaService,
-    ) -> anyhow::Result<jsonrpsee::RpcModule<()>> {
-        sov_modules_rollup_blueprint::register_rpc::<
+    ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
+        // TODO set the sequencer address
+        let sequencer = Address::new([0; 32]);
+
+        #[allow(unused_mut)]
+        let mut rpc_methods = sov_modules_rollup_blueprint::register_rpc::<
             Self::NativeRuntime,
             Self::NativeContext,
             Self::DaService,
-        >(storage, ledger_db, da_service)
-    }
+        >(storage, ledger_db, da_service, sequencer)?;
 
-    // Below, we provide the methods for setting up dependencies for the Rollup.
+        #[cfg(feature = "experimental")]
+        crate::eth::register_ethereum::<Self::DaService>(
+            da_service.clone(),
+            storage.clone(),
+            &mut rpc_methods,
+        )?;
+
+        Ok(rpc_methods)
+    }
 
     async fn create_da_service(
         &self,
@@ -88,20 +91,10 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
         MockDaService::new(rollup_config.da.sender_address)
     }
 
-    fn create_storage_manager(
-        &self,
-        rollup_config: &RollupConfig<Self::DaConfig>,
-    ) -> anyhow::Result<Self::StorageManager> {
-        let storage_config = StorageConfig {
-            path: rollup_config.storage.path.clone(),
-        };
-        sov_state::storage_manager::ProverStorageManager::new(storage_config)
-    }
-
     async fn create_prover_service(
         &self,
-
         prover_config: RollupProverConfig,
+        rollup_config: &RollupConfig<Self::DaConfig>,
         _da_service: &Self::DaService,
     ) -> Self::ProverService {
         let vm = Risc0Host::new(risc0_starter::MOCK_DA_ELF);
@@ -115,7 +108,18 @@ impl sov_modules_rollup_blueprint::RollupBlueprint for MockRollup {
             da_verifier,
             prover_config,
             zk_storage,
+            rollup_config.prover_service,
         )
+    }
+
+    fn create_storage_manager(
+        &self,
+        rollup_config: &RollupConfig<Self::DaConfig>,
+    ) -> anyhow::Result<Self::StorageManager> {
+        let storage_config = StorageConfig {
+            path: rollup_config.storage.path.clone(),
+        };
+        ProverStorageManager::new(storage_config)
     }
 }
 

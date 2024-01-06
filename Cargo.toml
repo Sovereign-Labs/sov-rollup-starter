@@ -33,6 +33,8 @@ sov-first-read-last-write-cache = { git = "https://github.com/Sovereign-Labs/sov
 sov-cli = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "de526a6bafeccb982a7e19a5abe7ca8997f58240" }
 sov-mock-da = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "de526a6bafeccb982a7e19a5abe7ca8997f58240" }
 sov-celestia-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "de526a6bafeccb982a7e19a5abe7ca8997f58240" }
+sov-prover-storage-manager = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "de526a6bafeccb982a7e19a5abe7ca8997f58240" }
+
 stf-starter = { path = "./crates/stf" }
 
 serde = { version = "1.0.192", features = ["derive", "rc"] }

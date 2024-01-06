@@ -20,16 +20,15 @@ risc0_zkvm::guest::entry!(main);
 pub fn main() {
     let guest = Risc0Guest::new();
     let storage = ZkStorage::new();
-    let app: StfBlueprint<ZkDefaultContext, _, _, Runtime<_, _>, BasicKernel<_>> =
+    let stf: StfBlueprint<ZkDefaultContext, _, _, Runtime<_, _>, BasicKernel<_, _>> =
         StfBlueprint::new();
 
     let stf_verifier = StfVerifier::new(
-        app,
+        stf,
         CelestiaVerifier {
             rollup_namespace: ROLLUP_NAMESPACE,
         },
     );
-
     stf_verifier
         .run_block(guest, storage)
         .expect("Prover must be honest");
