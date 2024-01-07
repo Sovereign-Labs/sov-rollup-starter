@@ -28,22 +28,32 @@ pub struct MockRollup {}
 /// they can be easily swapped with alternative implementations as needed.
 #[async_trait]
 impl RollupBlueprint for MockRollup {
+    /// This component defines the Data Availability layer.
     type DaService = MockDaService;
     type DaSpec = MockDaSpec;
     type DaConfig = MockDaConfig;
+
+    /// The concrete ZkVm used in the rollup.
     type Vm = Risc0Host<'static>;
 
+    /// Context for the Zero Knowledge environment.
     type ZkContext = ZkDefaultContext;
+    /// Context for the ZNative environment.
     type NativeContext = DefaultContext;
 
+    /// Manager for the native storage lifecycle.
     type StorageManager = ProverStorageManager<MockDaSpec, DefaultStorageSpec>;
 
+    /// Runtime for the Zero Knowledge environment.
     type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
+    /// Runtime for the Native environment.
     type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
 
+    /// Kernels.
     type NativeKernel = BasicKernel<Self::NativeContext, Self::DaSpec>;
     type ZkKernel = BasicKernel<Self::ZkContext, Self::DaSpec>;
 
+    /// Prover service.
     type ProverService = ParallelProverService<
         <<Self::NativeContext as Spec>::Storage as Storage>::Root,
         <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
@@ -58,6 +68,7 @@ impl RollupBlueprint for MockRollup {
         >,
     >;
 
+    /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
         &self,
         storage: &<Self::NativeContext as Spec>::Storage,
