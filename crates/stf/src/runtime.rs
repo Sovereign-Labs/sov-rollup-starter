@@ -10,7 +10,6 @@ pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
 use sov_modules_api::macros::DefaultRuntime;
-use sov_modules_api::runtime::capabilities::{BlobRefOrOwned, BlobSelector};
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
 use sov_modules_api::{Context, DaSpec, DispatchCall, Genesis, MessageCodec};
@@ -87,21 +86,5 @@ where
         genesis_paths: &Self::GenesisPaths,
     ) -> Result<Self::GenesisConfig, anyhow::Error> {
         crate::genesis_config::get_genesis_config(genesis_paths)
-    }
-}
-
-// Select which blobs will be executed in this slot. In this implementation simply execute all
-// available blobs in the order they appeared on the DA layer
-impl<C: Context, Da: DaSpec> BlobSelector<Da> for Runtime<C, Da> {
-    type Context = C;
-    fn get_blobs_for_this_slot<'a, I>(
-        &self,
-        current_blobs: I,
-        _working_set: &mut sov_modules_api::WorkingSet<C>,
-    ) -> anyhow::Result<Vec<BlobRefOrOwned<'a, Da::BlobTransaction>>>
-    where
-        I: IntoIterator<Item = &'a mut Da::BlobTransaction>,
-    {
-        Ok(current_blobs.into_iter().map(BlobRefOrOwned::Ref).collect())
     }
 }

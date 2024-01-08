@@ -34,7 +34,7 @@ $ make test-create-token
 
 #### 5. Wait for the transaction to be submitted.
 ```sh,test-ci
-$ make wait-five-seconds
+$ make wait-ten-seconds
 ```
 
 
