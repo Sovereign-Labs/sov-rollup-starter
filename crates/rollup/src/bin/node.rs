@@ -26,12 +26,19 @@ use tracing_subscriber::{fmt, EnvFilter};
 const DEFAULT_CONFIG_PATH: &str = "../../rollup_config.toml";
 #[cfg(feature = "mock_da")]
 const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock/";
+#[cfg(feature = "mock_da")]
+const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/mock/chain_state.json";
+
+
 
 // config and genesis for local docker celestia
 #[cfg(feature = "celestia_da")]
 const DEFAULT_CONFIG_PATH: &str = "../../celestia_rollup_config.toml";
 #[cfg(feature = "celestia_da")]
 const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/celestia/";
+#[cfg(feature = "celestia_da")]
+const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/celestia/chain_state.json";
+
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -43,6 +50,9 @@ struct Args {
     /// The path to the genesis config.
     #[arg(long, default_value = DEFAULT_GENESIS_PATH)]
     genesis_paths: String,
+    /// The path to the kernel genesis config.
+    #[arg(long, default_value = DEFAULT_KERNEL_GENESIS_PATH)]
+    kernel_genesis_paths: String,
 }
 
 #[tokio::main]
@@ -58,11 +68,12 @@ async fn main() -> Result<(), anyhow::Error> {
     let rollup_config_path = args.rollup_config_path.as_str();
 
     let genesis_paths = args.genesis_paths.as_str();
+    let kernel_genesis_paths = args.kernel_genesis_paths.as_str();
 
     let rollup = new_rollup(
         &GenesisPaths::from_dir(genesis_paths),
         &BasicKernelGenesisPaths {
-            chain_state: "../test-data/genesis/demo-tests/mock/chain_state.json".into(),
+            chain_state: kernel_genesis_paths.into(),
         },
         rollup_config_path,
         RollupProverConfig::Execute,
