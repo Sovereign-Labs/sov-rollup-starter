@@ -21,8 +21,8 @@ if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
 fi
-echo 'Running: '\''make wait-five-seconds'\'''
-make wait-five-seconds
+echo 'Running: '\''make wait-ten-seconds'\'''
+make wait-ten-seconds
 if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1

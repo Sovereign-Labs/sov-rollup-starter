@@ -85,7 +85,7 @@ else
 	cargo build --bin starter-cli-wallet
 endif
 
-wait-five-seconds:
+wait-ten-seconds:
 	sleep 10
 
 set-rpc-url: build-sov-cli
