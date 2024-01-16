@@ -75,7 +75,7 @@
                 lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
                 outputHashes = {
                   "sha2-0.10.6" = "sha256-1dDg6mujDC+vp9buyErWKq+pml2+xsjifxDDyiuoq8M=";
-                  "sov-accounts-0.3.0" = "sha256-nRJkW0xAyh94W7EVepzNvKKBrDJDBHZh3KZb3jDxYVQ=";
+                  "sov-accounts-0.3.0" = "sha256-+tRfA7Vl011zwz95CnWIwgF25gSbG3kbdAGJyuU379w=";
                   "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 };
             };
@@ -113,7 +113,7 @@
                   "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
                   "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                   "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                  "sov-accounts-0.3.0" = "sha256-nRJkW0xAyh94W7EVepzNvKKBrDJDBHZh3KZb3jDxYVQ=";
+                  "sov-accounts-0.3.0" = "sha256-+tRfA7Vl011zwz95CnWIwgF25gSbG3kbdAGJyuU379w=";
                   "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
                 };
             };
