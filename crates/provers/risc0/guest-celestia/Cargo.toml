@@ -23,6 +23,12 @@ sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev =
 [patch.crates-io]
 sha2 = { git = "https://github.com/risc0/RustCrypto-hashes", tag = "sha2/v0.10.6-risc0" }
 
+# Uncomment to apply the v0.19 build script downlaod issue hotfix.
+risc0-circuit-recursion = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-zkvm = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-zkvm-platform = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-circuit-rv32im = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+
 
 [profile.dev]
 opt-level = 3
