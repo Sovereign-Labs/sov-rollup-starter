@@ -9,6 +9,7 @@ use sov_modules_api::default_context::DefaultContext;
 use sov_modules_api::default_signature::private_key::DefaultPrivateKey;
 use sov_modules_api::transaction::Transaction;
 use sov_modules_api::{PrivateKey, Spec};
+use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 use sov_sequencer::utils::SimpleClient;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::genesis_config::GenesisPaths;
@@ -25,6 +26,9 @@ async fn bank_tx_tests() -> Result<(), anyhow::Error> {
         start_rollup(
             port_tx,
             GenesisPaths::from_dir("../../test-data/genesis/mock/"),
+            BasicKernelGenesisPaths {
+                chain_state: "../../test-data/genesis/mock/chain_state.json".into(),
+            },
             RollupProverConfig::Execute,
         )
         .await;
@@ -59,7 +63,18 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
         minter_address: user_address,
         authorized_minters: vec![],
     });
-    let tx = Transaction::<DefaultContext>::new_signed_tx(&key, msg.try_to_vec().unwrap(), 0);
+    let chain_id = 0;
+    let gas_tip = 0;
+    let gas_limit = 0;
+    let nonce = 0;
+    let tx = Transaction::<DefaultContext>::new_signed_tx(
+        &key,
+        msg.try_to_vec().unwrap(),
+        chain_id,
+        gas_tip,
+        gas_limit,
+        nonce,
+    );
 
     let port = rpc_address.port();
     let client = SimpleClient::new("localhost", port).await?;
@@ -80,6 +95,7 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
 
     let balance_response = sov_bank::BankRpcClient::<DefaultContext>::balance_of(
         client.http(),
+        None,
         user_address,
         token_address,
     )

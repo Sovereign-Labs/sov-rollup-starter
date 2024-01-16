@@ -85,8 +85,8 @@ else
 	cargo build --bin starter-cli-wallet
 endif
 
-wait-five-seconds:
-	sleep 3
+wait-ten-seconds:
+	sleep 10
 
 set-rpc-url: build-sov-cli
 	$(SOV_CLI_REL_PATH) rpc set-url http://127.0.0.1:12345
@@ -96,7 +96,7 @@ import-keys: build-sov-cli
 
 
 test-generate-create-token-tx: build-sov-cli
-	$(SOV_CLI_REL_PATH) transactions import from-file bank --path ../../test-data/requests/create_token.json
+	$(SOV_CLI_REL_PATH) transactions import from-file bank --chain-id 0 --path ../../test-data/requests/create_token.json
 
 
 test-create-token: set-rpc-url test-generate-create-token-tx import-keys
@@ -104,5 +104,5 @@ test-create-token: set-rpc-url test-generate-create-token-tx import-keys
 
 
 test-bank-supply-of: 
-	curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":["sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"],"id":1}' http://127.0.0.1:12345
+	curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}' http://127.0.0.1:12345
 

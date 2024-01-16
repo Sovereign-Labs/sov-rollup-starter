@@ -21,8 +21,8 @@ if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
 fi
-echo 'Running: '\''make wait-five-seconds'\'''
-make wait-five-seconds
+echo 'Running: '\''make wait-ten-seconds'\'''
+make wait-ten-seconds
 if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
@@ -33,9 +33,9 @@ if [ $? -ne 0 ]; then
     echo "Expected exit code 0, got $?"
     exit 1
 fi
-echo 'Running: '\''curl -X POST -H "Content-Type: application/json" -d '\''{"jsonrpc":"2.0","method":"bank_supplyOf","params":["sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"],"id":1}'\'' http://127.0.0.1:12345'\'''
+echo 'Running: '\''curl -X POST -H "Content-Type: application/json" -d '\''{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}'\'' http://127.0.0.1:12345'\'''
 
-output=$(curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":["sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"],"id":1}' http://127.0.0.1:12345)
+output=$(curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}' http://127.0.0.1:12345)
 expected='{"jsonrpc":"2.0","result":{"amount":1000},"id":1}
 '
 # Either of the two must be a substring of the other. This kinda protects us

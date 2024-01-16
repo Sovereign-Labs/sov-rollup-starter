@@ -89,19 +89,3 @@ where
         crate::genesis_config::get_genesis_config(genesis_paths)
     }
 }
-
-// Select which blobs will be executed in this slot. In this implementation simply execute all
-// available blobs in the order they appeared on the DA layer
-impl<C: Context, Da: DaSpec> BlobSelector<Da> for Runtime<C, Da> {
-    type Context = C;
-    fn get_blobs_for_this_slot<'a, I>(
-        &self,
-        current_blobs: I,
-        _working_set: &mut sov_modules_api::WorkingSet<C>,
-    ) -> anyhow::Result<Vec<BlobRefOrOwned<'a, Da::BlobTransaction>>>
-    where
-        I: IntoIterator<Item = &'a mut Da::BlobTransaction>,
-    {
-        Ok(current_blobs.into_iter().map(BlobRefOrOwned::Ref).collect())
-    }
-}
