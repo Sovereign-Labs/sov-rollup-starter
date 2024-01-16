@@ -29,8 +29,6 @@ const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock/";
 #[cfg(feature = "mock_da")]
 const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/mock/chain_state.json";
 
-
-
 // config and genesis for local docker celestia
 #[cfg(feature = "celestia_da")]
 const DEFAULT_CONFIG_PATH: &str = "../../celestia_rollup_config.toml";
@@ -38,7 +36,6 @@ const DEFAULT_CONFIG_PATH: &str = "../../celestia_rollup_config.toml";
 const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/celestia/";
 #[cfg(feature = "celestia_da")]
 const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/celestia/chain_state.json";
-
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

@@ -61,6 +61,7 @@
               mkdir -p $out
               cp -r crates $out/
               cp Cargo.toml constants.json $out/
+              cp constants.json $out/crates/provers/risc0/guest-celestia/
             '';
         };
 
@@ -99,7 +100,6 @@
             '';
         };
 
-
         rollup-guest-celestia = nixpkgs.rustPlatform.buildRustPackage {
             name = "rollup-guest-celestia";
 
@@ -125,6 +125,8 @@
             ];
 
             doCheck = false;
+
+            CONSTANTS_MANIFEST = rollup-guest-src;
 
             buildPhase = ''
                 RUSTC=${risc0-rust}/bin/rustc \

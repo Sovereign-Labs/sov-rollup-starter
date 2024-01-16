@@ -20,12 +20,6 @@ sov-modules-stf-blueprint = { git = "https://github.com/Sovereign-Labs/sovereign
 sov-risc0-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "a8a234c0d1a6e2b45f5e2852d0846a97c6a00133" }
 sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "a8a234c0d1a6e2b45f5e2852d0846a97c6a00133" }
 
-[profile.dev]
-opt-level = 3
-
-[profile.dev.build-override]
-opt-level = 3
-
 [profile.release]
 debug = 1
 lto = true
