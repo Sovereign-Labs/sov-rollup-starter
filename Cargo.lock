@@ -3004,26 +3004,12 @@ dependencies = [
 [[package]]
 name = "risc0-binfmt"
 version = "0.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "923c85a23cb9a9475b8cd4479ad3a06252604a361626e9ae7dc0dc635af22c22"
-dependencies = [
- "anyhow",
- "elf",
- "log",
- "risc0-zkp 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "risc0-zkvm-platform",
- "serde",
-]
-
-[[package]]
-name = "risc0-binfmt"
-version = "0.19.1"
 source = "git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix#d091294b5cf7eebb8aafb115b22f9531259afc71"
 dependencies = [
  "anyhow",
  "elf",
  "log",
- "risc0-zkp 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-zkp",
  "risc0-zkvm-platform",
  "serde",
 ]
@@ -3037,8 +3023,8 @@ dependencies = [
  "anyhow",
  "cargo_metadata",
  "docker-generate",
- "risc0-binfmt 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "risc0-zkp 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "risc0-binfmt",
+ "risc0-zkp",
  "risc0-zkvm-platform",
  "serde",
  "serde_json",
@@ -3069,8 +3055,8 @@ dependencies = [
  "rand",
  "rayon",
  "risc0-circuit-recursion-sys",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
- "risc0-zkp 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-core",
+ "risc0-zkp",
  "sha2 0.10.8",
  "tracing",
  "zip",
@@ -3083,7 +3069,7 @@ source = "git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix#d0912
 dependencies = [
  "glob",
  "risc0-build-kernel",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-core",
 ]
 
 [[package]]
@@ -3096,8 +3082,8 @@ dependencies = [
  "rand",
  "rayon",
  "risc0-circuit-rv32im-sys",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
- "risc0-zkp 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-core",
+ "risc0-zkp",
  "risc0-zkvm-platform",
  "tracing",
 ]
@@ -3109,17 +3095,7 @@ source = "git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix#d0912
 dependencies = [
  "glob",
  "risc0-build-kernel",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
-]
-
-[[package]]
-name = "risc0-core"
-version = "0.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "477e0bb8d2ec0b7955088b521eb596901e652d0faa2ea73bda0b77e05af5c07d"
-dependencies = [
- "bytemuck",
- "rand_core",
+ "risc0-core",
 ]
 
 [[package]]
@@ -3149,27 +3125,6 @@ dependencies = [
 [[package]]
 name = "risc0-zkp"
 version = "0.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5abb1a0cf847d3f9aed1e563b76c358107e7ba66dbfab28f7144252c990bd82"
-dependencies = [
- "anyhow",
- "blake2",
- "bytemuck",
- "digest 0.10.7",
- "hex",
- "log",
- "paste",
- "rand_core",
- "risc0-core 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
- "risc0-zkvm-platform",
- "serde",
- "sha2 0.10.8",
- "tracing",
-]
-
-[[package]]
-name = "risc0-zkp"
-version = "0.19.1"
 source = "git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix#d091294b5cf7eebb8aafb115b22f9531259afc71"
 dependencies = [
  "anyhow",
@@ -3185,7 +3140,7 @@ dependencies = [
  "rand",
  "rand_core",
  "rayon",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-core",
  "risc0-sys",
  "risc0-zkvm-platform",
  "serde",
@@ -3217,11 +3172,11 @@ dependencies = [
  "prost-build",
  "protobuf-src",
  "rayon",
- "risc0-binfmt 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-binfmt",
  "risc0-circuit-recursion",
  "risc0-circuit-rv32im",
- "risc0-core 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
- "risc0-zkp 0.19.1 (git+https://github.com/neysofu/risc0-hotfixes?rev=v0.19.2-hotfix)",
+ "risc0-core",
+ "risc0-zkp",
  "risc0-zkvm-platform",
  "rrs-lib",
  "semver 1.0.21",
@@ -4038,7 +3993,7 @@ dependencies = [
  "bincode",
  "bytemuck",
  "risc0-circuit-rv32im",
- "risc0-zkp 0.19.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "risc0-zkp",
  "risc0-zkvm",
  "risc0-zkvm-platform",
  "serde",

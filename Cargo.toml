@@ -58,3 +58,7 @@ risc0-circuit-recursion = { git = "https://github.com/neysofu/risc0-hotfixes", r
 risc0-zkvm = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
 risc0-zkvm-platform = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
 risc0-circuit-rv32im = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-binfmt = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-core = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+risc0-zkp = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
+bonsai-sdk = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
