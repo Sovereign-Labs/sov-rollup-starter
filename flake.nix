@@ -74,9 +74,9 @@
             cargoLock = {
                 lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
                 outputHashes = {
-                  "sha2-0.10.6" = "sha256-1dDg6mujDC+vp9buyErWKq+pml2+xsjifxDDyiuoq8M=";
                   "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                   "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
+                  "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
                 };
             };
 
@@ -130,8 +130,6 @@
 
             CONSTANTS_MANIFEST = rollup-guest-src;
 
-            buildType = "debug";
-
             buildPhase = ''
                 RUSTC=${risc0-rust}/bin/rustc \
                     CARGO_ENCODED_RUSTFLAGS=$'-C\x1fpasses=loweratomic\x1f-C\x1flink-arg=-Ttext=0x00200800\x1f-C\x1flink-arg=--fatal-warnings\x1f-C\x1fpanic=abort\x1f-C\x1flinker=lld' \
@@ -162,7 +160,6 @@
                 };
             };
 
-            buildType = "debug";
             doCheck = false;
             buildNoDefaultFeatures = true;
             buildFeatures = [ "celestia_da" ];
