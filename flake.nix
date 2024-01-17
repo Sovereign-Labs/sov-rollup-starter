@@ -61,7 +61,6 @@
               mkdir -p $out
               cp -r crates $out/
               cp Cargo.toml constants.json $out/
-              cp constants.json $out/crates/provers/risc0/guest-celestia/
             '';
         };
 
@@ -87,6 +86,8 @@
             ];
 
             doCheck = false;
+
+            CONSTANTS_MANIFEST = rollup-guest-src;
 
             buildPhase = ''
                 RUSTC=${risc0-rust}/bin/rustc \
@@ -139,9 +140,34 @@
                 cp target/riscv32im-risc0-zkvm-elf/release/rollup $out/
             '';
         };
+
+
+        rollup = nixpkgs.rustPlatform.buildRustPackage {
+            name = "sov-rollup-starter";
+
+            src = ./.;
+
+            cargoLock = {
+                lockFile = ./Cargo.lock;
+                outputHashes = {
+                  "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
+                  "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
+                  "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
+                  "sov-accounts-0.3.0" = "sha256-+tRfA7Vl011zwz95CnWIwgF25gSbG3kbdAGJyuU379w=";
+                  "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
+                };
+            };
+
+            PKG_CONFIG_PATH = "${nixpkgs.openssl.dev}/lib/pkgconfig";
+
+            nativeBuildInputs = [
+                nixpkgs.pkg-config
+                nixpkgs.protobuf
+            ];
+        };
     in {
       packages = {
-        inherit risc0-rust rollup-guest-mock rollup-guest-celestia;
+        inherit risc0-rust rollup rollup-guest-mock rollup-guest-celestia;
       };
     });
 }
