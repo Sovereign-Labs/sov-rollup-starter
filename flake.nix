@@ -166,8 +166,7 @@
 
             PKG_CONFIG_PATH = "${nixpkgs.openssl.dev}/lib/pkgconfig";
 
-            # ROLLUP_ELF_PATH = "${rollup-guest-celestia}/rollup";
-            SKIP_GUEST_BUILD = "1";
+            ROLLUP_ELF_PATH = "${rollup-guest-celestia}/rollup";
             CONSTANTS_MANIFEST = ./.;
 
             nativeBuildInputs = [
