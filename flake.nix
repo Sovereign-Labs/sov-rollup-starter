@@ -116,6 +116,7 @@
                   "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
                   "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                   "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
+                  "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
                 };
             };
 
@@ -128,6 +129,8 @@
             doCheck = false;
 
             CONSTANTS_MANIFEST = rollup-guest-src;
+
+            buildType = "debug";
 
             buildPhase = ''
                 RUSTC=${risc0-rust}/bin/rustc \
