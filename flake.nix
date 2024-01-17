@@ -158,12 +158,27 @@
                 };
             };
 
+            buildType = "debug";
+            buildNoDefaultFeatures = true;
+            buildFeatures = [ "celestia_da" ];
+
             PKG_CONFIG_PATH = "${nixpkgs.openssl.dev}/lib/pkgconfig";
+            # LIBCLANG_PATH = "${nixpkgs.llvmPackages.libclang.lib}/lib";
+            LIBCLANG_PATH = "${nixpkgs.libclang.lib}/lib";
+            BINDGEN_EXTRA_CLANG_ARGS = "-isystem ${nixpkgs.llvmPackages.libclang.lib}/lib/clang/${nixpkgs.lib.getVersion nixpkgs.clang}/include";
+            ROCKSDB_INCLUDE_DIR = "${nixpkgs.rocksdb}/include";
+            ROCKSDB_LIB_DIR = "${nixpkgs.rocksdb}/lib";
+
+            # ROLLUP_ELF_PATH = "${rollup-guest-celestia}/rollup";
+            SKIP_GUEST_BUILD = "1";
 
             nativeBuildInputs = [
                 nixpkgs.pkg-config
                 nixpkgs.protobuf
+                nixpkgs.llvmPackages.libclang
+                nixpkgs.rustPlatform.bindgenHook
             ];
+
         };
     in {
       packages = {
