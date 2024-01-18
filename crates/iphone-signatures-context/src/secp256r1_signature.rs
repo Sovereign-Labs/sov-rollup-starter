@@ -288,6 +288,7 @@ impl FromStr for Secp256r1Signature {
         })
     }
 }
+
 //
 // #[test]
 // #[cfg(feature = "native")]
@@ -316,3 +317,47 @@ impl FromStr for Secp256r1Signature {
 //
 //     assert_eq!(key_pair.as_hex(), output.as_hex());
 // }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use p256::ecdsa::VerifyingKey;
+    use p256::ecdsa::{SigningKey, signature::Signer, Signature};
+    use rand_core::OsRng;
+
+    #[test]
+    fn test_secp256r1_pubkey_serialization() {
+        let private_key = p256::ecdsa::SigningKey::random(&mut OsRng);
+        let public_key = VerifyingKey::from(&private_key);
+
+        let secp256r1_pubkey = Secp256r1PublicKey {
+            pub_key: public_key,
+        };
+
+        let mut serialized = Vec::new();
+        secp256r1_pubkey.serialize(&mut serialized).unwrap();
+
+        let deserialized_pubkey = Secp256r1PublicKey::deserialize_reader(&mut serialized.as_slice()).unwrap();
+
+        assert_eq!(secp256r1_pubkey, deserialized_pubkey);
+    }
+
+    #[test]
+    fn test_secp256r1_signature_serialization() {
+        let signing_key = SigningKey::random(&mut OsRng);
+        let message = b"Example message to sign";
+
+        let signature: Signature = signing_key.sign(message);
+        let p256_signature = p256Signature::from_bytes(&signature.to_bytes()).unwrap();
+        let secp256r1_signature = Secp256r1Signature {
+            msg_sig: p256_signature,
+        };
+
+        let mut serialized = Vec::new();
+        secp256r1_signature.serialize(&mut serialized).unwrap();
+
+        let deserialized_signature = Secp256r1Signature::deserialize_reader(&mut serialized.as_slice()).unwrap();
+
+        assert_eq!(secp256r1_signature, deserialized_signature);
+    }
+}

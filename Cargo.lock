@@ -1828,6 +1828,7 @@ dependencies = [
  "hex",
  "p256",
  "rand",
+ "rand_core",
  "schemars",
  "serde",
  "serde_json",

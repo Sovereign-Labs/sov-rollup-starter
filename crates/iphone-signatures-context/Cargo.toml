@@ -31,6 +31,7 @@ serde = { workspace = true }
 serde_json = { workspace = true, optional = true }
 
 p256 = {version ="0.13.2", features=["serde", "ecdsa", "ecdsa-core"]}
+rand_core = "0.6"
 
 [features]
 native = [
