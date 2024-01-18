@@ -45,6 +45,8 @@ stf-starter = { path = "../stf", features = ["native"] }
 
 sov-risc0-adapter = { workspace = true, features = ["native"] }
 
+iphone-signatures-context = { path = "../iphone-signatures-context", features = ["native"]}
+
 # binary dependencies
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 

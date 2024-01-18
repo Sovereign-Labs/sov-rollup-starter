@@ -5,6 +5,7 @@ resolver = "2"
 members = [
     "crates/rollup",
     "crates/stf",
+    "crates/iphone-signatures-context"
 ]
 
 [workspace.package]
@@ -35,11 +36,17 @@ sov-mock-da = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev
 sov-celestia-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 sov-prover-storage-manager = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 
+sov-modules-core = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
+
 stf-starter = { path = "./crates/stf" }
 
+schemars = { version = "0.8.16", features = ["derive"] }
 serde = { version = "1.0.192", features = ["derive", "rc"] }
 serde_json = { version = "1.0" }
 
+rand = "0.8"
+thiserror = "1.0.50"
+hex = { version = "0.4.3", default-features = false, features = ["alloc", "serde"] }
 
 anyhow = "1.0.68"
 clap = { version = "4.4.10", features = ["derive"] }
@@ -49,6 +56,8 @@ tracing = "0.1.40"
 tokio = { version = "1", features = ["full"] }
 tempfile = "3.5"
 jsonrpsee = { version = "0.20.1", features = ["jsonrpsee-types"] }
+derive_more = { version = "0.99.11", default-features = false }
+sha2 = { version = "0.10.6", default-features = false }
 
 risc0-build = "0.19"
 

@@ -4,7 +4,6 @@
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
-use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
 use sov_modules_api::Address;
 use sov_modules_api::Spec;
 use sov_modules_rollup_blueprint::RollupBlueprint;
@@ -20,6 +19,8 @@ use sov_stf_runner::ParallelProverService;
 use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
+
+use iphone_signatures_context::{NativeIphoneSigContext, ZkIphoneSigContext};
 
 /// Rollup with [`MockDaService`].
 pub struct MockRollup {}
@@ -37,9 +38,9 @@ impl RollupBlueprint for MockRollup {
     type Vm = Risc0Host<'static>;
 
     /// Context for the Zero Knowledge environment.
-    type ZkContext = ZkDefaultContext;
+    type ZkContext = ZkIphoneSigContext;
     /// Context for the ZNative environment.
-    type NativeContext = DefaultContext;
+    type NativeContext = NativeIphoneSigContext;
 
     /// Manager for the native storage lifecycle.
     type StorageManager = ProverStorageManager<MockDaSpec, DefaultStorageSpec>;

@@ -1,0 +1,47 @@
+[package]
+name = "iphone-signatures-context"
+version = { workspace = true }
+edition = { workspace = true }
+resolver = "2"
+authors = { workspace = true }
+license = { workspace = true }
+homepage = "sovereign.xyz"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = { workspace = true }
+
+sov-modules-api = { workspace = true }
+sov-modules-core = { workspace = true }
+sov-rollup-interface = { workspace = true }
+
+thiserror = { workspace = true }
+borsh = { workspace = true }
+
+hex = { workspace = true }
+rand = { workspace = true, optional = true }
+schemars = { workspace = true, optional = true, features = [] }
+derive_more = { workspace = true, default-features = true }
+
+sha2 = { workspace = true }
+
+serde = { workspace = true }
+serde_json = { workspace = true, optional = true }
+
+p256 = {version ="0.13.2", features=["serde", "ecdsa", "ecdsa-core"]}
+
+[features]
+native = [
+    "serde",
+    "serde_json",
+    "schemars",
+    "rand",
+    "sov-modules-core/native",
+    "p256/ecdsa",
+    "p256/ecdsa-core",
+    "p256/serde",
+
+]
+serde = ["sov-modules-core/serde"]
