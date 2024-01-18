@@ -3,9 +3,9 @@ name: Rust
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "ibc-rollup" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "ibc-rollup" ]
 
 env:
   CARGO_TERM_COLOR: always
