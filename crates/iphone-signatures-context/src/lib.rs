@@ -82,7 +82,7 @@ impl Spec for ZkIphoneSigContext {
     #[cfg(feature = "native")]
     type PrivateKey = Secp256r1PrivateKey;
     type PublicKey = Secp256r1PublicKey;
-    type Hasher = <DefaultContext as Spec>::Hasher;
+    type Hasher = <ZkDefaultContext as Spec>::Hasher;
     type Signature = Secp256r1Signature;
     type Witness = <ZkDefaultContext as Spec>::Witness;
 }

@@ -31,40 +31,85 @@ pub mod private_key {
 
     use super::{Secp256r1PublicKey, Secp256r1Signature};
 
+    #[derive(Clone)]
+    struct RealSigningKey(SigningKey);
+
     /// A private key for the default signature scheme.
     /// This struct also stores the corresponding public key.
-    #[derive(Clone)]
+    #[derive(Clone, Serialize, Deserialize)]
     pub struct Secp256r1PrivateKey {
-        key_pair: SigningKey,
+        key_pair: RealSigningKey,
     }
 
-    impl Serialize for Secp256r1PrivateKey {
+    impl Serialize for RealSigningKey {
         fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
             where
                 S: Serializer,
         {
-            let binding = self.key_pair.to_bytes();
+            let binding = self.0.to_bytes();
             let bytes: &[u8] = binding.deref();
             serializer.serialize_bytes(bytes)
         }
     }
 
-    impl<'de> Deserialize<'de> for Secp256r1PrivateKey {
+    impl<'d> Deserialize<'d> for RealSigningKey {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
             where
-                D: Deserializer<'de>,
+                D: Deserializer<'d>,
         {
-            let bytes = Vec::<u8>::deserialize(deserializer)?;
-            let key_pair = SigningKey::from_slice(&bytes)
-                .map_err(serde::de::Error::custom)?;
-            Ok(Secp256r1PrivateKey { key_pair })
+            struct RealSigningKeyVisitor;
+
+            impl<'de> serde::de::Visitor<'de> for RealSigningKeyVisitor {
+                type Value = RealSigningKey;
+
+                fn expecting(&self, formatter: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
+                    write!(formatter, concat!("An secp256r1 signing (private) key"))
+                }
+
+                fn visit_borrowed_bytes<E: serde::de::Error>(
+                    self,
+                    bytes: &'de [u8],
+                ) -> Result<Self::Value, E> {
+                    let key_pair = SigningKey::from_slice(bytes.as_ref()).map_err(E::custom)?;
+                    Ok(RealSigningKey(key_pair))
+                }
+
+                fn visit_seq<A>(self, mut seq: A) -> Result<Self::Value, A::Error>
+                    where
+                        A: serde::de::SeqAccess<'de>,
+                {
+                    let mut bytes = [0u8; PRIVATE_KEY_LENGTH];
+                    for i in 0..32 {
+                        bytes[i] = seq
+                            .next_element()?
+                            .ok_or_else(|| serde::de::Error::invalid_length(i, &"expected 32 bytes"))?;
+                    }
+
+                    let remaining = (0..)
+                        .map(|_| seq.next_element::<u8>())
+                        .take_while(|el| matches!(el, Ok(Some(_))))
+                        .count();
+
+                    if remaining > 0 {
+                        return Err(serde::de::Error::invalid_length(
+                            32 + remaining,
+                            &"expected 32 bytes",
+                        ));
+                    }
+
+                    let key_pair = SigningKey::from_slice(&bytes).map_err(serde::de::Error::custom)?;
+                    Ok(RealSigningKey(key_pair))
+                }
+            }
+
+            deserializer.deserialize_bytes(RealSigningKeyVisitor)
         }
     }
 
     impl core::fmt::Debug for Secp256r1PrivateKey {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             f.debug_struct("Secp256r1PrivateKey")
-                .field("public_key", &self.key_pair.verifying_key())
+                .field("public_key", &self.key_pair.0.verifying_key())
                 .field("private_key", &"***REDACTED***")
                 .finish()
         }
@@ -76,7 +121,7 @@ pub mod private_key {
         fn try_from(value: &[u8]) -> Result<Self, Self::Error> {
             if value.len() == PRIVATE_KEY_LENGTH {
                 let key_pair = SigningKey::from_slice(&value)?;
-                Ok(Self { key_pair })
+                Ok(Self { key_pair: RealSigningKey(key_pair) })
             } else {
                 Err(anyhow::anyhow!("Invalid private key length"))
             }
@@ -91,26 +136,26 @@ pub mod private_key {
             let mut csprng = OsRng;
 
             Self {
-                key_pair: SigningKey::random(&mut csprng),
+                key_pair: RealSigningKey(SigningKey::random(&mut csprng)),
             }
         }
 
         fn pub_key(&self) -> Self::PublicKey {
             Secp256r1PublicKey {
-                pub_key: self.key_pair.verifying_key().clone(),
+                pub_key: self.key_pair.0.verifying_key().clone(),
             }
         }
 
         fn sign(&self, msg: &[u8]) -> Self::Signature {
             Secp256r1Signature {
-                msg_sig: self.key_pair.sign(msg),
+                msg_sig: self.key_pair.0.sign(msg),
             }
         }
     }
 
     impl Secp256r1PrivateKey {
         pub fn as_hex(&self) -> String {
-            hex::encode(self.key_pair.to_bytes())
+            hex::encode(self.key_pair.0.to_bytes())
         }
 
         pub fn from_hex(hex: &str) -> anyhow::Result<Self> {

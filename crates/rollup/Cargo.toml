@@ -54,9 +54,12 @@ tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 tempfile = { workspace = true }
 
 [features]
-default = ["mock_da"] # set mock_da as the default feature
+default = ["mock_da", "native"] # set mock_da as the default feature
 mock_da = ["sov-mock-da"]
 celestia_da = ["sov-celestia-adapter"]
+native = [
+
+]
 
 [[bin]]
 name = "node"

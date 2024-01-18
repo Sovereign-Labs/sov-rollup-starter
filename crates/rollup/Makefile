@@ -106,3 +106,13 @@ test-create-token: set-rpc-url test-generate-create-token-tx import-keys
 test-bank-supply-of: 
 	curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}' http://127.0.0.1:12345
 
+import-keys-iphone: build-sov-cli
+	$(SOV_CLI_REL_PATH) keys import --nickname DANGER__DO_NOT_USE_WITH_REAL_MONEY --path ../../test-data/keys/token_deployer_private_key_iphone.json
+
+test-generate-create-token-tx-iphone: build-sov-cli
+	$(SOV_CLI_REL_PATH) transactions import from-file bank --chain-id 0 --path ../../test-data/requests/create_token_iphone.json
+
+test-create-token-iphone: set-rpc-url test-generate-create-token-tx-iphone import-keys-iphone
+	$(SOV_CLI_REL_PATH) rpc submit-batch by-nickname DANGER__DO_NOT_USE_WITH_REAL_MONEY
+
+
