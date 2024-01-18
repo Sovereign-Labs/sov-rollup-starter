@@ -1,0 +1,26 @@
+name: Rust
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "ibc-rollup" ]
+  pull_request:
+    branches: [ "ibc-rollup" ]
+
+jobs:
+  nix-build:
+    runs-on: ubuntu-latest
+    environment: CI
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v25
+          with:
+            extra_nix_config: |
+              experimental-features = nix-command flakes
+      - uses: cachix/cachix-action@v14
+        with:
+          name: informal-sovereign
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Run Nix Build
+        run: |
+          nix build .#rollup
