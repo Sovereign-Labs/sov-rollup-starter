@@ -6,16 +6,30 @@
 let
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
         name = "rollup-guest-src";
-        src = ../.;
+        src = ../crates;
         dontBuild = true;
 
         installPhase = ''
-            mkdir -p $out
-            cp -r crates $out/
-            cp Cargo.toml constants.json $out/
+            mkdir -p $out/crates
+            cp -r . $out/crates
+            cp ${../Cargo.toml} $out/Cargo.toml
+            cp ${../constants.json} $out/constants.json
         '';
     };
 
+    rollup-src = nixpkgs.stdenv.mkDerivation {
+        name = "rollup-guest-src";
+        src = ../crates;
+        dontBuild = true;
+
+        installPhase = ''
+            mkdir -p $out/crates
+            cp -r . $out/crates
+            cp ${../Cargo.toml} $out/Cargo.toml
+            cp ${../Cargo.lock} $out/Cargo.lock
+            cp ${../constants.json} $out/constants.json
+        '';
+    };
     rollup-guest-mock = nixpkgs.rustPlatform.buildRustPackage {
         name = "rollup-guest-mock";
 
@@ -98,7 +112,7 @@ let
     rollup = nixpkgs.rustPlatform.buildRustPackage {
         name = "sov-rollup-starter";
 
-        src = ../.;
+        src = rollup-src;
 
         cargoLock = {
             lockFile = ../Cargo.lock;
@@ -119,7 +133,7 @@ let
         PKG_CONFIG_PATH = "${nixpkgs.openssl.dev}/lib/pkgconfig";
 
         ROLLUP_ELF_PATH = "${rollup-guest-celestia}/rollup";
-        CONSTANTS_MANIFEST = ../.;
+        CONSTANTS_MANIFEST = rollup-src;
 
         nativeBuildInputs = [
             nixpkgs.pkg-config
