@@ -470,9 +470,9 @@ name = "guest-mock-starter"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "iphone-signatures-context",
  "risc0-zkvm",
  "risc0-zkvm-platform",
+ "secp256r1-context",
  "serde",
  "sov-mock-da",
  "sov-modules-api",
@@ -541,25 +541,6 @@ checksum = "b4eecd90f87bea412eac91c6ef94f6b1e390128290898cbe14f2b926787ae1fb"
 dependencies = [
  "base64",
  "serde",
-]
-
-[[package]]
-name = "iphone-signatures-context"
-version = "0.3.0"
-dependencies = [
- "anyhow",
- "bincode",
- "borsh",
- "derive_more",
- "hex",
- "p256",
- "rand_core",
- "serde",
- "sha2",
- "sov-modules-api",
- "sov-modules-core",
- "sov-rollup-interface",
- "thiserror",
 ]
 
 [[package]]
@@ -1096,6 +1077,25 @@ dependencies = [
  "serdect",
  "subtle",
  "zeroize",
+]
+
+[[package]]
+name = "secp256r1-context"
+version = "0.3.0"
+dependencies = [
+ "anyhow",
+ "bincode",
+ "borsh",
+ "derive_more",
+ "hex",
+ "p256",
+ "rand_core",
+ "serde",
+ "sha2",
+ "sov-modules-api",
+ "sov-modules-core",
+ "sov-rollup-interface",
+ "thiserror",
 ]
 
 [[package]]

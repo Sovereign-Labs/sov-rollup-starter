@@ -1819,28 +1819,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c8573b2b1fb643a372c73b23f4da5f888677feef3305146d68a539250a9bccc7"
 
 [[package]]
-name = "iphone-signatures-context"
-version = "0.3.0"
-dependencies = [
- "anyhow",
- "bincode",
- "borsh",
- "derive_more",
- "hex",
- "p256",
- "rand",
- "rand_core",
- "schemars",
- "serde",
- "serde_json",
- "sha2 0.10.8",
- "sov-modules-api",
- "sov-modules-core",
- "sov-rollup-interface",
- "thiserror",
-]
-
-[[package]]
 name = "ipnet"
 version = "2.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3630,6 +3608,28 @@ dependencies = [
 ]
 
 [[package]]
+name = "secp256r1-context"
+version = "0.3.0"
+dependencies = [
+ "anyhow",
+ "bincode",
+ "borsh",
+ "derive_more",
+ "hex",
+ "p256",
+ "rand",
+ "rand_core",
+ "schemars",
+ "serde",
+ "serde_json",
+ "sha2 0.10.8",
+ "sov-modules-api",
+ "sov-modules-core",
+ "sov-rollup-interface",
+ "thiserror",
+]
+
+[[package]]
 name = "security-framework"
 version = "2.9.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4229,9 +4229,9 @@ dependencies = [
  "async-trait",
  "borsh",
  "clap",
- "iphone-signatures-context",
  "jsonrpsee",
  "risc0-starter",
+ "secp256r1-context",
  "serde",
  "serde_json",
  "sov-accounts",

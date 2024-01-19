@@ -1,13 +1,7 @@
-mod secp256r1_signature;
-mod pub_key_hex;
-mod serde_pub_key;
-
-pub use pub_key_hex::PublicKeyHex;
 use sha2::Digest;
 
 use sov_modules_api::default_context::ZkDefaultContext;
 use sov_modules_core::{Address, Context, PublicKey, Spec, TupleGasUnit};
-
 
 #[cfg(feature = "native")]
 use crate::secp256r1_signature::private_key::Secp256r1PrivateKey;
@@ -22,9 +16,8 @@ use sov_modules_api::default_context::DefaultContext;
 use sov_modules_api::RollupAddress;
 
 #[cfg(feature = "native")]
-#[cfg_attr(feature = "arbitrary", derive(arbitrary::Arbitrary))]
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
-pub struct NativeIphoneSigContext {
+pub struct NativeSecp256r1Context {
     pub sender: Address,
     pub sequencer: Address,
     /// The height to report. This is set by the kernel when the context is created
@@ -32,7 +25,7 @@ pub struct NativeIphoneSigContext {
 }
 
 #[cfg(feature = "native")]
-impl Spec for NativeIphoneSigContext {
+impl Spec for NativeSecp256r1Context {
     type Address = <DefaultContext as Spec>::Address;
     type Storage = <DefaultContext as Spec>::Storage;
     type PrivateKey = Secp256r1PrivateKey;
@@ -43,7 +36,7 @@ impl Spec for NativeIphoneSigContext {
 }
 
 #[cfg(feature = "native")]
-impl Context for NativeIphoneSigContext {
+impl Context for NativeSecp256r1Context {
     type GasUnit = TupleGasUnit<2>;
 
     fn sender(&self) -> &Self::Address {
@@ -69,14 +62,14 @@ impl Context for NativeIphoneSigContext {
 
 #[derive(Clone, Debug, PartialEq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub struct ZkIphoneSigContext {
+pub struct ZkSecp256r1Context {
     pub sender: Address,
     pub sequencer: Address,
     /// The height to report. This is set by the kernel when the context is created
     visible_height: u64,
 }
 
-impl Spec for ZkIphoneSigContext {
+impl Spec for ZkSecp256r1Context {
     type Address = <ZkDefaultContext as Spec>::Address;
     type Storage = <ZkDefaultContext as Spec>::Storage;
     #[cfg(feature = "native")]
@@ -87,7 +80,7 @@ impl Spec for ZkIphoneSigContext {
     type Witness = <ZkDefaultContext as Spec>::Witness;
 }
 
-impl Context for ZkIphoneSigContext {
+impl Context for ZkSecp256r1Context {
     type GasUnit = TupleGasUnit<2>;
 
     fn sender(&self) -> &Self::Address {

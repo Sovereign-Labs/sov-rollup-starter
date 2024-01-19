@@ -12,7 +12,6 @@ use sov_modules_core::{SigVerificationError, Signature};
 use sov_rollup_interface::anyhow;
 
 pub(crate) const PUBLIC_KEY_LENGTH: usize = 33; // Compressed public key length in bytes
-const PRIVATE_KEY_LENGTH: usize = 32; // Private key length in bytes
 const SIGNATURE_LENGTH: usize = 64; // Signature length in bytes
 
 
@@ -28,7 +27,7 @@ pub mod private_key {
     use sov_modules_core::{Address, PrivateKey, PublicKey};
 
     use serde::{Serialize, Deserialize, Serializer, Deserializer};
-    use super::PRIVATE_KEY_LENGTH;
+    const PRIVATE_KEY_LENGTH: usize = 32; // Private key length in bytes
 
     use super::{Secp256r1PublicKey, Secp256r1Signature};
 

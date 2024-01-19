@@ -1,5 +1,5 @@
 [package]
-name = "iphone-signatures-context"
+name = "secp256r1-context"
 version = { workspace = true }
 edition = { workspace = true }
 resolver = "2"
@@ -33,6 +33,9 @@ serde_json = { workspace = true, optional = true }
 
 p256 = {version ="0.13.2", features=["serde", "ecdsa", "ecdsa-core"]}
 rand_core = "0.6"
+
+[dev-dependencies]
+sov-modules-core = { workspace = true, features = ["native"] }
 
 [features]
 native = [

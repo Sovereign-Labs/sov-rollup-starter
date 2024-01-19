@@ -20,7 +20,7 @@ use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
 
-use iphone_signatures_context::{NativeIphoneSigContext, ZkIphoneSigContext};
+use secp256r1_context::{NativeSecp256r1Context,ZkSecp256r1Context};
 
 /// Rollup with [`MockDaService`].
 pub struct MockRollup {}
@@ -38,9 +38,9 @@ impl RollupBlueprint for MockRollup {
     type Vm = Risc0Host<'static>;
 
     /// Context for the Zero Knowledge environment.
-    type ZkContext = ZkIphoneSigContext;
+    type ZkContext = ZkSecp256r1Context;
     /// Context for the ZNative environment.
-    type NativeContext = NativeIphoneSigContext;
+    type NativeContext = NativeSecp256r1Context;
 
     /// Manager for the native storage lifecycle.
     type StorageManager = ProverStorageManager<MockDaSpec, DefaultStorageSpec>;

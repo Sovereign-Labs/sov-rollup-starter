@@ -5,7 +5,7 @@ resolver = "2"
 members = [
     "crates/rollup",
     "crates/stf",
-    "crates/iphone-signatures-context"
+    "crates/secp256r1-context"
 ]
 
 [workspace.package]
