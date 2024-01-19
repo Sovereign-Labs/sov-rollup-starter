@@ -7,6 +7,12 @@
         flake-utils.url = github:numtide/flake-utils;
 
         rust-overlay.url = github:oxalica/rust-overlay;
+
+        celestia-app-src = {
+            flake = false;
+            url = github:celestiaorg/celestia-app/v1.6.0;
+        };
+
     };
 
     outputs = inputs:
@@ -28,8 +34,8 @@
                 rust-bin = nixpkgs.rust-bin.stable.latest.complete;
 
                 risc0-rust-tarball = builtins.fetchurl {
-                url = "https://github.com/risc0/rust/releases/download/test-release-2/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
-                sha256 = "sha256:1nqgpx6ww0rla5c4jzam6fr43v6lf0flsj572racjqwq9xk86l4a";
+                    url = "https://github.com/risc0/rust/releases/download/test-release-2/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
+                    sha256 = "sha256:1nqgpx6ww0rla5c4jzam6fr43v6lf0flsj572racjqwq9xk86l4a";
                 };
 
                 risc0-rust = import ./nix/risc0.nix {
@@ -39,9 +45,15 @@
                 rollup-packages = import ./nix/rollup.nix {
                     inherit nixpkgs rust-bin risc0-rust;
                 };
+
+                celestia-app = import ./nix/celestia-app.nix {
+                    inherit nixpkgs;
+
+                    inherit (inputs) celestia-app-src;
+                };
             in {
                 packages = {
-                    inherit risc0-rust;
+                    inherit risc0-rust celestia-app;
                     inherit (rollup-packages) rollup rollup-guest-mock rollup-guest-celestia;
                 };
             });
