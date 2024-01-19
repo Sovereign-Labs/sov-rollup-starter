@@ -70,6 +70,23 @@
         "type": "github"
       }
     },
+    "gaia-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700568577,
+        "narHash": "sha256-kx4dn7Cj0RhIg5oUqMkbowJ396AUQo9hJEwn/y495yI=",
+        "owner": "cosmos",
+        "repo": "gaia",
+        "rev": "0d9408e9169488707f1ad423e87d0df84a30431f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cosmos",
+        "ref": "v14.1.0",
+        "repo": "gaia",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1705303754,
@@ -107,6 +124,7 @@
         "celestia-app-src": "celestia-app-src",
         "celestia-node-src": "celestia-node-src",
         "flake-utils": "flake-utils",
+        "gaia-src": "gaia-src",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"
       }

@@ -17,6 +17,11 @@
             flake = false;
             url = github:celestiaorg/celestia-node/v0.12.4;
         };
+
+        gaia-src = {
+            flake = false;
+            url = github:cosmos/gaia/v14.1.0;
+        };
     };
 
     outputs = inputs:
@@ -50,6 +55,12 @@
                     inherit nixpkgs rust-bin risc0-rust;
                 };
 
+                gaia = import ./nix/gaia.nix {
+                    inherit nixpkgs;
+
+                    inherit (inputs) gaia-src;
+                };
+
                 celestia-app = import ./nix/celestia-app.nix {
                     inherit nixpkgs;
 
@@ -63,7 +74,7 @@
                 };
             in {
                 packages = {
-                    inherit risc0-rust celestia-app celestia-node;
+                    inherit risc0-rust gaia celestia-app celestia-node;
                     inherit (rollup-packages) rollup rollup-guest-mock rollup-guest-celestia;
                 };
             });
