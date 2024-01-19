@@ -22,6 +22,7 @@ sov-risc0-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git
 sov-state = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 
 stf-starter = { path = "../../../stf" }
+iphone-signatures-context = { path = "../../../iphone-signatures-context", features = ["serde"]}
 
 [patch.crates-io]
 sha2 = { git = "https://github.com/risc0/RustCrypto-hashes", tag = "sha2/v0.10.6-risc0" }
