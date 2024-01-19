@@ -8,6 +8,7 @@ use p256::ecdsa::{signature::Verifier,
                    VerifyingKey}};
 
 use sov_modules_core::{SigVerificationError, Signature};
+
 use sov_rollup_interface::anyhow;
 
 pub(crate) const PUBLIC_KEY_LENGTH: usize = 33; // Compressed public key length in bytes
@@ -289,34 +290,33 @@ impl FromStr for Secp256r1Signature {
     }
 }
 
-//
-// #[test]
-// #[cfg(feature = "native")]
-// fn test_privatekey_serde_bincode() {
-//     use self::private_key::Secp256r1PrivateKey;
-//     use crate::PrivateKey;
-//
-//     let key_pair = Secp256r1PrivateKey::generate();
-//     let serialized = bincode::serialize(&key_pair).expect("Serialization to vec is infallible");
-//     let output = bincode::deserialize::<Secp256r1PrivateKey>(&serialized)
-//         .expect("SigningKey is serialized correctly");
-//
-//     assert_eq!(key_pair.as_hex(), output.as_hex());
-// }
-//
-// #[test]
-// #[cfg(feature = "native")]
-// fn test_privatekey_serde_json() {
-//     use self::private_key::Secp256r1PrivateKey;
-//     use crate::PrivateKey;
-//
-//     let key_pair = Secp256r1PrivateKey::generate();
-//     let serialized = serde_json::to_vec(&key_pair).expect("Serialization to vec is infallible");
-//     let output = serde_json::from_slice::<Secp256r1PrivateKey>(&serialized)
-//         .expect("Keypair is serialized correctly");
-//
-//     assert_eq!(key_pair.as_hex(), output.as_hex());
-// }
+#[test]
+#[cfg(feature = "native")]
+fn test_privatekey_serde_bincode() {
+    use self::private_key::Secp256r1PrivateKey;
+    use sov_modules_core::PrivateKey;
+
+    let key_pair = Secp256r1PrivateKey::generate();
+    let serialized = bincode::serialize(&key_pair).expect("Serialization to vec is infallible");
+    let output = bincode::deserialize::<Secp256r1PrivateKey>(&serialized)
+        .expect("SigningKey is serialized correctly");
+
+    assert_eq!(key_pair.as_hex(), output.as_hex());
+}
+
+#[test]
+#[cfg(feature = "native")]
+fn test_privatekey_serde_json() {
+    use self::private_key::Secp256r1PrivateKey;
+    use sov_modules_core::PrivateKey;
+
+    let key_pair = Secp256r1PrivateKey::generate();
+    let serialized = serde_json::to_vec(&key_pair).expect("Serialization to vec is infallible");
+    let output = serde_json::from_slice::<Secp256r1PrivateKey>(&serialized)
+        .expect("Keypair is serialized correctly");
+
+    assert_eq!(key_pair.as_hex(), output.as_hex());
+}
 
 #[cfg(test)]
 mod tests {

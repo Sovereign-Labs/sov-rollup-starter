@@ -80,46 +80,46 @@ impl TryFrom<&PublicKeyHex> for Secp256r1PublicKey {
 }
 
 
-// #[cfg(test)]
-// mod tests {
-//     use sov_modules_core::PrivateKey;
-//
-//     use super::*;
-//     use crate::default_signature::private_key::DefaultPrivateKey;
-//
-//     #[test]
-//     fn test_pub_key_hex() {
-//         let pub_key = DefaultPrivateKey::generate().pub_key();
-//         let pub_key_hex = PublicKeyHex::from(&pub_key);
-//         let converted_pub_key = DefaultPublicKey::try_from(&pub_key_hex).unwrap();
-//         assert_eq!(pub_key, converted_pub_key);
-//     }
-//
-//     #[test]
-//     fn test_pub_key_hex_str() {
-//         let key = "022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad8";
-//         let pub_key_hex_lower: PublicKeyHex = key.try_into().unwrap();
-//         let pub_key_hex_upper: PublicKeyHex = key.to_uppercase().try_into().unwrap();
-//
-//         let pub_key_lower = DefaultPublicKey::try_from(&pub_key_hex_lower).unwrap();
-//         let pub_key_upper = DefaultPublicKey::try_from(&pub_key_hex_upper).unwrap();
-//
-//         assert_eq!(pub_key_lower, pub_key_upper)
-//     }
-//
-//     #[test]
-//     fn test_bad_pub_key_hex_str() {
-//         let key = "022e229198d957Zf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad8";
-//         let err = PublicKeyHex::try_from(key).unwrap_err();
-//
-//         assert_eq!(
-//             err.to_string(),
-//             "Bad hex conversion: wrong character `Z` at index 14"
-//         );
-//
-//         let key = "022";
-//         let err = PublicKeyHex::try_from(key).unwrap_err();
-//
-//         assert_eq!(err.to_string(), "Bad hex conversion: odd input length")
-//     }
-// }
+#[cfg(test)]
+mod tests {
+    use sov_modules_core::PrivateKey;
+
+    use super::*;
+    use crate::secp256r1_signature::private_key::Secp256r1PrivateKey;
+
+    #[test]
+    fn test_pub_key_hex() {
+        let pub_key = Secp256r1PrivateKey::generate().pub_key();
+        let pub_key_hex = PublicKeyHex::from(&pub_key);
+        let converted_pub_key = Secp256r1PublicKey::try_from(&pub_key_hex).unwrap();
+        assert_eq!(pub_key, converted_pub_key);
+    }
+
+    #[test]
+    fn test_pub_key_hex_str() {
+        let key = "022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad802";
+        let pub_key_hex_lower: PublicKeyHex = key.try_into().unwrap();
+        let pub_key_hex_upper: PublicKeyHex = key.to_uppercase().try_into().unwrap();
+
+        let pub_key_lower = Secp256r1PublicKey::try_from(&pub_key_hex_lower).unwrap();
+        let pub_key_upper = Secp256r1PublicKey::try_from(&pub_key_hex_upper).unwrap();
+
+        assert_eq!(pub_key_lower, pub_key_upper)
+    }
+
+    #[test]
+    fn test_bad_pub_key_hex_str() {
+        let key = "022e229198d957Zf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad802";
+        let err = PublicKeyHex::try_from(key).unwrap_err();
+
+        assert_eq!(
+            err.to_string(),
+            "Bad hex conversion: wrong character `Z` at index 14"
+        );
+
+        let key = "022";
+        let err = PublicKeyHex::try_from(key).unwrap_err();
+
+        assert_eq!(err.to_string(), "Bad hex conversion: odd input length")
+    }
+}

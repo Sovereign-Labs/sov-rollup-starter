@@ -548,6 +548,7 @@ name = "iphone-signatures-context"
 version = "0.3.0"
 dependencies = [
  "anyhow",
+ "bincode",
  "borsh",
  "derive_more",
  "hex",

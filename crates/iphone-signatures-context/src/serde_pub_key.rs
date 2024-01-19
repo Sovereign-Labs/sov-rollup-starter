@@ -31,26 +31,26 @@ impl<'de> serde::Deserialize<'de> for Secp256r1PublicKey {
     }
 }
 
-// #[cfg(test)]
-// mod test {
-//     use super::*;
-//
-//     #[test]
-//     fn test_pub_key_json() {
-//         let pub_key_hex: PublicKeyHex =
-//             "022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad8"
-//                 .try_into()
-//                 .unwrap();
-//
-//         let pub_key = DefaultPublicKey::try_from(&pub_key_hex).unwrap();
-//         let pub_key_str: String = serde_json::to_string(&pub_key).unwrap();
-//
-//         assert_eq!(
-//             pub_key_str,
-//             r#""022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad8""#
-//         );
-//
-//         let deserialized: DefaultPublicKey = serde_json::from_str(&pub_key_str).unwrap();
-//         assert_eq!(deserialized, pub_key);
-//     }
-// }
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_pub_key_json() {
+        let pub_key_hex: PublicKeyHex =
+            "022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad802"
+                .try_into()
+                .unwrap();
+
+        let pub_key = Secp256r1PublicKey::try_from(&pub_key_hex).unwrap();
+        let pub_key_str: String = serde_json::to_string(&pub_key).unwrap();
+
+        assert_eq!(
+            pub_key_str,
+            r#""022e229198d957bf0c0a504e7d7bcec99a1d62cccc7861ed2452676ad0323ad802""#
+        );
+
+        let deserialized: Secp256r1PublicKey = serde_json::from_str(&pub_key_str).unwrap();
+        assert_eq!(deserialized, pub_key);
+    }
+}

@@ -51,6 +51,7 @@ hex = { version = "0.4.3", default-features = false, features = ["alloc", "serde
 anyhow = "1.0.68"
 clap = { version = "4.4.10", features = ["derive"] }
 async-trait = "0.1.71"
+bincode = "1.3.3"
 borsh = { version = "0.10.3", features = ["rc", "bytes"] }
 tracing = "0.1.40"
 tokio = { version = "1", features = ["full"] }
