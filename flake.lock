@@ -17,6 +17,23 @@
         "type": "github"
       }
     },
+    "celestia-node-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705334246,
+        "narHash": "sha256-kvH5l/oUU7f7E5bwCv2nR3OldxhpZxG5tTFG0JEGXSQ=",
+        "owner": "celestiaorg",
+        "repo": "celestia-node",
+        "rev": "8e5a71746bc9bd9300ad3e4853797e64fdd1d018",
+        "type": "github"
+      },
+      "original": {
+        "owner": "celestiaorg",
+        "ref": "v0.12.4",
+        "repo": "celestia-node",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -88,6 +105,7 @@
     "root": {
       "inputs": {
         "celestia-app-src": "celestia-app-src",
+        "celestia-node-src": "celestia-node-src",
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay"

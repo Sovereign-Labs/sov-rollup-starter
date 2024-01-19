@@ -13,6 +13,10 @@
             url = github:celestiaorg/celestia-app/v1.6.0;
         };
 
+        celestia-node-src = {
+            flake = false;
+            url = github:celestiaorg/celestia-node/v0.12.4;
+        };
     };
 
     outputs = inputs:
@@ -51,9 +55,15 @@
 
                     inherit (inputs) celestia-app-src;
                 };
+
+                celestia-node = import ./nix/celestia-node.nix {
+                    inherit nixpkgs;
+
+                    inherit (inputs) celestia-node-src;
+                };
             in {
                 packages = {
-                    inherit risc0-rust celestia-app;
+                    inherit risc0-rust celestia-app celestia-node;
                     inherit (rollup-packages) rollup rollup-guest-mock rollup-guest-celestia;
                 };
             });
