@@ -2,15 +2,13 @@
 
 use anyhow::Context;
 use clap::Parser;
-#[cfg(feature = "celestia_da")]
-use sov_celestia_adapter::CelestiaConfig;
+
 #[cfg(feature = "mock_da")]
 use sov_mock_da::MockDaConfig;
 use sov_modules_rollup_blueprint::{Rollup, RollupBlueprint};
 use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisConfig;
 use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
-#[cfg(feature = "celestia_da")]
-use sov_rollup_starter::celestia_rollup::CelestiaRollup;
+
 #[cfg(feature = "mock_da")]
 use sov_rollup_starter::mock_rollup::MockRollup;
 use sov_stf_runner::RollupProverConfig;
@@ -28,17 +26,6 @@ const DEFAULT_CONFIG_PATH: &str = "../../rollup_config.toml";
 const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock/";
 #[cfg(feature = "mock_da")]
 const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/mock/chain_state.json";
-
-
-
-// config and genesis for local docker celestia
-#[cfg(feature = "celestia_da")]
-const DEFAULT_CONFIG_PATH: &str = "../../celestia_rollup_config.toml";
-#[cfg(feature = "celestia_da")]
-const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/celestia/";
-#[cfg(feature = "celestia_da")]
-const DEFAULT_KERNEL_GENESIS_PATH: &str = "../../test-data/genesis/celestia/chain_state.json";
-
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -103,39 +90,6 @@ async fn new_rollup(
         )?,
     };
 
-    mock_rollup
-        .create_new_rollup(
-            rt_genesis_paths,
-            kernel_genesis,
-            rollup_config,
-            prover_config,
-        )
-        .await
-}
-
-#[cfg(feature = "celestia_da")]
-async fn new_rollup(
-    rt_genesis_paths: &GenesisPaths,
-    kernel_genesis_paths: &BasicKernelGenesisPaths,
-    rollup_config_path: &str,
-    prover_config: RollupProverConfig,
-) -> Result<Rollup<CelestiaRollup>, anyhow::Error> {
-    info!(
-        "Starting celestia rollup with config {}",
-        rollup_config_path
-    );
-
-    let rollup_config: RollupConfig<CelestiaConfig> =
-        from_toml_path(rollup_config_path).context("Failed to read rollup configuration")?;
-
-    let kernel_genesis = BasicKernelGenesisConfig {
-        chain_state: serde_json::from_str(
-            &std::fs::read_to_string(&kernel_genesis_paths.chain_state)
-                .context("Failed to read chain state")?,
-        )?,
-    };
-
-    let mock_rollup = CelestiaRollup {};
     mock_rollup
         .create_new_rollup(
             rt_genesis_paths,

@@ -3,8 +3,6 @@
 
 use sov_modules_api::cli::{FileNameArg, JsonStringArg};
 use sov_modules_rollup_blueprint::WalletBlueprint;
-#[cfg(feature = "celestia_da")]
-use sov_rollup_starter::celestia_rollup::CelestiaRollup as StarterRollup;
 #[cfg(feature = "mock_da")]
 use sov_rollup_starter::mock_rollup::MockRollup as StarterRollup;
 use stf_starter::runtime::RuntimeSubcommand;

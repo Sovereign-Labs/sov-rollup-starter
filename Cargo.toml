@@ -32,7 +32,6 @@ sov-risc0-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git
 sov-first-read-last-write-cache = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 sov-cli = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 sov-mock-da = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
-sov-celestia-adapter = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 sov-prover-storage-manager = { git = "https://github.com/Sovereign-Labs/sovereign-sdk.git", rev = "13e4077c329ff14954b32e3180d43a6d86fa3172" }
 
 stf-starter = { path = "./crates/stf" }

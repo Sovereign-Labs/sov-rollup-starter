@@ -27,7 +27,6 @@ sov-db = { workspace = true }
 sov-sequencer = { workspace = true }
 sov-rollup-interface = { workspace = true }
 sov-mock-da = { workspace = true, features = ["native"], optional=true }
-sov-celestia-adapter = { workspace = true, features = ["native"], optional=true }
 
 anyhow = { workspace = true }
 async-trait = { workspace = true }
@@ -54,7 +53,6 @@ tempfile = { workspace = true }
 [features]
 default = ["mock_da"] # set mock_da as the default feature
 mock_da = ["sov-mock-da"]
-celestia_da = ["sov-celestia-adapter"]
 
 [[bin]]
 name = "node"
