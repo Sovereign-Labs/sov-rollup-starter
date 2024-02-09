@@ -1,7 +1,9 @@
+.DS_Store
 .idea
 /target/
 /rollup-starter-data/
 /crates/provers/risc0/guest-mock/target
+/crates/provers/risc0/guest-celestia/target
 docker/credentials/*
 !docker/credentials/bridge-0.addr
 !docker/credentials/bridge-0.key

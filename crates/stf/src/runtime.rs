@@ -9,11 +9,14 @@
 pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
+#[cfg(feature = "native")]
+pub use sov_ibc::{IbcRpcImpl, IbcRpcServer};
+#[cfg(feature = "native")]
+pub use sov_ibc_transfer::{IbcTransferRpcImpl, IbcTransferRpcServer};
 use sov_modules_api::macros::DefaultRuntime;
-use sov_modules_api::runtime::capabilities::{BlobRefOrOwned, BlobSelector};
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
-use sov_modules_api::{Context, DaSpec, DispatchCall, Genesis, MessageCodec};
+use sov_modules_api::{Context, DaSpec, DispatchCall, Event, Genesis, MessageCodec};
 #[cfg(feature = "native")]
 pub use sov_sequencer_registry::{SequencerRegistryRpcImpl, SequencerRegistryRpcServer};
 
@@ -55,7 +58,7 @@ use crate::genesis_config::GenesisPaths;
     derive(sov_modules_api::macros::CliWallet),
     sov_modules_api::macros::expose_rpc
 )]
-#[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
+#[derive(Genesis, DispatchCall, Event, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
 #[cfg_attr(feature = "serde", serialization(serde::Serialize, serde::Deserialize))]
 pub struct Runtime<C: Context, Da: DaSpec> {
@@ -63,6 +66,10 @@ pub struct Runtime<C: Context, Da: DaSpec> {
     pub accounts: sov_accounts::Accounts<C>,
     /// The bank module is responsible for minting, transferring, and burning tokens
     pub bank: sov_bank::Bank<C>,
+    /// The `ibc` module is responsible for creating clients, connections and channels and managing IBC packets
+    pub ibc: sov_ibc::Ibc<C, Da>,
+    /// The `ibc_transfer` module is responsible for managing IBC transfers
+    pub ibc_transfer: sov_ibc_transfer::IbcTransfer<C>,
     /// The sequencer registry module is responsible for authorizing users to sequencer rollup transactions
     pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<C, Da>,
 }
@@ -78,7 +85,9 @@ where
     type GenesisPaths = GenesisPaths;
 
     #[cfg(feature = "native")]
-    fn rpc_methods(storage: <C as Spec>::Storage) -> jsonrpsee::RpcModule<()> {
+    fn rpc_methods(
+        storage: std::sync::Arc<std::sync::RwLock<<C as Spec>::Storage>>,
+    ) -> jsonrpsee::RpcModule<()> {
         get_rpc_methods::<C, Da>(storage.clone())
     }
 

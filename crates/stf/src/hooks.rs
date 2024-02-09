@@ -7,7 +7,8 @@
 use super::runtime::Runtime;
 use sov_accounts::AccountsTxHook;
 use sov_bank::BankTxHook;
-use sov_modules_api::hooks::{ApplyBlobHooks, FinalizeHook, SlotHooks, TxHooks};
+use sov_modules_api::batch::BatchWithId;
+use sov_modules_api::hooks::{ApplyBatchHooks, FinalizeHook, SlotHooks, TxHooks};
 use sov_modules_api::transaction::Transaction;
 use sov_modules_api::{AccessoryWorkingSet, BlobReaderTrait, Context, DaSpec, Spec, WorkingSet};
 use sov_modules_stf_blueprint::{RuntimeTxHook, SequencerOutcome};
@@ -49,30 +50,32 @@ impl<C: Context, Da: DaSpec> TxHooks for Runtime<C, Da> {
     }
 }
 
-impl<C: Context, Da: DaSpec> ApplyBlobHooks<Da::BlobTransaction> for Runtime<C, Da> {
+impl<C: Context, Da: DaSpec> ApplyBatchHooks<Da> for Runtime<C, Da> {
     type Context = C;
-    type BlobResult =
+    type BatchResult =
         SequencerOutcome<<<Da as DaSpec>::BlobTransaction as BlobReaderTrait>::Address>;
 
-    fn begin_blob_hook(
+    fn begin_batch_hook(
         &self,
-        blob: &mut Da::BlobTransaction,
+        batch: &mut BatchWithId,
+        sender: &Da::Address,
         working_set: &mut WorkingSet<C>,
     ) -> anyhow::Result<()> {
-        // Before executing each batch, check that the sender is regsitered as a sequencer
-        self.sequencer_registry.begin_blob_hook(blob, working_set)
+        // Before executing each batch, check that the sender is registered as a sequencer
+        self.sequencer_registry
+            .begin_batch_hook(batch, sender, working_set)
     }
 
-    fn end_blob_hook(
+    fn end_batch_hook(
         &self,
-        result: Self::BlobResult,
+        result: Self::BatchResult,
         working_set: &mut WorkingSet<C>,
     ) -> anyhow::Result<()> {
         // After processing each blob, reward or slash the sequencer if appropriate
         match result {
             SequencerOutcome::Rewarded(_reward) => {
                 // TODO: Process reward here or above.
-                <SequencerRegistry<C, Da> as ApplyBlobHooks<Da::BlobTransaction>>::end_blob_hook(
+                <SequencerRegistry<C, Da> as ApplyBatchHooks<Da>>::end_batch_hook(
                     &self.sequencer_registry,
                     sov_sequencer_registry::SequencerOutcome::Completed,
                     working_set,
@@ -84,7 +87,7 @@ impl<C: Context, Da: DaSpec> ApplyBlobHooks<Da::BlobTransaction> for Runtime<C, 
                 sequencer_da_address,
             } => {
                 info!("Sequencer {} slashed: {:?}", sequencer_da_address, reason);
-                <SequencerRegistry<C, Da> as ApplyBlobHooks<Da::BlobTransaction>>::end_blob_hook(
+                <SequencerRegistry<C, Da> as ApplyBatchHooks<Da>>::end_batch_hook(
                     &self.sequencer_registry,
                     sov_sequencer_registry::SequencerOutcome::Slashed {
                         sequencer: sequencer_da_address,
@@ -96,22 +99,20 @@ impl<C: Context, Da: DaSpec> ApplyBlobHooks<Da::BlobTransaction> for Runtime<C, 
     }
 }
 
-impl<C: Context, Da: DaSpec> SlotHooks<Da> for Runtime<C, Da> {
+impl<C: Context, Da: DaSpec> SlotHooks for Runtime<C, Da> {
     type Context = C;
 
     fn begin_slot_hook(
         &self,
-        _slot_header: &Da::BlockHeader,
-        _validity_condition: &Da::ValidityCondition,
         _pre_state_root: &<<Self::Context as Spec>::Storage as Storage>::Root,
-        _working_set: &mut sov_modules_api::WorkingSet<C>,
+        _versioned_working_set: &mut sov_modules_api::VersionedWorkingSet<C>,
     ) {
     }
 
     fn end_slot_hook(&self, _working_set: &mut sov_modules_api::WorkingSet<C>) {}
 }
 
-impl<C: Context, Da: sov_modules_api::DaSpec> FinalizeHook<Da> for Runtime<C, Da> {
+impl<C: Context, Da: sov_modules_api::DaSpec> FinalizeHook for Runtime<C, Da> {
     type Context = C;
 
     fn finalize_hook(
