@@ -66,6 +66,7 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
     let chain_id = 0;
     let gas_tip = 0;
     let gas_limit = 0;
+    let max_gas_price = None;
     let nonce = 0;
     let tx = Transaction::<DefaultContext>::new_signed_tx(
         &key,
@@ -73,6 +74,7 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
         chain_id,
         gas_tip,
         gas_limit,
+        max_gas_price,
         nonce,
     );
 

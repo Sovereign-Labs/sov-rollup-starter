@@ -1,5 +1,6 @@
 #![deny(missing_docs)]
 //! StarterRollup provides a minimal self-contained rollup implementation
+use std::sync::{Arc, RwLock};
 
 use async_trait::async_trait;
 use sov_celestia_adapter::types::Namespace;
@@ -23,7 +24,7 @@ use sov_stf_runner::RollupProverConfig;
 use stf_starter::Runtime;
 
 /// The namespace for the rollup on Celestia.
-const ROLLUP_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-celest");
+const ROLLUP_BATCH_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-celest");
 
 /// The rollup stores the zk proofs in the namespace b"sov-test-p" on Celestia.
 const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-test-p");
@@ -67,7 +68,7 @@ impl RollupBlueprint for CelestiaRollup {
 
     fn create_rpc_methods(
         &self,
-        storage: &<Self::NativeContext as sov_modules_api::Spec>::Storage,
+        storage: Arc<RwLock<<Self::NativeContext as sov_modules_api::Spec>::Storage>>,
         ledger_db: &sov_db::ledger_db::LedgerDB,
         da_service: &Self::DaService,
     ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
@@ -79,7 +80,7 @@ impl RollupBlueprint for CelestiaRollup {
             Self::NativeRuntime,
             Self::NativeContext,
             Self::DaService,
-        >(storage, ledger_db, da_service, sequencer)?;
+        >(storage.clone(), ledger_db, da_service, sequencer)?;
 
         #[cfg(feature = "experimental")]
         crate::eth::register_ethereum::<Self::DaService>(
@@ -98,7 +99,7 @@ impl RollupBlueprint for CelestiaRollup {
         CelestiaService::new(
             rollup_config.da.clone(),
             RollupParams {
-                rollup_batch_namespace: ROLLUP_NAMESPACE,
+                rollup_batch_namespace: ROLLUP_BATCH_NAMESPACE,
                 rollup_proof_namespace: ROLLUP_PROOF_NAMESPACE,
             },
         )
@@ -116,7 +117,7 @@ impl RollupBlueprint for CelestiaRollup {
         let zk_storage = ZkStorage::new();
 
         let da_verifier = CelestiaVerifier {
-            rollup_namespace: ROLLUP_NAMESPACE,
+            rollup_namespace: ROLLUP_BATCH_NAMESPACE,
         };
 
         ParallelProverService::new_with_default_workers(

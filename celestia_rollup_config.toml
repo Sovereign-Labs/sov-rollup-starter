@@ -1,6 +1,6 @@
 [da]
 # The JWT used to authenticate with the celestia light client. Instructions for generating this token can be found in the README
-celestia_rpc_auth_token = ""
+celestia_rpc_auth_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJwdWJsaWMiLCJyZWFkIiwid3JpdGUiLCJhZG1pbiJdfQ.cpgAm8Hms_DYhpaQADyWll5RP13nfTAsYROrfFilpLk"
 # The address of the *trusted* Celestia light client to interact with
 celestia_rpc_address = "http://127.0.0.1:26658"
 # The largest response the rollup will accept from the Celestia node. Defaults to 100 MB
@@ -16,6 +16,7 @@ path = "../../rollup-starter-data"
 # any blocks before this height
 [runner]
 start_height = 3
+da_polling_interval_ms = 10000
 
 [runner.rpc_config]
 # the host and port to bind the rpc server for

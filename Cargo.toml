@@ -13,7 +13,7 @@ edition = "2021"
 license = "MIT OR Apache-2.0"
 authors = ["Informal Systems <hello@informal.systems>", "Sovereign Labs <info@sovereign.xyz>"]
 publish = false
-rust-version = "1.73"
+rust-version = "1.75"
 
 [workspace.dependencies]
 sov-modules-api                 = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
@@ -35,8 +35,8 @@ sov-mock-da                     = { git = "ssh://git@github.com/Sovereign-Labs/s
 sov-celestia-adapter            = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
 sov-prover-storage-manager      = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
 
-sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git" }
-sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git" }
+sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "b62c16e" }
+sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "b62c16e" }
 
 stf-starter = { path = "./crates/stf" }
 
