@@ -23,7 +23,7 @@ tracing = "0.1.37"
 
 anyhow = { workspace = true }
 serde = { workspace = true, features = ["derive", "rc"] }
-serde_json = { workspace = true, optional = true }
+serde_json = { workspace = true }
 jsonrpsee = { workspace = true, features = ["jsonrpsee-types"], optional = true }
 borsh = { workspace = true, features = ["rc", "bytes"] }
 clap = { workspace = true, features = ["derive"], optional = true }
@@ -41,7 +41,6 @@ native = [
     "sov-mock-da/native",
     "sov-modules-stf-blueprint/native",
     "sov-stf-runner/native",
-    "serde_json",
     "jsonrpsee",
     "sov-sequencer",
     "clap",
