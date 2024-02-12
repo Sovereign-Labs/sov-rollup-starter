@@ -9,9 +9,9 @@
 pub use sov_accounts::{AccountsRpcImpl, AccountsRpcServer};
 #[cfg(feature = "native")]
 pub use sov_bank::{BankRpcImpl, BankRpcServer};
-use sov_modules_api::macros::DefaultRuntime;
 #[cfg(feature = "native")]
 use sov_modules_api::Spec;
+use sov_modules_api::{macros::DefaultRuntime, Event};
 use sov_modules_api::{Context, DaSpec, DispatchCall, Genesis, MessageCodec};
 #[cfg(feature = "native")]
 pub use sov_sequencer_registry::{SequencerRegistryRpcImpl, SequencerRegistryRpcServer};
@@ -54,7 +54,7 @@ use crate::genesis_config::GenesisPaths;
     derive(sov_modules_api::macros::CliWallet),
     sov_modules_api::macros::expose_rpc
 )]
-#[derive(Genesis, DispatchCall, MessageCodec, DefaultRuntime)]
+#[derive(Genesis, DispatchCall, Event, MessageCodec, DefaultRuntime)]
 #[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
 #[cfg_attr(feature = "serde", serialization(serde::Serialize, serde::Deserialize))]
 pub struct Runtime<C: Context, Da: DaSpec> {
@@ -77,8 +77,10 @@ where
     type GenesisPaths = GenesisPaths;
 
     #[cfg(feature = "native")]
-    fn rpc_methods(storage: <C as Spec>::Storage) -> jsonrpsee::RpcModule<()> {
-        get_rpc_methods::<C, Da>(storage.clone())
+    fn rpc_methods(
+        storage: std::sync::Arc<std::sync::RwLock<<C as Spec>::Storage>>,
+    ) -> jsonrpsee::RpcModule<()> {
+        get_rpc_methods::<C, Da>(storage)
     }
 
     #[cfg(feature = "native")]
