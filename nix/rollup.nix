@@ -83,6 +83,9 @@ let
                 "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
                 "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
+                "ibc-app-transfer-0.50.0" = "sha256-+F6/YQ2wGhCFfuWJRQbhJx+cfurT/8hh8hkw1FAEiPM=";
+                "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
+                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
             };
         };
 
@@ -122,7 +125,10 @@ let
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
                 "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
-                "bonsai-sdk-0.5.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
+                "bonsai-sdk-0.5.1" = "sha256-vBcJIbMMYmWhU/NHMODm+8HxXbF+tBjB/DV4HYwlVo0=";
+                "ibc-app-transfer-0.50.0" = "sha256-+F6/YQ2wGhCFfuWJRQbhJx+cfurT/8hh8hkw1FAEiPM=";
+                "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
+                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
             };
         };
 

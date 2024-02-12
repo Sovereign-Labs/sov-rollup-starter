@@ -310,9 +310,6 @@ name = "deranged"
 version = "0.3.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b42b6fa04a440b495c8b04d0e71b707c585f83cb9cb28cf8cd0d976c315e31b4"
-dependencies = [
- "powerfmt",
-]
 
 [[package]]
 name = "derivative"
@@ -1011,9 +1008,9 @@ checksum = "ce23b50ad8242c51a442f3ff322d56b02f08852c77e4c0b4d3fd684abc89c683"
 
 [[package]]
 name = "indexmap"
-version = "2.2.2"
+version = "2.2.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "824b2ae422412366ba479e8111fd301f7b5faece8149317bb81925979a53f520"
+checksum = "233cf39063f058ea2caae4091bf4a3ef70a653afbc026f5c4a4135d114e3c177"
 dependencies = [
  "equivalent",
  "hashbrown 0.14.3",
@@ -1226,12 +1223,6 @@ name = "platforms"
 version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "14e6ab3f592e6fb464fc9712d8d6e6912de6473954635fd76a589d832cffcbb0"
-
-[[package]]
-name = "powerfmt"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "439ee305def115ba05938db6eb1644ff94165c5ab5e9420d1c1bcedbba909391"
 
 [[package]]
 name = "ppv-lite86"
@@ -1696,7 +1687,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=b62c16e#b62c16ec459bd048b876c31e24b4ae287e90fb0b"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
 dependencies = [
  "derive_more",
  "ibc-client-tendermint",
@@ -1713,7 +1704,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client-types"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=b62c16e#b62c16ec459bd048b876c31e24b4ae287e90fb0b"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
 dependencies = [
  "base64 0.21.7",
  "bytes",
@@ -1745,7 +1736,7 @@ dependencies = [
 [[package]]
 name = "sov-ibc"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=b62c16e#b62c16ec459bd048b876c31e24b4ae287e90fb0b"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
 dependencies = [
  "anyhow",
  "borsh",
@@ -1769,7 +1760,7 @@ dependencies = [
 [[package]]
 name = "sov-ibc-transfer"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=b62c16e#b62c16ec459bd048b876c31e24b4ae287e90fb0b"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
 dependencies = [
  "anyhow",
  "base64 0.21.7",
@@ -2124,12 +2115,11 @@ dependencies = [
 
 [[package]]
 name = "time"
-version = "0.3.31"
+version = "0.3.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f657ba42c3f86e7680e53c8cd3af8abbe56b5491790b46e22e19c0d57463583e"
+checksum = "426f806f4089c493dcac0d24c29c01e2c38baf8e30f1b716ee37e83d200b18fe"
 dependencies = [
  "deranged",
- "powerfmt",
  "serde",
  "time-core",
  "time-macros",
@@ -2143,9 +2133,9 @@ checksum = "ef927ca75afb808a4d64dd374f00a2adf8d0fcff8e7b184af886c3c87ec4a3f3"
 
 [[package]]
 name = "time-macros"
-version = "0.2.16"
+version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "26197e33420244aeb70c3e8c78376ca46571bc4e701e4791c2cd9f57dcb3a43f"
+checksum = "4ad70d68dba9e1f8aceda7aa6711965dfec1cac869f311a51bd08b3a2ccbce20"
 dependencies = [
  "time-core",
 ]
