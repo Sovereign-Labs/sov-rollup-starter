@@ -36,11 +36,12 @@ checksum = "f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe"
 
 [[package]]
 name = "ahash"
-version = "0.8.8"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "42cd52102d3df161c77a887b608d7a4897d7cc112886a9537b738a887a03aaff"
+checksum = "91429305e9f0a25f6205c5b8e0d2db09e0708a7a6df0f42212bb56c32c8ac97a"
 dependencies = [
  "cfg-if",
+ "getrandom",
  "once_cell",
  "version_check",
  "zerocopy",
@@ -693,11 +694,10 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.0.83"
+version = "1.0.85"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f1174fb0b6ec23863f8b971027804a42614e347eafb0a95bf0b12cdae21fc4d0"
+checksum = "9b918671670962b48bc23753aef0c51d072dca6f52f01f800854ada6ddb7f7d3"
 dependencies = [
- "jobserver",
  "libc",
 ]
 
@@ -929,9 +929,9 @@ dependencies = [
 
 [[package]]
 name = "crc32fast"
-version = "1.3.2"
+version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b540bd8bc810d3885c6ea91e2018302f68baba2129ab3e88f32389ee9370880d"
+checksum = "b3855a8a784b474f333699ef2bbca9db2c4a1f6d9088a90a2d25b1eb53111eaa"
 dependencies = [
  "cfg-if",
 ]
@@ -2393,15 +2393,6 @@ dependencies = [
  "sha2 0.10.8",
  "thiserror",
  "tracing",
-]
-
-[[package]]
-name = "jobserver"
-version = "0.1.28"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ab46a6e9526ddef3ae7f787c06f0f2600639ba80ea3eade3d8e670a2230f51d6"
-dependencies = [
- "libc",
 ]
 
 [[package]]
@@ -4433,7 +4424,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "derive_more",
  "ibc-client-tendermint",
@@ -4450,7 +4441,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client-types"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "base64 0.21.7",
  "bytes",
@@ -4520,8 +4511,9 @@ dependencies = [
 [[package]]
 name = "sov-ibc"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
+ "ahash",
  "anyhow",
  "borsh",
  "derive_more",
@@ -4542,12 +4534,13 @@ dependencies = [
  "sov-state",
  "tendermint 0.34.0",
  "thiserror",
+ "time",
 ]
 
 [[package]]
 name = "sov-ibc-transfer"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "anyhow",
  "base64 0.21.7",
@@ -5953,9 +5946,9 @@ checksum = "dff9641d1cd4be8d1a070daf9e3773c5f67e78b4d9d42263020c057706765c04"
 
 [[package]]
 name = "winnow"
-version = "0.5.39"
+version = "0.5.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5389a154b01683d28c77f8f68f49dea75f0a4da32557a58f68ee51ebba472d29"
+checksum = "f593a95398737aeed53e489c785df13f3618e41dbcd6718c6addbf1395aa6876"
 dependencies = [
  "memchr",
 ]

@@ -35,8 +35,8 @@ sov-mock-da                     = { git = "ssh://git@github.com/Sovereign-Labs/s
 sov-celestia-adapter            = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
 sov-prover-storage-manager      = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
 
-sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "1adaf43" }
-sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "1adaf43" }
+sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }
+sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }
 
 stf-starter = { path = "./crates/stf" }
 

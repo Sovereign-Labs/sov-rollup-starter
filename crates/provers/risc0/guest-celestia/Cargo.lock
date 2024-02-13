@@ -4,13 +4,15 @@ version = 3
 
 [[package]]
 name = "ahash"
-version = "0.8.3"
+version = "0.8.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2c99f64d1e06488f620f932677e24bc6e2897582980441ae90a671415bd7ec2f"
+checksum = "91429305e9f0a25f6205c5b8e0d2db09e0708a7a6df0f42212bb56c32c8ac97a"
 dependencies = [
  "cfg-if",
+ "getrandom",
  "once_cell",
  "version_check",
+ "zerocopy",
 ]
 
 [[package]]
@@ -2420,7 +2422,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "derive_more",
  "ibc-client-tendermint",
@@ -2437,7 +2439,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client-types"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "base64 0.21.5",
  "bytes",
@@ -2485,8 +2487,9 @@ dependencies = [
 [[package]]
 name = "sov-ibc"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
+ "ahash",
  "anyhow",
  "borsh",
  "derive_more",
@@ -2504,12 +2507,13 @@ dependencies = [
  "sov-state",
  "tendermint 0.34.0",
  "thiserror",
+ "time",
 ]
 
 [[package]]
 name = "sov-ibc-transfer"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=1adaf43#1adaf4314664f8a82aaaf5ce71a167959c2758b9"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
 dependencies = [
  "anyhow",
  "base64 0.21.5",
@@ -3252,6 +3256,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "05f360fc0b24296329c78fda852a1e9ae82de9cf7b27dae4b7f62f118f77b9ed"
 dependencies = [
  "tap",
+]
+
+[[package]]
+name = "zerocopy"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "74d4d3961e53fa4c9a25a8637fc2bfaf2595b3d3ae34875568a5cf64787716be"
+dependencies = [
+ "zerocopy-derive",
+]
+
+[[package]]
+name = "zerocopy-derive"
+version = "0.7.32"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9ce1b18ccd8e73a9321186f97e46f9f04b778851177567b1975109d26a08d2a6"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.48",
 ]
 
 [[package]]
