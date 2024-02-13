@@ -16,24 +16,24 @@ publish = false
 rust-version = "1.75"
 
 [workspace.dependencies]
-sov-modules-api                 = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-state                       = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-accounts                    = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-bank                        = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-ledger-rpc                  = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-sequencer-registry          = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-modules-stf-blueprint       = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-modules-rollup-blueprint    = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-stf-runner                  = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-db                          = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-sequencer                   = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-rollup-interface            = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-risc0-adapter               = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-first-read-last-write-cache = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-cli                         = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-mock-da                     = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-celestia-adapter            = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-prover-storage-manager      = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
+sov-modules-api                 = { path = "./sovereign-sdk" }
+sov-state                       = { path = "./sovereign-sdk" }
+sov-accounts                    = { path = "./sovereign-sdk" }
+sov-bank                        = { path = "./sovereign-sdk" }
+sov-ledger-rpc                  = { path = "./sovereign-sdk" }
+sov-sequencer-registry          = { path = "./sovereign-sdk" }
+sov-modules-stf-blueprint       = { path = "./sovereign-sdk" }
+sov-modules-rollup-blueprint    = { path = "./sovereign-sdk" }
+sov-stf-runner                  = { path = "./sovereign-sdk" }
+sov-db                          = { path = "./sovereign-sdk" }
+sov-sequencer                   = { path = "./sovereign-sdk" }
+sov-rollup-interface            = { path = "./sovereign-sdk" }
+sov-risc0-adapter               = { path = "./sovereign-sdk" }
+sov-first-read-last-write-cache = { path = "./sovereign-sdk" }
+sov-cli                         = { path = "./sovereign-sdk" }
+sov-mock-da                     = { path = "./sovereign-sdk" }
+sov-celestia-adapter            = { path = "./sovereign-sdk" }
+sov-prover-storage-manager      = { path = "./sovereign-sdk" }
 
 sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }
 sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }

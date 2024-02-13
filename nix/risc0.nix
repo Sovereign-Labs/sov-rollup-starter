@@ -12,7 +12,9 @@ let
         nativeBuildInputs = [
             rust-bin
             nixpkgs.zlib
+            nixpkgs.stdenv.cc.cc.lib
             nixpkgs.autoPatchelfHook
+            nixpkgs.openssl_1_1
         ];
 
         dontBuild = true;
