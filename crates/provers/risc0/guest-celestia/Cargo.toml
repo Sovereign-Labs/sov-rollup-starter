@@ -13,12 +13,12 @@ risc0-zkvm-platform = "0.19"
 
 stf-starter = { path = "../../../stf" }
 
-sov-rollup-interface      = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-celestia-adapter      = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-modules-api           = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-modules-stf-blueprint = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-risc0-adapter         = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
-sov-state                 = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "ba092a2" }
+sov-rollup-interface            = { path = "../../../../sovereign-sdk/rollup-interface" }
+sov-celestia-adapter            = { path = "../../../../sovereign-sdk/adapters/celestia" }
+sov-modules-api                 = { path = "../../../../sovereign-sdk/module-system/sov-modules-api" }
+sov-modules-stf-blueprint       = { path = "../../../../sovereign-sdk/module-system/sov-modules-stf-blueprint" }
+sov-risc0-adapter               = { path = "../../../../sovereign-sdk/adapters/risc0" }
+sov-state                       = { path = "../../../../sovereign-sdk/module-system/sov-state" }
 
 [patch.crates-io]
 # Uncomment to apply the v0.19 build script downlaod issue hotfix.

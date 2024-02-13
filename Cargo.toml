@@ -7,6 +7,10 @@ members = [
     "crates/stf",
 ]
 
+exclude = [
+    "sovereign-sdk"
+]
+
 [workspace.package]
 version = "0.3.0"
 edition = "2021"
@@ -16,24 +20,23 @@ publish = false
 rust-version = "1.75"
 
 [workspace.dependencies]
-sov-modules-api                 = { path = "./sovereign-sdk" }
-sov-state                       = { path = "./sovereign-sdk" }
-sov-accounts                    = { path = "./sovereign-sdk" }
-sov-bank                        = { path = "./sovereign-sdk" }
-sov-ledger-rpc                  = { path = "./sovereign-sdk" }
-sov-sequencer-registry          = { path = "./sovereign-sdk" }
-sov-modules-stf-blueprint       = { path = "./sovereign-sdk" }
-sov-modules-rollup-blueprint    = { path = "./sovereign-sdk" }
-sov-stf-runner                  = { path = "./sovereign-sdk" }
-sov-db                          = { path = "./sovereign-sdk" }
-sov-sequencer                   = { path = "./sovereign-sdk" }
-sov-rollup-interface            = { path = "./sovereign-sdk" }
-sov-risc0-adapter               = { path = "./sovereign-sdk" }
-sov-first-read-last-write-cache = { path = "./sovereign-sdk" }
-sov-cli                         = { path = "./sovereign-sdk" }
-sov-mock-da                     = { path = "./sovereign-sdk" }
-sov-celestia-adapter            = { path = "./sovereign-sdk" }
-sov-prover-storage-manager      = { path = "./sovereign-sdk" }
+sov-modules-api                 = { path = "./sovereign-sdk/module-system/sov-modules-api" }
+sov-state                       = { path = "./sovereign-sdk/module-system/sov-state" }
+sov-accounts                    = { path = "./sovereign-sdk/module-system/module-implementations/sov-accounts" }
+sov-bank                        = { path = "./sovereign-sdk/module-system/module-implementations/sov-bank" }
+sov-ledger-rpc                  = { path = "./sovereign-sdk/full-node/sov-ledger-rpc" }
+sov-sequencer-registry          = { path = "./sovereign-sdk/module-system/module-implementations/sov-sequencer-registry" }
+sov-modules-stf-blueprint       = { path = "./sovereign-sdk/module-system/sov-modules-stf-blueprint" }
+sov-modules-rollup-blueprint    = { path = "./sovereign-sdk/module-system/sov-modules-rollup-blueprint" }
+sov-stf-runner                  = { path = "./sovereign-sdk/full-node/sov-stf-runner" }
+sov-db                          = { path = "./sovereign-sdk/full-node/db/sov-db" }
+sov-sequencer                   = { path = "./sovereign-sdk/full-node/sov-sequencer" }
+sov-rollup-interface            = { path = "./sovereign-sdk/rollup-interface" }
+sov-risc0-adapter               = { path = "./sovereign-sdk/adapters/risc0" }
+sov-cli                         = { path = "./sovereign-sdk/module-system/sov-cli" }
+sov-mock-da                     = { path = "./sovereign-sdk/adapters/mock-da" }
+sov-celestia-adapter            = { path = "./sovereign-sdk/adapters/celestia" }
+sov-prover-storage-manager      = { path = "./sovereign-sdk/full-node/sov-prover-storage-manager" }
 
 sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }
 sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "5e74309" }
