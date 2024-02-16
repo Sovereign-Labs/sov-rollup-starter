@@ -30,9 +30,12 @@ pub async fn start_rollup(
                 bind_host: "127.0.0.1".into(),
                 bind_port: 0,
             },
+            da_polling_interval_ms: 100,
         },
         da: MockDaConfig {
             sender_address: MockAddress::from([0; 32]),
+            finalization_blocks: 0,
+            wait_attempts: 1000,
         },
         prover_service: ProverServiceConfig {
             aggregated_proof_block_jump: 1,
