@@ -9,6 +9,7 @@ path = "<STORAGE_PATH>"
 
 [runner]
 start_height = 3
+da_polling_interval_ms = 1000
 
 [runner.rpc_config]
 bind_host = "127.0.0.1"

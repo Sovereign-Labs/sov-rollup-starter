@@ -8,6 +8,11 @@
 
         rust-overlay.url = github:oxalica/rust-overlay;
 
+        sovereign-sdk-src = {
+            flake = false;
+            url = git+ssh://git@github.com/informalsystems/sovereign-sdk-wip?rev=a1d9ed80af46a0ea6e173204ca708c40ce592d3f;
+        };
+
         celestia-app-src = {
             flake = false;
             url = github:celestiaorg/celestia-app/v1.6.0;
@@ -38,13 +43,18 @@
                     overlays = [
                         inputs.rust-overlay.overlays.default
                     ];
+                    config = {
+                        permittedInsecurePackages = [
+                            "openssl-1.1.1w"
+                        ];
+                    };
                 };
 
                 rust-bin = nixpkgs.rust-bin.stable.latest.complete;
 
                 risc0-rust-tarball = builtins.fetchurl {
-                    url = "https://github.com/risc0/rust/releases/download/test-release-2/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
-                    sha256 = "sha256:1nqgpx6ww0rla5c4jzam6fr43v6lf0flsj572racjqwq9xk86l4a";
+                    url = "https://github.com/risc0/rust/releases/download/v2024-01-31.1/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
+                    sha256 = "sha256:05k8d47zcrascjwwas9pnzg6qz5ambxvfh485flxsn6l7hxq3jf0";
                 };
 
                 risc0-rust = import ./nix/risc0.nix {
@@ -53,6 +63,7 @@
 
                 rollup-packages = import ./nix/rollup.nix {
                     inherit nixpkgs rust-bin risc0-rust;
+                    inherit (inputs) sovereign-sdk-src;
                 };
 
                 gaia = import ./nix/gaia.nix {
