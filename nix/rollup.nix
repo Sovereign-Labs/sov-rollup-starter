@@ -138,7 +138,7 @@ let
         };
 
         doCheck = false;
-        buildType = "debug";
+        # buildType = "debug";
         buildNoDefaultFeatures = true;
         buildFeatures = [ "celestia_da" ];
 
