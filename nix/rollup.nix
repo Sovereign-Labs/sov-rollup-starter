@@ -5,9 +5,6 @@
 ,   sovereign-sdk-src
 }:
 let
-    buildType = "debug";
-    # buildType = "release";
-
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
         name = "rollup-guest-src";
         src = ../crates;
@@ -21,6 +18,7 @@ let
             cp ${../constants.json} $out/constants.json
         '';
     };
+
 
     rollup-src = nixpkgs.stdenv.mkDerivation {
         name = "rollup-src";
@@ -45,10 +43,14 @@ let
         sourceRoot = "rollup-guest-src/crates/provers/risc0/guest-mock";
 
         cargoLock = {
-            lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
+            lockFile = ../crates/provers/risc0/guest-mock/Cargo.lock;
             outputHashes = {
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
-                "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
+                "risc0-binfmt-0.19.1" = "sha256-vBcJIbMMYmWhU/NHMODm+8HxXbF+tBjB/DV4HYwlVo0=";
+                "crypto-bigint-0.5.2" = "sha256-9rh8z3vwOQ7/mtzVbyADoRWgTzARF/nkhBwfKb7+A6I=";
+                "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
+                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
+                "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
             };
         };
 
@@ -58,7 +60,6 @@ let
         ];
 
         doCheck = false;
-        inherit buildType;
 
         CONSTANTS_MANIFEST = rollup-guest-src;
 
@@ -103,7 +104,6 @@ let
         ];
 
         doCheck = false;
-        inherit buildType;
 
         CONSTANTS_MANIFEST = rollup-guest-src;
 
@@ -138,7 +138,7 @@ let
         };
 
         doCheck = false;
-        inherit buildType;
+        buildType = "debug";
         buildNoDefaultFeatures = true;
         buildFeatures = [ "celestia_da" ];
 
