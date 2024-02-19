@@ -24,6 +24,15 @@ jobs:
         with:
           name: informal-sovereign
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+      - name: Allow insecure Nix packages
+        run: |
+          cat > ~/.config/nixpkgs/config.nix << EOL
+          {
+            permittedInsecurePackages = [
+              "openssl-1.1.1w"
+            ];
+          }
+          EOL
       - name: Run Nix Build
         run: |
           nix build .#rollup .#celestia-app .#celestia-node
