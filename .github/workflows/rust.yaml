@@ -14,10 +14,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.9.0
         with:
-          submodules: 'true'
-          token: ${{ github.token }}
+          ssh-private-key: ${{ secrets.SOVEREIGN_SDK_PRIVATE_SSH_KEY }}
+      - uses: actions/checkout@v4
       - name: Install Protoc
         uses: arduino/setup-protoc@v2
         with:
