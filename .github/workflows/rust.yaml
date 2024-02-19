@@ -22,7 +22,6 @@ jobs:
         uses: arduino/setup-protoc@v2
         with:
           version: "23.2"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-risc0 # Risc0 v0.17 and higher require a cargo extension to build the guest code
