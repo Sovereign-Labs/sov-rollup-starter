@@ -14,9 +14,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.SDK_WIP_ACCESS_TOKEN }}
       - uses: actions/checkout@v3
       - name: Install Protoc
         uses: arduino/setup-protoc@v2
