@@ -16,12 +16,12 @@ risc0-zkvm-platform = "0.19"
 serde = { version = "1.0.188", features = ["derive", "rc"] }
 
 
-sov-rollup-interface = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
-sov-mock-da = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
-sov-modules-stf-blueprint = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
-sov-modules-api = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
-sov-risc0-adapter = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
-sov-state = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "a1d9ed80af46a0ea6e173204ca708c40ce592d3f" }
+sov-rollup-interface            = { path = "../../../../vendor/sovereign-sdk/rollup-interface" }
+sov-mock-da                     = { path = "../../../../vendor/sovereign-sdk/adapters/mock-da" }
+sov-modules-api                 = { path = "../../../../vendor/sovereign-sdk/module-system/sov-modules-api" }
+sov-modules-stf-blueprint       = { path = "../../../../vendor/sovereign-sdk/module-system/sov-modules-stf-blueprint" }
+sov-risc0-adapter               = { path = "../../../../vendor/sovereign-sdk/adapters/risc0" }
+sov-state                       = { path = "../../../../vendor/sovereign-sdk/module-system/sov-state" }
 
 stf-starter = { path = "../../../stf" }
 
