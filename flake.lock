@@ -126,7 +126,8 @@
         "flake-utils": "flake-utils",
         "gaia-src": "gaia-src",
         "nixpkgs": "nixpkgs",
-        "rust-overlay": "rust-overlay"
+        "rust-overlay": "rust-overlay",
+        "sovereign-sdk-src": "sovereign-sdk-src"
       }
     },
     "rust-overlay": {
@@ -146,6 +147,22 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "type": "github"
+      }
+    },
+    "sovereign-sdk-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707860097,
+        "narHash": "sha256-YgqmGHi89T053DdLeP7E2RmKAuh3MZX2jvq+4teTJNQ=",
+        "ref": "refs/heads/nightly",
+        "rev": "b0a054679f85ff99806ddc0f0476811a9b84fcc2",
+        "revCount": 804,
+        "type": "git",
+        "url": "ssh://git@github.com/informalsystems/sovereign-sdk-wip"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/informalsystems/sovereign-sdk-wip"
       }
     },
     "systems": {

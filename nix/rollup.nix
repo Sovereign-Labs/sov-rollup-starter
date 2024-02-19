@@ -2,6 +2,7 @@
     nixpkgs
 ,   rust-bin
 ,   risc0-rust
+,   sovereign-sdk-src
 }:
 let
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
@@ -10,26 +11,29 @@ let
         dontBuild = true;
 
         installPhase = ''
-            mkdir -p $out/crates
+            mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
+            cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../constants.json} $out/constants.json
         '';
     };
 
     rollup-src = nixpkgs.stdenv.mkDerivation {
-        name = "rollup-guest-src";
+        name = "rollup-src";
         src = ../crates;
         dontBuild = true;
 
         installPhase = ''
-            mkdir -p $out/crates
+            mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
+            cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../Cargo.lock} $out/Cargo.lock
             cp ${../constants.json} $out/constants.json
         '';
     };
+
     rollup-guest-mock = nixpkgs.rustPlatform.buildRustPackage {
         name = "rollup-guest-mock";
 
@@ -40,7 +44,6 @@ let
         cargoLock = {
             lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
             outputHashes = {
-                "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
             };
@@ -80,7 +83,6 @@ let
                 "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
                 "risc0-binfmt-0.19.1" = "sha256-vBcJIbMMYmWhU/NHMODm+8HxXbF+tBjB/DV4HYwlVo0=";
                 "crypto-bigint-0.5.2" = "sha256-9rh8z3vwOQ7/mtzVbyADoRWgTzARF/nkhBwfKb7+A6I=";
@@ -124,7 +126,6 @@ let
                 "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
                 "bonsai-sdk-0.5.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
             };
