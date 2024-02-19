@@ -1,6 +1,5 @@
 #![deny(missing_docs)]
 //! StarterRollup provides a minimal self-contained rollup implementation
-
 use async_trait::async_trait;
 use sov_celestia_adapter::types::Namespace;
 use sov_celestia_adapter::verifier::{CelestiaSpec, CelestiaVerifier, RollupParams};
@@ -20,6 +19,7 @@ use sov_state::{DefaultStorageSpec, ZkStorage};
 use sov_stf_runner::ParallelProverService;
 use sov_stf_runner::RollupConfig;
 use sov_stf_runner::RollupProverConfig;
+use std::sync::{Arc, RwLock};
 use stf_starter::Runtime;
 
 /// The namespace for the rollup on Celestia.
@@ -67,7 +67,7 @@ impl RollupBlueprint for CelestiaRollup {
 
     fn create_rpc_methods(
         &self,
-        storage: &<Self::NativeContext as sov_modules_api::Spec>::Storage,
+        storage: Arc<RwLock<<Self::NativeContext as Spec>::Storage>>,
         ledger_db: &sov_db::ledger_db::LedgerDB,
         da_service: &Self::DaService,
     ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {

@@ -5,6 +5,9 @@
 ,   sovereign-sdk-src
 }:
 let
+    buildType = "debug";
+    # buildType = "release";
+
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
         name = "rollup-guest-src";
         src = ../crates;
@@ -55,6 +58,7 @@ let
         ];
 
         doCheck = false;
+        inherit buildType;
 
         CONSTANTS_MANIFEST = rollup-guest-src;
 
@@ -99,6 +103,7 @@ let
         ];
 
         doCheck = false;
+        inherit buildType;
 
         CONSTANTS_MANIFEST = rollup-guest-src;
 
@@ -133,6 +138,7 @@ let
         };
 
         doCheck = false;
+        inherit buildType;
         buildNoDefaultFeatures = true;
         buildFeatures = [ "celestia_da" ];
 
