@@ -43,6 +43,11 @@
                     overlays = [
                         inputs.rust-overlay.overlays.default
                     ];
+                    config = {
+                        permittedInsecurePackages = [
+                            "openssl-1.1.1w"
+                        ];
+                    };
                 };
 
                 rust-bin = nixpkgs.rust-bin.stable.latest.complete;
