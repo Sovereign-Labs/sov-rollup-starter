@@ -20,16 +20,16 @@
     "celestia-node-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1705334246,
-        "narHash": "sha256-kvH5l/oUU7f7E5bwCv2nR3OldxhpZxG5tTFG0JEGXSQ=",
+        "lastModified": 1707218580,
+        "narHash": "sha256-O5a8Dy7WOSaLzYHTZAZFHFeJwqOLyajcHmGEcphOpKg=",
         "owner": "celestiaorg",
         "repo": "celestia-node",
-        "rev": "8e5a71746bc9bd9300ad3e4853797e64fdd1d018",
+        "rev": "e55e1c88708b46839867bcbbed9bcdd8a3ffa830",
         "type": "github"
       },
       "original": {
         "owner": "celestiaorg",
-        "ref": "v0.12.4",
+        "ref": "v0.13.0",
         "repo": "celestia-node",
         "type": "github"
       }

@@ -20,7 +20,7 @@
 
         celestia-node-src = {
             flake = false;
-            url = github:celestiaorg/celestia-node/v0.12.4;
+            url = github:celestiaorg/celestia-node/v0.13.0;
         };
 
         gaia-src = {
