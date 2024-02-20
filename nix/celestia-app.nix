@@ -5,7 +5,7 @@
 let
     celestia-app = nixpkgs.buildGoModule {
         name = "celestia-app";
-        version = "1.6.0";
+        version = "1.3.0";
         src = celestia-app-src;
         vendorHash = "sha256-KvkVqJZ5kvkKWXTYgG7+Ksz8aLhGZPBG5zkM44fVNT4=";
         doCheck = false;
