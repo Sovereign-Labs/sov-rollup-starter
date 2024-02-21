@@ -38,10 +38,8 @@ sov-mock-da                     = { path = "./vendor/sovereign-sdk/adapters/mock
 sov-celestia-adapter            = { path = "./vendor/sovereign-sdk/adapters/celestia" }
 sov-prover-storage-manager      = { path = "./vendor/sovereign-sdk/full-node/sov-prover-storage-manager" }
 
-sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "9fc291f" }
-sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "9fc291f" }
-# sov-ibc = { path = "./../sovereign-ibc/modules/sov-ibc" }
-# sov-ibc-transfer = { path = "./../sovereign-ibc/modules/sov-ibc-transfer" }
+sov-ibc                         = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "c4df757" }
+sov-ibc-transfer                = { git = "https://github.com/informalsystems/sovereign-ibc.git", rev = "c4df757" }
 
 stf-starter = { path = "./crates/stf" }
 
