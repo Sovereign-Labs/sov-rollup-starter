@@ -16,7 +16,7 @@ path = "../../rollup-starter-data"
 # any blocks before this height
 [runner]
 start_height = 3
-da_polling_interval_ms = 10000
+da_polling_interval_ms = 1000
 
 [runner.rpc_config]
 # the host and port to bind the rpc server for

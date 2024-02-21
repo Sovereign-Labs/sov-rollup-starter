@@ -8,6 +8,11 @@
 
         rust-overlay.url = github:oxalica/rust-overlay;
 
+        sovereign-sdk-src = {
+            flake = false;
+            url = git+ssh://git@github.com/informalsystems/sovereign-sdk-wip?rev=a1d9ed80af46a0ea6e173204ca708c40ce592d3f;
+        };
+
         celestia-app-src = {
             flake = false;
             url = github:celestiaorg/celestia-app/v1.6.0;
@@ -41,6 +46,11 @@
                     overlays = [
                         inputs.rust-overlay.overlays.default
                     ];
+                    config = {
+                        permittedInsecurePackages = [
+                            "openssl-1.1.1w"
+                        ];
+                    };
                 };
 
                 rust-bin = nixpkgs.rust-bin.stable.latest.complete;
@@ -56,6 +66,7 @@
 
                 rollup-packages = import ./nix/rollup.nix {
                     inherit nixpkgs rust-bin risc0-rust;
+                    inherit (inputs) sovereign-sdk-src;
                 };
 
                 gaia = import ./nix/gaia.nix {

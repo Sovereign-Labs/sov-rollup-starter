@@ -68,6 +68,7 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
     let gas_limit = 0;
     let max_gas_price = None;
     let nonce = 0;
+    let max_gas_price = [10_000; 2].into();
     let tx = Transaction::<DefaultContext>::new_signed_tx(
         &key,
         msg.try_to_vec().unwrap(),

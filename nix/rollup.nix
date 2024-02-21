@@ -2,6 +2,7 @@
     nixpkgs
 ,   rust-bin
 ,   risc0-rust
+,   sovereign-sdk-src
 }:
 let
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
@@ -10,26 +11,30 @@ let
         dontBuild = true;
 
         installPhase = ''
-            mkdir -p $out/crates
+            mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
+            cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../constants.json} $out/constants.json
         '';
     };
 
+
     rollup-src = nixpkgs.stdenv.mkDerivation {
-        name = "rollup-guest-src";
+        name = "rollup-src";
         src = ../crates;
         dontBuild = true;
 
         installPhase = ''
-            mkdir -p $out/crates
+            mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
+            cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../Cargo.lock} $out/Cargo.lock
             cp ${../constants.json} $out/constants.json
         '';
     };
+
     rollup-guest-mock = nixpkgs.rustPlatform.buildRustPackage {
         name = "rollup-guest-mock";
 
@@ -38,11 +43,14 @@ let
         sourceRoot = "rollup-guest-src/crates/provers/risc0/guest-mock";
 
         cargoLock = {
-            lockFile = ./crates/provers/risc0/guest-mock/Cargo.lock;
+            lockFile = ../crates/provers/risc0/guest-mock/Cargo.lock;
             outputHashes = {
-                "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
-                "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
+                "risc0-binfmt-0.19.1" = "sha256-vBcJIbMMYmWhU/NHMODm+8HxXbF+tBjB/DV4HYwlVo0=";
+                "crypto-bigint-0.5.2" = "sha256-9rh8z3vwOQ7/mtzVbyADoRWgTzARF/nkhBwfKb7+A6I=";
+                "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
+                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
+                "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
             };
         };
 
@@ -78,15 +86,18 @@ let
             lockFile = ../crates/provers/risc0/guest-celestia/Cargo.lock;
             outputHashes = {
                 "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
-                "ibc-app-transfer-0.50.0" = "sha256-+F6/YQ2wGhCFfuWJRQbhJx+cfurT/8hh8hkw1FAEiPM=";
+                "ibc-app-transfer-0.50.0" = "sha256-4pjCPDzjVrNGQ3IBJvptA73Bu8G7QZGubokeuryCB6A=";
                 "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
-                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
-                "sov-accounts-0.3.0" = "";
-                "sov-celestia-client-0.1.0" = "sha256-iBc5SN/eydQjjNWRUx/3tGswQsziTQd1V0yYuhyTbm8=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
+                "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
+                "crypto-bigint-0.5.2" = "sha256-9rh8z3vwOQ7/mtzVbyADoRWgTzARF/nkhBwfKb7+A6I=";
+                "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
+                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
+                "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
+                "sov-bank-0.3.0" = "";
+                "sov-celestia-client-0.1.0" = "";
             };
         };
 
@@ -125,16 +136,18 @@ let
                 "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "sov-accounts-0.3.0" = "sha256-Bmzo0xe1GdSKEIAyYx0PHhauNdVBMawOSSIflhdfi6U=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
                 "bonsai-sdk-0.5.1" = "sha256-vBcJIbMMYmWhU/NHMODm+8HxXbF+tBjB/DV4HYwlVo0=";
-                "ibc-app-transfer-0.50.0" = "sha256-+F6/YQ2wGhCFfuWJRQbhJx+cfurT/8hh8hkw1FAEiPM=";
-                "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
                 "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
+                "ibc-0.50.0" = "sha256-4pjCPDzjVrNGQ3IBJvptA73Bu8G7QZGubokeuryCB6A=";
+                "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
+                "sov-bank-0.3.0" = "";
+                "sov-celestia-client-0.1.0" = "";
             };
         };
 
         doCheck = false;
+        # buildType = "debug";
         buildNoDefaultFeatures = true;
         buildFeatures = [ "celestia_da" ];
 

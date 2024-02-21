@@ -7,6 +7,10 @@ on:
   pull_request:
     branches: [ "ibc-rollup" ]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 env:
   CARGO_TERM_COLOR: always
   CARGO_NET_GIT_FETCH_WITH_CLI: true
@@ -17,13 +21,15 @@ jobs:
     steps:
       - uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.SOVEREIGN_DEPLOY_KEY }}
-      - uses: actions/checkout@v3
+          ssh-private-key: ${{ secrets.SOVEREIGN_SDK_PRIVATE_SSH_KEY }}
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          ssh-key: ${{ secrets.SOVEREIGN_SDK_PRIVATE_SSH_KEY }}
       - name: Install Protoc
         uses: arduino/setup-protoc@v2
         with:
           version: "23.2"
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cache dependencies
         uses: Swatinem/rust-cache@v2
       - name: Install cargo-risc0 # Risc0 v0.17 and higher require a cargo extension to build the guest code

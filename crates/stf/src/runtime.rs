@@ -88,7 +88,7 @@ where
     fn rpc_methods(
         storage: std::sync::Arc<std::sync::RwLock<<C as Spec>::Storage>>,
     ) -> jsonrpsee::RpcModule<()> {
-        get_rpc_methods::<C, Da>(storage.clone())
+        get_rpc_methods::<C, Da>(storage)
     }
 
     #[cfg(feature = "native")]

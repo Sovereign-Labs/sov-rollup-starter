@@ -524,6 +524,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7a81dae078cea95a014a339291cec439d2f232ebe854a9d672b796c6afafa9b7"
 
 [[package]]
+name = "crypto-bigint"
+version = "0.5.2"
+source = "git+https://github.com/risc0/RustCrypto-crypto-bigint?tag=v0.5.2-risc0#8b30304277cfe553b51a78a0e693f48bbb059eb3"
+dependencies = [
+ "getrandom",
+ "subtle",
+ "zeroize",
+]
+
+[[package]]
 name = "crypto-common"
 version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -535,15 +545,16 @@ dependencies = [
 
 [[package]]
 name = "curve25519-dalek"
-version = "4.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e89b8c6a2e4b1f45971ad09761aafb85514a84744b67a95e32c3cc1352d1f65c"
+version = "4.1.0"
+source = "git+https://github.com/risc0/curve25519-dalek?tag=curve25519-4.1.0-risczero.1#42c4faf7dc3f640a7e3f7e4cbf43e7d5d6d46b67"
 dependencies = [
  "cfg-if",
  "cpufeatures",
+ "crypto-bigint",
  "curve25519-dalek-derive",
  "digest 0.10.7",
  "fiat-crypto",
+ "hex",
  "platforms",
  "rustc_version 0.4.0",
  "subtle",
@@ -552,8 +563,7 @@ dependencies = [
 [[package]]
 name = "curve25519-dalek-derive"
 version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "83fdaf97f4804dcebfa5862639bc9ce4121e82140bec2a987ac5140294865b5b"
+source = "git+https://github.com/risc0/curve25519-dalek?tag=curve25519-4.1.0-risczero.1#42c4faf7dc3f640a7e3f7e4cbf43e7d5d6d46b67"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -710,13 +720,13 @@ dependencies = [
 [[package]]
 name = "ed25519-dalek"
 version = "2.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7277392b266383ef8396db7fdeb1e77b6c52fed775f5df15bb24f35b72156980"
+source = "git+https://github.com/risc0/curve25519-dalek?tag=curve25519-4.1.0-risczero.1#42c4faf7dc3f640a7e3f7e4cbf43e7d5d6d46b67"
 dependencies = [
  "curve25519-dalek",
  "ed25519",
  "serde",
  "sha2 0.10.8",
+ "subtle",
 ]
 
 [[package]]
@@ -969,7 +979,7 @@ dependencies = [
 [[package]]
 name = "ibc-app-transfer"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-app-transfer-types",
  "ibc-core",
@@ -979,7 +989,7 @@ dependencies = [
 [[package]]
 name = "ibc-app-transfer-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -995,7 +1005,7 @@ dependencies = [
 [[package]]
 name = "ibc-client-tendermint"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-client-tendermint-types",
  "ibc-core-client",
@@ -1011,7 +1021,7 @@ dependencies = [
 [[package]]
 name = "ibc-client-tendermint-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "displaydoc",
  "ibc-core-client-types",
@@ -1028,7 +1038,7 @@ dependencies = [
 [[package]]
 name = "ibc-core"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-core-channel",
  "ibc-core-client",
@@ -1044,7 +1054,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-channel"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-core-channel-types",
  "ibc-core-client",
@@ -1059,7 +1069,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-channel-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1080,7 +1090,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-client"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-core-client-context",
  "ibc-core-client-types",
@@ -1093,7 +1103,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-client-context"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "derive_more",
  "displaydoc",
@@ -1109,7 +1119,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-client-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1127,7 +1137,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-commitment-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1143,7 +1153,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-connection"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-core-client",
  "ibc-core-connection-types",
@@ -1155,7 +1165,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-connection-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1174,7 +1184,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-handler"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "ibc-core-channel",
  "ibc-core-client",
@@ -1189,7 +1199,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-handler-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1211,7 +1221,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-host"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "derive_more",
  "displaydoc",
@@ -1229,7 +1239,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-host-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1242,7 +1252,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-router"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "derive_more",
  "displaydoc",
@@ -1256,7 +1266,7 @@ dependencies = [
 [[package]]
 name = "ibc-core-router-types"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -1273,7 +1283,7 @@ dependencies = [
 [[package]]
 name = "ibc-derive"
 version = "0.6.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1283,7 +1293,7 @@ dependencies = [
 [[package]]
 name = "ibc-primitives"
 version = "0.50.0"
-source = "git+https://github.com/cosmos/ibc-rs.git?rev=b25d7d8868#b25d7d88687599e7b457471c55965b73d8cbe177"
+source = "git+https://github.com/cosmos/ibc-rs.git?rev=74c316c36c#74c316c36c8dae87a44f04627e0fb223c3805e3d"
 dependencies = [
  "borsh",
  "derive_more",
@@ -2319,8 +2329,7 @@ dependencies = [
 [[package]]
 name = "sha2"
 version = "0.10.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "793db75ad2bcafc3ffa7c68b215fee268f537982cd901d132f89c6343f3a3dc8"
+source = "git+https://github.com/risc0/RustCrypto-hashes?tag=sha2-v0.10.8-risczero.0#244dc3b08788f7a4ccce14c66896ae3b4f24c166"
 dependencies = [
  "cfg-if",
  "cpufeatures",
@@ -2379,13 +2388,13 @@ dependencies = [
 [[package]]
 name = "sov-bank"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "borsh",
  "serde",
- "sov-modules-api 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-state 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-api 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-state 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "thiserror",
 ]
 
@@ -2431,7 +2440,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=9fc291f#9fc291fb15e23b27f3dfe4babc2a4aa53f440284"
 dependencies = [
  "derive_more",
  "ibc-client-tendermint",
@@ -2448,7 +2457,7 @@ dependencies = [
 [[package]]
 name = "sov-celestia-client-types"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=9fc291f#9fc291fb15e23b27f3dfe4babc2a4aa53f440284"
 dependencies = [
  "base64 0.21.5",
  "bytes",
@@ -2479,13 +2488,13 @@ dependencies = [
 [[package]]
 name = "sov-chain-state"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "borsh",
  "serde",
- "sov-modules-api 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-state 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-api 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-state 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "tracing",
 ]
 
@@ -2493,6 +2502,7 @@ dependencies = [
 name = "sov-demo-prover-guest-celestia"
 version = "0.3.0"
 dependencies = [
+ "ahash",
  "anyhow",
  "risc0-zkvm",
  "risc0-zkvm-platform",
@@ -2503,12 +2513,13 @@ dependencies = [
  "sov-rollup-interface 0.3.0",
  "sov-state 0.3.0",
  "stf-starter",
+ "time-macros",
 ]
 
 [[package]]
 name = "sov-ibc"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=9fc291f#9fc291fb15e23b27f3dfe4babc2a4aa53f440284"
 dependencies = [
  "ahash",
  "anyhow",
@@ -2521,11 +2532,11 @@ dependencies = [
  "serde",
  "serde_json",
  "sov-celestia-client",
- "sov-chain-state 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-chain-state 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "sov-ibc-transfer",
- "sov-modules-api 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-state 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-api 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-state 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "tendermint 0.34.0",
  "thiserror",
  "time",
@@ -2534,7 +2545,7 @@ dependencies = [
 [[package]]
 name = "sov-ibc-transfer"
 version = "0.1.0"
-source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=5e74309#5e743097c6d8d7626ece0c4f3625966a5a4c01a7"
+source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=9fc291f#9fc291fb15e23b27f3dfe4babc2a4aa53f440284"
 dependencies = [
  "anyhow",
  "base64 0.21.5",
@@ -2544,9 +2555,9 @@ dependencies = [
  "prost",
  "serde",
  "serde_json",
- "sov-bank 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-modules-api 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-bank 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-modules-api 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "thiserror",
  "uint",
 ]
@@ -2589,7 +2600,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-api"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "bech32",
@@ -2599,10 +2610,10 @@ dependencies = [
  "hex",
  "serde",
  "sha2 0.10.8",
- "sov-modules-core 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-modules-macros 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-state 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-core 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-modules-macros 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-state 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "thiserror",
  "tracing",
 ]
@@ -2629,7 +2640,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-core"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "bech32",
@@ -2642,7 +2653,7 @@ dependencies = [
  "schemars",
  "serde",
  "sha2 0.10.8",
- "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "thiserror",
 ]
 
@@ -2663,7 +2674,7 @@ dependencies = [
 [[package]]
 name = "sov-modules-macros"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "borsh",
@@ -2671,7 +2682,7 @@ dependencies = [
  "quote",
  "schemars",
  "serde_json",
- "sov-modules-core 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-core 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "syn 1.0.109",
 ]
 
@@ -2726,7 +2737,7 @@ dependencies = [
 [[package]]
 name = "sov-rollup-interface"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2773,7 +2784,7 @@ dependencies = [
 [[package]]
 name = "sov-state"
 version = "0.3.0"
-source = "git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2#ba092a2c3a2d7c816c0f8bafeef1dd907fdfd19a"
+source = "git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8#a1d9ed80af46a0ea6e173204ca708c40ce592d3f"
 dependencies = [
  "anyhow",
  "bcs",
@@ -2784,8 +2795,8 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2 0.10.8",
- "sov-modules-core 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
- "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git?rev=ba092a2)",
+ "sov-modules-core 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
+ "sov-rollup-interface 0.3.0 (git+ssh://git@github.com/informalsystems/sovereign-sdk-wip.git?rev=a1d9ed8)",
  "thiserror",
 ]
 

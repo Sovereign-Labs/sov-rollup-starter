@@ -2,6 +2,8 @@
 //! StarterRollup provides a minimal self-contained rollup implementation
 use std::sync::{Arc, RwLock};
 
+use std::sync::{Arc, RwLock};
+
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
