@@ -23,7 +23,7 @@ use tracing_subscriber::{fmt, EnvFilter};
 
 // config and genesis for mock da
 #[cfg(feature = "mock_da")]
-const DEFAULT_CONFIG_PATH: &str = "../../mock_rollup_config.toml";
+const DEFAULT_CONFIG_PATH: &str = "../../rollup_config.toml";
 #[cfg(feature = "mock_da")]
 const DEFAULT_GENESIS_PATH: &str = "../../test-data/genesis/mock/";
 #[cfg(feature = "mock_da")]

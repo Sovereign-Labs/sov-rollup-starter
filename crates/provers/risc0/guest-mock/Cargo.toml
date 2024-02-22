@@ -36,7 +36,7 @@ risc0-zkvm = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2
 risc0-zkvm-platform = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
 risc0-circuit-rv32im = { git = "https://github.com/neysofu/risc0-hotfixes", rev = "v0.19.2-hotfix" }
 
-[patch.'https://github.com/informalsystems/sovereign-ibc.git']
+[patch.'ssh://git@github.com/informalsystems/sovereign-sdk-wip.git']
 sov-bank             = { path = "../../../../vendor/sovereign-sdk/module-system/module-implementations/sov-bank" }
 sov-chain-state      = { path = "../../../../vendor/sovereign-sdk/module-system/module-implementations/sov-chain-state" }
 sov-modules-api      = { path = "../../../../vendor/sovereign-sdk/module-system/sov-modules-api" }
