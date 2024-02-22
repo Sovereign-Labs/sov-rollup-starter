@@ -26,7 +26,6 @@ pub async fn start_rollup(
         },
         runner: RunnerConfig {
             start_height: 1,
-            da_polling_interval_ms: 1000,
             rpc_config: RpcConfig {
                 bind_host: "127.0.0.1".into(),
                 bind_port: 0,

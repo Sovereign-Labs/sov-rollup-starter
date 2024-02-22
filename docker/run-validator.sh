@@ -35,7 +35,7 @@ wait_for_block() {
   local block_num="$1"
   local block_hash=""
 
-  # Wait for the block to be created 
+  # Wait for the block to be created
   while [[ -z "$block_hash" ]]; do
     # `|| echo` fallbacks to an empty string in case it's not ready
     block_hash="$(celestia-appd query block "$block_num" 2>/dev/null | jq '.block_id.hash' || echo)"
@@ -84,11 +84,9 @@ provision_bridge_nodes() {
   local start_block=2
 
   for node_idx in $(seq 0 "$last_node_idx"); do
-    # TODO: <https://github.com/celestiaorg/celestia-app/issues/2869>
+    # TODO: create an issue in celestia-app and link it here
     # we need to transfer the coins for each node in separate
-    # block, or the signing of all but the first one will fail.
-    # Unfortunately multi-send only works with >= 2 bridge nodes,
-    # so we still rely on this hack.
+    # block, or the signing of all but the first one will fail
     wait_for_block $((start_block + node_idx))
 
     local bridge_name="bridge-$node_idx"

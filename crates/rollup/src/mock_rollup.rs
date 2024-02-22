@@ -1,6 +1,5 @@
 #![deny(missing_docs)]
 //! StarterRollup provides a minimal self-contained rollup implementation
-use std::sync::{Arc, RwLock};
 
 use std::sync::{Arc, RwLock};
 
@@ -86,7 +85,7 @@ impl RollupBlueprint for MockRollup {
             Self::NativeRuntime,
             Self::NativeContext,
             Self::DaService,
-        >(storage.clone(), ledger_db, da_service, sequencer)?;
+        >(storage, ledger_db, da_service, sequencer)?;
 
         #[cfg(feature = "experimental")]
         crate::eth::register_ethereum::<Self::DaService>(
@@ -102,7 +101,7 @@ impl RollupBlueprint for MockRollup {
         &self,
         rollup_config: &RollupConfig<Self::DaConfig>,
     ) -> Self::DaService {
-        MockDaService::from_config(rollup_config.da.clone())
+        MockDaService::new(rollup_config.da.sender_address)
     }
 
     async fn create_prover_service(

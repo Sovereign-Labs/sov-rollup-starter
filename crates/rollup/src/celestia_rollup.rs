@@ -22,20 +22,11 @@ use sov_stf_runner::RollupProverConfig;
 use std::sync::{Arc, RwLock};
 use stf_starter::Runtime;
 
-/// The namespace used by the rollup to store its data. This is a raw slice of 8 bytes.
-/// The rollup stores its data in the namespace b"sov-test" on Celestia. Which in this case is encoded using the
-/// ascii representation of each character.
-pub const ROLLUP_BATCH_NAMESPACE_RAW: [u8; 10] = [0, 0, 115, 111, 118, 45, 116, 101, 115, 116];
-
-/// The namespace used by the rollup to store aggregated ZK proofs.
-pub const ROLLUP_PROOF_NAMESPACE_RAW: [u8; 10] = [115, 111, 118, 45, 116, 101, 115, 116, 45, 112];
-
-/// The rollup stores its data in the namespace b"sov-test" on Celestia
-/// You can change this constant to point your rollup at a different namespace
-pub const ROLLUP_BATCH_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_BATCH_NAMESPACE_RAW);
+/// The namespace for the rollup on Celestia.
+const ROLLUP_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-celest");
 
 /// The rollup stores the zk proofs in the namespace b"sov-test-p" on Celestia.
-pub const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(ROLLUP_PROOF_NAMESPACE_RAW);
+const ROLLUP_PROOF_NAMESPACE: Namespace = Namespace::const_v0(*b"sov-test-p");
 
 /// Rollup with [`CelestiaDaService`].
 pub struct CelestiaRollup {}
@@ -88,7 +79,7 @@ impl RollupBlueprint for CelestiaRollup {
             Self::NativeRuntime,
             Self::NativeContext,
             Self::DaService,
-        >(storage.clone(), ledger_db, da_service, sequencer)?;
+        >(storage, ledger_db, da_service, sequencer)?;
 
         #[cfg(feature = "experimental")]
         crate::eth::register_ethereum::<Self::DaService>(
@@ -107,7 +98,7 @@ impl RollupBlueprint for CelestiaRollup {
         CelestiaService::new(
             rollup_config.da.clone(),
             RollupParams {
-                rollup_batch_namespace: ROLLUP_BATCH_NAMESPACE,
+                rollup_batch_namespace: ROLLUP_NAMESPACE,
                 rollup_proof_namespace: ROLLUP_PROOF_NAMESPACE,
             },
         )
@@ -125,7 +116,7 @@ impl RollupBlueprint for CelestiaRollup {
         let zk_storage = ZkStorage::new();
 
         let da_verifier = CelestiaVerifier {
-            rollup_namespace: ROLLUP_BATCH_NAMESPACE,
+            rollup_namespace: ROLLUP_NAMESPACE,
         };
 
         ParallelProverService::new_with_default_workers(
