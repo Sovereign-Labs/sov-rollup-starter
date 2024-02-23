@@ -96,7 +96,7 @@ let
                 "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
                 "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
                 "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
-                "sov-celestia-client-0.1.0" = "";
+                "sov-celestia-client-0.1.0" = "sha256-5/k0b1YsO+uSMyaE6qJxZydizEzT0YqrprxyGr6MsjI=";
             };
         };
 
@@ -140,7 +140,7 @@ let
                 "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
                 "ibc-0.50.0" = "sha256-4pjCPDzjVrNGQ3IBJvptA73Bu8G7QZGubokeuryCB6A=";
                 "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
-                "sov-celestia-client-0.1.0" = "";
+                "sov-celestia-client-0.1.0" = "sha256-5/k0b1YsO+uSMyaE6qJxZydizEzT0YqrprxyGr6MsjI=";
             };
         };
 
