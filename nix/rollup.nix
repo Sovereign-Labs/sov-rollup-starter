@@ -109,7 +109,6 @@ let
         doCheck = false;
 
         CONSTANTS_MANIFEST = rollup-guest-src;
-        CARGO_NET_GIT_FETCH_WITH_CLI = true;
 
         buildPhase = ''
             RUSTC=${risc0-rust}/bin/rustc \
