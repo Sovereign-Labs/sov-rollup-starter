@@ -3,6 +3,8 @@ use std::path::{Path, PathBuf};
 use anyhow::{bail, Context as _};
 use sov_accounts::AccountConfig;
 use sov_bank::BankConfig;
+use sov_ibc::ExampleModuleConfig;
+use sov_ibc_transfer::TransferConfig;
 use sov_modules_api::{Context, DaSpec};
 use sov_modules_stf_blueprint::Runtime as RuntimeTrait;
 use sov_sequencer_registry::SequencerConfig;
@@ -17,6 +19,10 @@ pub struct GenesisPaths {
     pub accounts_genesis_path: PathBuf,
     /// Bank genesis path.
     pub bank_genesis_path: PathBuf,
+    /// IBC genesis path.
+    pub ibc_genesis_path: PathBuf,
+    /// IBC transfer genesis path.
+    pub ibc_transfer_genesis_path: PathBuf,
     /// Sequencer Registry genesis path.
     pub sequencer_genesis_path: PathBuf,
 }
@@ -31,6 +37,8 @@ impl GenesisPaths {
         Self {
             accounts_genesis_path: dir.as_ref().join("accounts.json"),
             bank_genesis_path: dir.as_ref().join("bank.json"),
+            ibc_genesis_path: dir.as_ref().join("ibc.json"),
+            ibc_transfer_genesis_path: dir.as_ref().join("ibc_transfer.json"),
             sequencer_genesis_path: dir.as_ref().join("sequencer_registry.json"),
         }
     }
@@ -81,6 +89,8 @@ fn create_genesis_config<C: Context, Da: DaSpec>(
     Ok(GenesisConfig::new(
         accounts_config,
         bank_config,
+        ExampleModuleConfig {},
+        TransferConfig {},
         sequencer_registry_config,
     ))
 }

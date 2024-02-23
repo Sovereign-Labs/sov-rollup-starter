@@ -13,6 +13,8 @@ sov-modules-api = { workspace = true }
 sov-state = { workspace = true }
 sov-accounts = { workspace = true }
 sov-bank = { workspace = true }
+sov-ibc = { workspace = true }
+sov-ibc-transfer = { workspace = true }
 sov-sequencer-registry = { workspace = true }
 sov-mock-da = { workspace = true }
 sov-modules-stf-blueprint = { workspace = true }
@@ -28,15 +30,14 @@ jsonrpsee = { workspace = true, features = ["jsonrpsee-types"], optional = true 
 borsh = { workspace = true, features = ["rc", "bytes"] }
 clap = { workspace = true, features = ["derive"], optional = true }
 
-
-
-
 [features]
 default = ["serde"]
 native = [
     "sov-modules-api/native",
     "sov-accounts/native",
     "sov-bank/native",
+    "sov-ibc/native",
+    "sov-ibc-transfer/native",
     "sov-sequencer-registry/native",
     "sov-mock-da/native",
     "sov-modules-stf-blueprint/native",
@@ -49,6 +50,8 @@ native = [
 serde = [
     "sov-accounts/serde",
     "sov-bank/serde",
+    "sov-ibc/serde",
+    "sov-ibc-transfer/serde",
     "sov-modules-api/serde",
     "sov-sequencer-registry/serde",
 ]

@@ -35,7 +35,7 @@ wait_for_block() {
   local block_num="$1"
   local block_hash=""
 
-  # Wait for the block to be created 
+  # Wait for the block to be created
   while [[ -z "$block_hash" ]]; do
     # `|| echo` fallbacks to an empty string in case it's not ready
     block_hash="$(celestia-appd query block "$block_num" 2>/dev/null | jq '.block_id.hash' || echo)"
