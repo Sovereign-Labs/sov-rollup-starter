@@ -15,12 +15,12 @@
 
         celestia-app-src = {
             flake = false;
-            url = github:celestiaorg/celestia-app/v1.6.0;
+            url = github:celestiaorg/celestia-app/v1.3.0;
         };
 
         celestia-node-src = {
             flake = false;
-            url = github:celestiaorg/celestia-node/v0.12.4;
+            url = github:celestiaorg/celestia-node/v0.12.0;
         };
 
         gaia-src = {
