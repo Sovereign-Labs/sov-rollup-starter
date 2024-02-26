@@ -6,7 +6,7 @@ use std::sync::{Arc, RwLock};
 use async_trait::async_trait;
 use sov_db::ledger_db::LedgerDB;
 use sov_mock_da::{MockDaConfig, MockDaService, MockDaSpec};
-use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
+use sov_modules_api::default_spec::{DefaultSpec, ZkDefaultSpec};
 use sov_modules_api::Address;
 use sov_modules_api::Spec;
 use sov_modules_rollup_blueprint::RollupBlueprint;
@@ -14,7 +14,8 @@ use sov_modules_stf_blueprint::kernels::basic::BasicKernel;
 use sov_modules_stf_blueprint::StfBlueprint;
 use sov_prover_storage_manager::ProverStorageManager;
 use sov_risc0_adapter::host::Risc0Host;
-use sov_rollup_interface::zk::ZkvmHost;
+use sov_risc0_adapter::Risc0Verifier;
+use sov_rollup_interface::zk::{ZkvmGuest, ZkvmHost};
 use sov_state::config::Config as StorageConfig;
 use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
@@ -38,33 +39,34 @@ impl RollupBlueprint for MockRollup {
     /// The concrete ZkVm used in the rollup.
     type Vm = Risc0Host<'static>;
 
-    /// Context for the Zero Knowledge environment.
-    type ZkContext = ZkDefaultContext;
-    /// Context for the ZNative environment.
-    type NativeContext = DefaultContext;
+    /// Spec for the Zero Knowledge environment.
+    type ZkSpec = ZkDefaultSpec<Risc0Verifier>;
+
+    /// Spec for the Native environment.
+    type NativeSpec = DefaultSpec<Risc0Verifier>;
 
     /// Manager for the native storage lifecycle.
     type StorageManager = ProverStorageManager<MockDaSpec, DefaultStorageSpec>;
 
     /// Runtime for the Zero Knowledge environment.
-    type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
+    type ZkRuntime = Runtime<Self::ZkSpec, Self::DaSpec>;
     /// Runtime for the Native environment.
-    type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
+    type NativeRuntime = Runtime<Self::NativeSpec, Self::DaSpec>;
 
     /// Kernels.
-    type NativeKernel = BasicKernel<Self::NativeContext, Self::DaSpec>;
-    type ZkKernel = BasicKernel<Self::ZkContext, Self::DaSpec>;
+    type NativeKernel = BasicKernel<Self::NativeSpec, Self::DaSpec>;
+    type ZkKernel = BasicKernel<Self::ZkSpec, Self::DaSpec>;
 
     /// Prover service.
     type ProverService = ParallelProverService<
-        <<Self::NativeContext as Spec>::Storage as Storage>::Root,
-        <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
+        <<Self::NativeSpec as Spec>::Storage as Storage>::Root,
+        <<Self::NativeSpec as Spec>::Storage as Storage>::Witness,
         Self::DaService,
         Self::Vm,
         StfBlueprint<
-            Self::ZkContext,
+            Self::ZkSpec,
             Self::DaSpec,
-            <Self::Vm as ZkvmHost>::Guest,
+            <<Self::Vm as ZkvmHost>::Guest as ZkvmGuest>::Verifier,
             Self::ZkRuntime,
             Self::ZkKernel,
         >,
@@ -73,7 +75,7 @@ impl RollupBlueprint for MockRollup {
     /// This function generates RPC methods for the rollup, allowing for extension with custom endpoints.
     fn create_rpc_methods(
         &self,
-        storage: Arc<RwLock<<Self::NativeContext as Spec>::Storage>>,
+        storage: Arc<RwLock<<Self::NativeSpec as Spec>::Storage>>,
         ledger_db: &LedgerDB,
         da_service: &Self::DaService,
     ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
@@ -83,7 +85,7 @@ impl RollupBlueprint for MockRollup {
         #[allow(unused_mut)]
         let mut rpc_methods = sov_modules_rollup_blueprint::register_rpc::<
             Self::NativeRuntime,
-            Self::NativeContext,
+            Self::NativeSpec,
             Self::DaService,
         >(storage, ledger_db, da_service, sequencer)?;
 
