@@ -48,6 +48,7 @@ tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
 
 [dev-dependencies]
 tempfile = { workspace = true }
+sov-mock-zkvm = { workspace = true, features = ["native", "sov-modules"] }
 
 [features]
 default = ["mock_da"] # set mock_da as the default feature

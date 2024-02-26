@@ -29,6 +29,7 @@ sov-db = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", re
 sov-sequencer = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
 sov-rollup-interface = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
 sov-risc0-adapter = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
+sov-mock-zkvm = {  git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b"  }
 sov-first-read-last-write-cache = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
 sov-cli = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
 sov-mock-da = { git = "ssh://git@github.com/Sovereign-Labs/sovereign-sdk-wip.git", rev = "5a144d60eefaf9ce166bbfd66324b959aa4ae82b" }
