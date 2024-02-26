@@ -41,9 +41,7 @@ tokio = { workspace = true }
 
 risc0-starter = { path = "../provers/risc0" }
 stf-starter = { path = "../stf", features = ["native"] }
-
-
-sov-risc0-adapter = { workspace = true, features = ["native"] }
+sov-risc0-adapter = { workspace = true, features = ["native", "sov-modules"] }
 
 # binary dependencies
 tracing-subscriber = { version = "0.3.17", features = ["env-filter"] }
