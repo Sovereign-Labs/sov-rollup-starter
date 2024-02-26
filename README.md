@@ -32,19 +32,31 @@ $ cargo run --bin node
 $ make test-create-token
 ```
 
-#### 5. Wait for the transaction to be submitted.
+#### 5. Note the transaction hash from the output of the above command
+
+```text
+Your batch was submitted to the sequencer for publication. Response: "Submitted 1 transactions"
+0: 633764b4ac1e0a6259d786e4a2b8b916f16c2c9690359d8b53995fd6d80747cd
+```
+
+#### 6. Wait for the transaction to be submitted.
 ```sh,test-ci
 $ make wait-ten-seconds
 ```
 
+#### 7. To get the token address, fetch the events of the transaction hash from #5
+```bash,test-ci
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"ledger_getEventsByTxnHash","params":["633764b4ac1e0a6259d786e4a2b8b916f16c2c9690359d8b53995fd6d80747cd"],"id":1}' http://127.0.0.1:12345
+{"jsonrpc":"2.0","result":[{"event_value":{"TokenCreated":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"}},"module_name":"bank","module_address":"sov1r5glamudyy9ysysfjkwu3wf9cjqs98e47tzc6pxuqlp48phqk36sthwg6h"}],"id":1}
+```
 
-#### 6. Test if token creation succeeded:
+#### 8. Test if token creation succeeded:
 
 ```sh,test-ci
 $ make test-bank-supply-of
 ```
 
-#### 7. The output of the above script:
+#### 9. The output of the above script:
 
 ```bash,test-ci,bashtestmd:compare-output
 $ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}' http://127.0.0.1:12345
@@ -86,14 +98,28 @@ Using `CELESTIA=1` will enable the client to be built with Celestia support and 
 $ CELESTIA=1 make test-create-token
 ```
 
-#### 6. Test if token creation succeeded:
+#### 6. Note the transaction hash from the output of the above command
+
+```text
+Your batch was submitted to the sequencer for publication. Response: "Submitted 1 transactions"
+0: 633764b4ac1e0a6259d786e4a2b8b916f16c2c9690359d8b53995fd6d80747cd
+```
+
+
+#### 7. To get the token address, fetch the events of the transaction hash from #5
+```bash,test-ci
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"ledger_getEventsByTxnHash","params":["633764b4ac1e0a6259d786e4a2b8b916f16c2c9690359d8b53995fd6d80747cd"],"id":1}' http://127.0.0.1:12345
+{"jsonrpc":"2.0","result":[{"event_value":{"TokenCreated":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"}},"module_name":"bank","module_address":"sov1r5glamudyy9ysysfjkwu3wf9cjqs98e47tzc6pxuqlp48phqk36sthwg6h"}],"id":1}
+```
+
+#### 8. Test if token creation succeeded:
 
 
 ```
 $ make test-bank-supply-of
 ```
 
-#### 7. The output of the above script:
+#### 9. The output of the above script:
 
 ```
 $ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"bank_supplyOf","params":{"token_address":"sov1zdwj8thgev2u3yyrrlekmvtsz4av4tp3m7dm5mx5peejnesga27svq9m72"},"id":1}' http://127.0.0.1:12345
