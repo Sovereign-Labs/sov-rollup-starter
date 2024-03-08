@@ -86,17 +86,16 @@ let
             lockFile = ../crates/provers/risc0/guest-celestia/Cargo.lock;
             outputHashes = {
                 "celestia-proto-0.1.0" = "sha256-iUgrctxdJUyhfrEQ0zoVj5AKIqgj/jQVNli5/K2nxK0=";
-                "ibc-app-transfer-0.50.0" = "sha256-4pjCPDzjVrNGQ3IBJvptA73Bu8G7QZGubokeuryCB6A=";
-                "ibc-proto-0.41.0" = "sha256-uUfB6K/WuLb2+OMX8MB2r5ptFsgkF3OVbBWFFMRdlTw=";
-                "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
-                "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
-                "risc0-binfmt-0.19.1" = "sha256-Av3rpNhDny8FroOcn8eyvZcR8hFSNukA7n9impm1HHU=";
                 "crypto-bigint-0.5.2" = "sha256-9rh8z3vwOQ7/mtzVbyADoRWgTzARF/nkhBwfKb7+A6I=";
                 "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
-                "risc0-cycle-utils-0.3.0" = "sha256-nWDM/GJkpXvlqOzRKKiAZTBVHRqxE54dvkNeJ2SH6UM=";
+                "ibc-app-transfer-0.50.0" = "sha256-8iWoYw9xX1D/Z+H7IVUP4AoEI4LjL3jzseAOvPBDFbU=";
+                "ibc-proto-0.41.0" = "sha256-OXqtIFDK5KdYW39EkNGGtfuDvOAMjmxzfnSpm1NWpRc=";
+                "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
+                "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
+                "risc0-cycle-utils-0.3.0" = "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=";
                 "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
-                "sov-celestia-client-0.1.0" = "sha256-5/k0b1YsO+uSMyaE6qJxZydizEzT0YqrprxyGr6MsjI=";
+                "sov-celestia-client-0.1.0" = "sha256-5o3GYYXfpcqI5qyCSzIKbYmm/wj2Zs+k+6WoVctvfW0=";
+                "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
             };
         };
 

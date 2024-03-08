@@ -427,6 +427,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "borsh"
+version = "1.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f58b559fd6448c6e2fd0adb5720cd98a2506594cafa4737ff98c396f3e82f667"
+dependencies = [
+ "cfg_aliases",
+]
+
+[[package]]
 name = "borsh-derive"
 version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -555,6 +564,12 @@ name = "cfg-if"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
+
+[[package]]
+name = "cfg_aliases"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fd16c4719339c4530435d38e511904438d07cce7950afa3718a84ac36c10e89e"
 
 [[package]]
 name = "cid"
@@ -1105,7 +1120,7 @@ name = "ibc-app-transfer-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core",
@@ -1186,7 +1201,7 @@ name = "ibc-core-channel-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core-client-types",
@@ -1236,7 +1251,7 @@ name = "ibc-core-client-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core-commitment-types",
@@ -1254,7 +1269,7 @@ name = "ibc-core-commitment-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-primitives",
@@ -1282,7 +1297,7 @@ name = "ibc-core-connection-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core-client-types",
@@ -1316,7 +1331,7 @@ name = "ibc-core-handler-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core-channel-types",
@@ -1356,7 +1371,7 @@ name = "ibc-core-host-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-primitives",
@@ -1383,7 +1398,7 @@ name = "ibc-core-router-types"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-core-host-types",
@@ -1410,7 +1425,7 @@ name = "ibc-primitives"
 version = "0.50.0"
 source = "git+https://github.com/cosmos/ibc-rs.git?rev=4463366e65#4463366e651c0d88dd2fc2923a1b6fff489cae3e"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "displaydoc",
  "ibc-proto",
@@ -1427,7 +1442,7 @@ version = "0.41.0"
 source = "git+https://github.com/cosmos/ibc-proto-rs.git?rev=1b1d7a9#1b1d7a94c012d2e23527c438acb2599833f0153f"
 dependencies = [
  "base64",
- "borsh",
+ "borsh 0.10.3",
  "bytes",
  "flex-error",
  "ics23",
@@ -1555,7 +1570,7 @@ version = "0.9.0"
 source = "git+https://github.com/penumbra-zone/jmt.git?rev=1d007e11cb68aa5ca13e9a5af4a12e6439d5f7b6#1d007e11cb68aa5ca13e9a5af4a12e6439d5f7b6"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "digest 0.10.7",
  "hashbrown 0.13.2",
  "hex",
@@ -1677,7 +1692,7 @@ name = "nmt-rs"
 version = "0.1.0"
 source = "git+https://github.com/Sovereign-Labs/nmt-rs.git?rev=d821332#d821332baa03aea625d23060dc239af57b9121f5"
 dependencies = [
- "borsh",
+ "borsh 0.10.3",
  "bytes",
  "serde",
  "sha2 0.10.8",
@@ -2142,6 +2157,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "risc0-cycle-macros"
+version = "0.3.0"
+source = "git+https://github.com/Sovereign-Labs/risc0-cycle-macros.git?rev=98948b8ee0e3edffcee7f3bd95a9d93c5c0941af#98948b8ee0e3edffcee7f3bd95a9d93c5c0941af"
+dependencies = [
+ "anyhow",
+ "borsh 1.3.1",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.52",
+]
+
+[[package]]
 name = "risc0-cycle-utils"
 version = "0.3.0"
 source = "git+https://github.com/Sovereign-Labs/risc0-cycle-macros.git?rev=98948b8ee0e3edffcee7f3bd95a9d93c5c0941af#98948b8ee0e3edffcee7f3bd95a9d93c5c0941af"
@@ -2486,7 +2513,7 @@ name = "sov-accounts"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "serde",
  "sov-modules-api",
  "sov-state",
@@ -2498,7 +2525,7 @@ name = "sov-bank"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "serde",
  "sov-modules-api",
  "sov-state",
@@ -2511,7 +2538,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "hex",
  "serde",
  "sov-chain-state",
@@ -2528,7 +2555,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "bech32",
- "borsh",
+ "borsh 0.10.3",
  "celestia-proto",
  "celestia-types",
  "hex",
@@ -2584,7 +2611,7 @@ name = "sov-chain-state"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "serde",
  "sov-modules-api",
  "sov-state",
@@ -2597,6 +2624,8 @@ version = "0.3.0"
 dependencies = [
  "ahash",
  "anyhow",
+ "risc0-cycle-macros",
+ "risc0-cycle-utils",
  "risc0-zkvm",
  "risc0-zkvm-platform",
  "sov-celestia-adapter",
@@ -2617,7 +2646,7 @@ dependencies = [
  "ahash",
  "anyhow",
  "base64",
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "ibc-app-transfer",
  "ibc-client-tendermint",
@@ -2642,7 +2671,7 @@ source = "git+https://github.com/informalsystems/sovereign-ibc.git?rev=e67de8#e6
 dependencies = [
  "anyhow",
  "base64",
- "borsh",
+ "borsh 0.10.3",
  "ibc-app-transfer",
  "ibc-core",
  "prost",
@@ -2660,7 +2689,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "borsh",
+ "borsh 0.10.3",
  "bytes",
  "hex",
  "serde",
@@ -2674,7 +2703,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "bech32",
- "borsh",
+ "borsh 0.10.3",
  "derive_more",
  "hex",
  "serde",
@@ -2693,7 +2722,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "bech32",
- "borsh",
+ "borsh 0.10.3",
  "derivative",
  "derive_more",
  "digest 0.10.7",
@@ -2712,7 +2741,7 @@ name = "sov-modules-macros"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "proc-macro2",
  "quote",
  "schemars",
@@ -2725,7 +2754,7 @@ name = "sov-modules-stf-blueprint"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "hex",
  "serde",
  "sov-blob-storage",
@@ -2744,7 +2773,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "bincode",
- "borsh",
+ "borsh 0.10.3",
  "bytemuck",
  "crypto-bigint",
  "ed25519-dalek",
@@ -2765,7 +2794,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-trait",
- "borsh",
+ "borsh 0.10.3",
  "bytes",
  "digest 0.10.7",
  "futures",
@@ -2782,7 +2811,7 @@ name = "sov-sequencer-registry"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "serde",
  "sov-bank",
  "sov-modules-api",
@@ -2795,7 +2824,7 @@ version = "0.3.0"
 dependencies = [
  "anyhow",
  "bcs",
- "borsh",
+ "borsh 0.10.3",
  "derivative",
  "hex",
  "jmt",
@@ -2812,7 +2841,7 @@ name = "sov-stf-runner"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "hex",
  "num_cpus",
  "serde",
@@ -2841,7 +2870,7 @@ name = "stf-starter"
 version = "0.3.0"
 dependencies = [
  "anyhow",
- "borsh",
+ "borsh 0.10.3",
  "serde",
  "serde_json",
  "sov-accounts",
