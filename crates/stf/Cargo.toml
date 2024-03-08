@@ -13,8 +13,8 @@ sov-modules-api = { workspace = true }
 sov-state = { workspace = true }
 sov-accounts = { workspace = true }
 sov-bank = { workspace = true }
-sov-ibc = { workspace = true }
-sov-ibc-transfer = { workspace = true }
+sov-ibc = { workspace = true, features = ["serde"] }
+sov-ibc-transfer = { workspace = true, features = ["serde"] }
 sov-sequencer-registry = { workspace = true }
 sov-mock-da = { workspace = true }
 sov-modules-stf-blueprint = { workspace = true }

@@ -5,7 +5,7 @@ use sov_accounts::AccountConfig;
 use sov_bank::BankConfig;
 use sov_ibc::ExampleModuleConfig;
 use sov_ibc_transfer::TransferConfig;
-use sov_modules_api::{Context, DaSpec};
+use sov_modules_api::{DaSpec, Spec};
 use sov_modules_stf_blueprint::Runtime as RuntimeTrait;
 use sov_sequencer_registry::SequencerConfig;
 use sov_stf_runner::read_json_file;

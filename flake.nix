@@ -10,7 +10,7 @@
 
         sovereign-sdk-src = {
             flake = false;
-            url = git+ssh://git@github.com/informalsystems/sovereign-sdk-wip?rev=a1d9ed80af46a0ea6e173204ca708c40ce592d3f;
+            url = git+ssh://git@github.com/informalsystems/sovereign-sdk-wip?rev=5a144d60eefaf9ce166bbfd66324b959aa4ae82b;
         };
 
         risc0-cycle-macros-src = {
@@ -95,6 +95,19 @@
                 packages = {
                     inherit risc0-rust gaia celestia-app celestia-node;
                     inherit (rollup-packages) rollup rollup-guest-mock rollup-guest-celestia;
+                };
+
+                devShell = nixpkgs.mkShell {
+                    # nativeBuildInputs = [
+                    #     nixpkgs.zlib
+                    #     nixpkgs.stdenv.cc.cc.lib
+                    #     nixpkgs.autoPatchelfHook
+                    #     nixpkgs.openssl_1_1
+                    # ];
+                    LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath [
+                        nixpkgs.openssl_1_1
+                        nixpkgs.stdenv.cc.cc.lib
+                    ];
                 };
             });
 }
