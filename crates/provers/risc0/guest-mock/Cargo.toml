@@ -36,6 +36,7 @@ sov-chain-state      = { path = "../../../../vendor/sovereign-sdk/module-system/
 sov-modules-api      = { path = "../../../../vendor/sovereign-sdk/module-system/sov-modules-api" }
 sov-state            = { path = "../../../../vendor/sovereign-sdk/module-system/sov-state" }
 sov-rollup-interface = { path = "../../../../vendor/sovereign-sdk/rollup-interface" }
+sov-accounts         = { path = "../../../../vendor/sovereign-sdk/module-system/module-implementations/sov-accounts" }
 
 [profile.release]
 debug = 1

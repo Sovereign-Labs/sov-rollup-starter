@@ -96,18 +96,5 @@
                     inherit risc0-rust gaia celestia-app celestia-node;
                     inherit (rollup-packages) rollup rollup-guest-mock rollup-guest-celestia;
                 };
-
-                devShell = nixpkgs.mkShell {
-                    # nativeBuildInputs = [
-                    #     nixpkgs.zlib
-                    #     nixpkgs.stdenv.cc.cc.lib
-                    #     nixpkgs.autoPatchelfHook
-                    #     nixpkgs.openssl_1_1
-                    # ];
-                    LD_LIBRARY_PATH = nixpkgs.lib.makeLibraryPath [
-                        nixpkgs.openssl_1_1
-                        nixpkgs.stdenv.cc.cc.lib
-                    ];
-                };
             });
 }
