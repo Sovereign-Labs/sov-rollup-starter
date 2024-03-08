@@ -13,10 +13,8 @@ pub use sov_bank::{BankRpcImpl, BankRpcServer};
 pub use sov_ibc::{IbcRpcImpl, IbcRpcServer};
 #[cfg(feature = "native")]
 pub use sov_ibc_transfer::{IbcTransferRpcImpl, IbcTransferRpcServer};
-use sov_modules_api::macros::DefaultRuntime;
-#[cfg(feature = "native")]
-use sov_modules_api::Spec;
-use sov_modules_api::{Context, DaSpec, DispatchCall, Event, Genesis, MessageCodec};
+use sov_modules_api::{macros::DefaultRuntime, Event};
+use sov_modules_api::{DaSpec, DispatchCall, Genesis, MessageCodec, Spec};
 #[cfg(feature = "native")]
 pub use sov_sequencer_registry::{SequencerRegistryRpcImpl, SequencerRegistryRpcServer};
 
@@ -59,36 +57,40 @@ use crate::genesis_config::GenesisPaths;
     sov_modules_api::macros::expose_rpc
 )]
 #[derive(Genesis, DispatchCall, Event, MessageCodec, DefaultRuntime)]
-#[serialization(borsh::BorshDeserialize, borsh::BorshSerialize)]
-#[cfg_attr(feature = "serde", serialization(serde::Serialize, serde::Deserialize))]
-pub struct Runtime<C: Context, Da: DaSpec> {
+#[serialization(
+    borsh::BorshDeserialize,
+    borsh::BorshSerialize,
+    serde::Serialize,
+    serde::Deserialize
+)]
+pub struct Runtime<S: Spec, Da: DaSpec> {
     /// The `accounts` module is responsible for managing user accounts and their nonces
-    pub accounts: sov_accounts::Accounts<C>,
+    pub accounts: sov_accounts::Accounts<S>,
     /// The bank module is responsible for minting, transferring, and burning tokens
-    pub bank: sov_bank::Bank<C>,
+    pub bank: sov_bank::Bank<S>,
     /// The `ibc` module is responsible for creating clients, connections and channels and managing IBC packets
-    pub ibc: sov_ibc::Ibc<C, Da>,
+    pub ibc: sov_ibc::Ibc<S, Da>,
     /// The `ibc_transfer` module is responsible for managing IBC transfers
-    pub ibc_transfer: sov_ibc_transfer::IbcTransfer<C>,
+    pub ibc_transfer: sov_ibc_transfer::IbcTransfer<S>,
     /// The sequencer registry module is responsible for authorizing users to sequencer rollup transactions
-    pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<C, Da>,
+    pub sequencer_registry: sov_sequencer_registry::SequencerRegistry<S, Da>,
 }
 
-impl<C, Da> sov_modules_stf_blueprint::Runtime<C, Da> for Runtime<C, Da>
+impl<S, Da> sov_modules_stf_blueprint::Runtime<S, Da> for Runtime<S, Da>
 where
-    C: Context,
+    S: Spec,
     Da: DaSpec,
 {
-    type GenesisConfig = GenesisConfig<C, Da>;
+    type GenesisConfig = GenesisConfig<S, Da>;
 
     #[cfg(feature = "native")]
     type GenesisPaths = GenesisPaths;
 
     #[cfg(feature = "native")]
     fn rpc_methods(
-        storage: std::sync::Arc<std::sync::RwLock<<C as Spec>::Storage>>,
+        storage: std::sync::Arc<std::sync::RwLock<<S as Spec>::Storage>>,
     ) -> jsonrpsee::RpcModule<()> {
-        get_rpc_methods::<C, Da>(storage)
+        get_rpc_methods::<S, Da>(storage)
     }
 
     #[cfg(feature = "native")]

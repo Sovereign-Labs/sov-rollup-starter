@@ -5,10 +5,8 @@ use borsh::BorshSerialize;
 use jsonrpsee::core::client::{Subscription, SubscriptionClientT};
 use jsonrpsee::rpc_params;
 use sov_mock_da::MockDaSpec;
-use sov_modules_api::default_context::DefaultContext;
-use sov_modules_api::default_signature::private_key::DefaultPrivateKey;
 use sov_modules_api::transaction::Transaction;
-use sov_modules_api::{PrivateKey, Spec};
+use sov_modules_api::{CryptoSpec, PrivateKey, Spec};
 use sov_modules_stf_blueprint::kernels::basic::BasicKernelGenesisPaths;
 use sov_sequencer::utils::SimpleClient;
 use sov_stf_runner::RollupProverConfig;
@@ -17,6 +15,9 @@ use stf_starter::RuntimeCall;
 
 const TOKEN_SALT: u64 = 0;
 const TOKEN_NAME: &str = "test_token";
+
+type DefaultSpec = sov_modules_api::default_spec::DefaultSpec<sov_mock_zkvm::MockZkVerifier>;
+type DefaultPrivateKey = <<DefaultSpec as Spec>::CryptoSpec as CryptoSpec>::PrivateKey;
 
 #[tokio::test]
 async fn bank_tx_tests() -> Result<(), anyhow::Error> {
@@ -46,29 +47,26 @@ async fn bank_tx_tests() -> Result<(), anyhow::Error> {
 
 async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow::Error> {
     let key = DefaultPrivateKey::generate();
-    let user_address: <DefaultContext as Spec>::Address = key.to_address();
+    let user_address: <DefaultSpec as Spec>::Address = key.to_address();
 
-    let token_address = sov_bank::get_token_address::<DefaultContext>(
-        TOKEN_NAME,
-        user_address.as_ref(),
-        TOKEN_SALT,
+    let token_address =
+        sov_bank::get_token_address::<DefaultSpec>(TOKEN_NAME, &user_address, TOKEN_SALT);
+
+    let msg = RuntimeCall::<DefaultSpec, MockDaSpec>::bank(
+        sov_bank::CallMessage::<DefaultSpec>::CreateToken {
+            salt: TOKEN_SALT,
+            token_name: TOKEN_NAME.to_string(),
+            initial_balance: 1000,
+            minter_address: user_address,
+            authorized_minters: vec![],
+        },
     );
-
-    let msg = RuntimeCall::<DefaultContext, MockDaSpec>::bank(sov_bank::CallMessage::<
-        DefaultContext,
-    >::CreateToken {
-        salt: TOKEN_SALT,
-        token_name: TOKEN_NAME.to_string(),
-        initial_balance: 1000,
-        minter_address: user_address,
-        authorized_minters: vec![],
-    });
     let chain_id = 0;
     let gas_tip = 0;
     let gas_limit = 0;
     let nonce = 0;
-    let max_gas_price = [10_000; 2].into();
-    let tx = Transaction::<DefaultContext>::new_signed_tx(
+    let max_gas_price = None;
+    let tx = Transaction::<DefaultSpec>::new_signed_tx(
         &key,
         msg.try_to_vec().unwrap(),
         chain_id,
@@ -95,7 +93,7 @@ async fn send_test_create_token_tx(rpc_address: SocketAddr) -> Result<(), anyhow
     // Wait until the rollup has processed the next slot
     let _ = slot_processed_subscription.next().await;
 
-    let balance_response = sov_bank::BankRpcClient::<DefaultContext>::balance_of(
+    let balance_response = sov_bank::BankRpcClient::<DefaultSpec>::balance_of(
         client.http(),
         None,
         user_address,

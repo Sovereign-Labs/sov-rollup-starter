@@ -1,10 +1,11 @@
 #![deny(missing_docs)]
 //! StarterRollup provides a minimal self-contained rollup implementation
+
 use async_trait::async_trait;
 use sov_celestia_adapter::types::Namespace;
 use sov_celestia_adapter::verifier::{CelestiaSpec, CelestiaVerifier, RollupParams};
 use sov_celestia_adapter::{CelestiaConfig, CelestiaService};
-use sov_modules_api::default_context::{DefaultContext, ZkDefaultContext};
+use sov_modules_api::default_spec::{DefaultSpec, ZkDefaultSpec};
 use sov_modules_api::Address;
 use sov_modules_api::Spec;
 use sov_modules_rollup_blueprint::RollupBlueprint;
@@ -12,7 +13,8 @@ use sov_modules_stf_blueprint::kernels::basic::BasicKernel;
 use sov_modules_stf_blueprint::StfBlueprint;
 use sov_prover_storage_manager::ProverStorageManager;
 use sov_risc0_adapter::host::Risc0Host;
-use sov_rollup_interface::zk::ZkvmHost;
+use sov_risc0_adapter::Risc0Verifier;
+use sov_rollup_interface::zk::{ZkvmGuest, ZkvmHost};
 use sov_state::config::Config as StorageConfig;
 use sov_state::Storage;
 use sov_state::{DefaultStorageSpec, ZkStorage};
@@ -40,8 +42,11 @@ impl RollupBlueprint for CelestiaRollup {
     type DaConfig = CelestiaConfig;
     type Vm = Risc0Host<'static>;
 
-    type ZkContext = ZkDefaultContext;
-    type NativeContext = DefaultContext;
+    /// Spec for the Zero Knowledge environment.
+    type ZkSpec = ZkDefaultSpec<Risc0Verifier>;
+
+    /// Spec for the Native environment.
+    type NativeSpec = DefaultSpec<Risc0Verifier>;
 
     type StorageManager = ProverStorageManager<CelestiaSpec, DefaultStorageSpec>;
     type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
@@ -52,14 +57,14 @@ impl RollupBlueprint for CelestiaRollup {
     type ZkKernel = BasicKernel<Self::ZkContext, Self::DaSpec>;
 
     type ProverService = ParallelProverService<
-        <<Self::NativeContext as Spec>::Storage as Storage>::Root,
-        <<Self::NativeContext as Spec>::Storage as Storage>::Witness,
+        <<Self::NativeSpec as Spec>::Storage as Storage>::Root,
+        <<Self::NativeSpec as Spec>::Storage as Storage>::Witness,
         Self::DaService,
         Self::Vm,
         StfBlueprint<
-            Self::ZkContext,
+            Self::ZkSpec,
             Self::DaSpec,
-            <Self::Vm as ZkvmHost>::Guest,
+            <<Self::Vm as ZkvmHost>::Guest as ZkvmGuest>::Verifier,
             Self::ZkRuntime,
             Self::ZkKernel,
         >,
@@ -67,7 +72,7 @@ impl RollupBlueprint for CelestiaRollup {
 
     fn create_rpc_methods(
         &self,
-        storage: Arc<RwLock<<Self::NativeContext as Spec>::Storage>>,
+        storage: Arc<RwLock<<Self::NativeSpec as sov_modules_api::Spec>::Storage>>,
         ledger_db: &sov_db::ledger_db::LedgerDB,
         da_service: &Self::DaService,
     ) -> Result<jsonrpsee::RpcModule<()>, anyhow::Error> {
