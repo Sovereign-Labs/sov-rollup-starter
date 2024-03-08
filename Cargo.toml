@@ -8,7 +8,8 @@ members = [
 ]
 
 exclude = [
-    "vendor/sovereign-sdk"
+    "vendor/sovereign-sdk",
+    "vendor/risc0-cycle-macros"
 ]
 
 [workspace.package]

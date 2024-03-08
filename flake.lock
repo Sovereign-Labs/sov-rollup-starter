@@ -119,6 +119,23 @@
         "type": "github"
       }
     },
+    "risc0-cycle-macros-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707815844,
+        "narHash": "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=",
+        "owner": "Sovereign-Labs",
+        "repo": "risc0-cycle-macros",
+        "rev": "98948b8ee0e3edffcee7f3bd95a9d93c5c0941af",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sovereign-Labs",
+        "repo": "risc0-cycle-macros",
+        "rev": "98948b8ee0e3edffcee7f3bd95a9d93c5c0941af",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "celestia-app-src": "celestia-app-src",
@@ -126,6 +143,7 @@
         "flake-utils": "flake-utils",
         "gaia-src": "gaia-src",
         "nixpkgs": "nixpkgs",
+        "risc0-cycle-macros-src": "risc0-cycle-macros-src",
         "rust-overlay": "rust-overlay",
         "sovereign-sdk-src": "sovereign-sdk-src"
       }

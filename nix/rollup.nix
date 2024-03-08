@@ -3,6 +3,7 @@
 ,   rust-bin
 ,   risc0-rust
 ,   sovereign-sdk-src
+,   risc0-cycle-macros-src
 }:
 let
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
@@ -14,6 +15,7 @@ let
             mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
             cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
+            cp -r ${risc0-cycle-macros-src} $out/vendor/risc0-cycle-macros
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../constants.json} $out/constants.json
         '';
@@ -29,6 +31,7 @@ let
             mkdir -p $out/crates $out/vendor
             cp -r . $out/crates
             cp -r ${sovereign-sdk-src} $out/vendor/sovereign-sdk
+            cp -r ${risc0-cycle-macros-src} $out/vendor/risc0-cycle-macros
             cp ${../Cargo.toml} $out/Cargo.toml
             cp ${../Cargo.lock} $out/Cargo.lock
             cp ${../constants.json} $out/constants.json
@@ -92,7 +95,6 @@ let
                 "ibc-proto-0.41.0" = "sha256-OXqtIFDK5KdYW39EkNGGtfuDvOAMjmxzfnSpm1NWpRc=";
                 "jmt-0.9.0" = "sha256-pq1v6FXS//6Dh+fdysQIVp+RVLHdXrW5aDx3263O1rs=";
                 "nmt-rs-0.1.0" = "sha256-jcHbqyIKk8ZDDjSz+ot5YDxROOnrpM4TRmNFVfNniwU=";
-                "risc0-cycle-utils-0.3.0" = "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=";
                 "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
                 "sov-celestia-client-0.1.0" = "sha256-5o3GYYXfpcqI5qyCSzIKbYmm/wj2Zs+k+6WoVctvfW0=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";

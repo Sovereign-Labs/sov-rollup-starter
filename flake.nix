@@ -13,6 +13,11 @@
             url = git+ssh://git@github.com/informalsystems/sovereign-sdk-wip?rev=a1d9ed80af46a0ea6e173204ca708c40ce592d3f;
         };
 
+        risc0-cycle-macros-src = {
+            flake = false;
+            url = github:Sovereign-Labs/risc0-cycle-macros?rev=98948b8ee0e3edffcee7f3bd95a9d93c5c0941af;
+        };
+
         celestia-app-src = {
             flake = false;
             url = github:celestiaorg/celestia-app/v1.3.0;
@@ -66,7 +71,7 @@
 
                 rollup-packages = import ./nix/rollup.nix {
                     inherit nixpkgs rust-bin risc0-rust;
-                    inherit (inputs) sovereign-sdk-src;
+                    inherit (inputs) sovereign-sdk-src risc0-cycle-macros-src;
                 };
 
                 gaia = import ./nix/gaia.nix {
