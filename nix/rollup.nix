@@ -4,6 +4,7 @@
 ,   risc0-rust
 ,   sovereign-sdk-src
 ,   risc0-cycle-macros-src
+,   risc0-circuit
 }:
 let
     rollup-guest-src = nixpkgs.stdenv.mkDerivation {
@@ -142,7 +143,6 @@ let
                 "curve25519-dalek-4.1.0" = "sha256-H8YMea3AIcUn9NGRfataNjCTzCK4NAjo4ZhWuPfT6ts=";
                 "ibc-0.50.0" = "sha256-8iWoYw9xX1D/Z+H7IVUP4AoEI4LjL3jzseAOvPBDFbU=";
                 "ibc-proto-0.41.0" = "sha256-OXqtIFDK5KdYW39EkNGGtfuDvOAMjmxzfnSpm1NWpRc=";
-                "risc0-cycle-utils-0.3.0" = "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=";
                 "sov-celestia-client-0.1.0" = "sha256-5o3GYYXfpcqI5qyCSzIKbYmm/wj2Zs+k+6WoVctvfW0=";
             };
         };
@@ -155,6 +155,7 @@ let
         PKG_CONFIG_PATH = "${nixpkgs.openssl.dev}/lib/pkgconfig";
 
         ROLLUP_ELF_PATH = "${rollup-guest-celestia}/rollup";
+        RECURSION_SRC_PATH = "${risc0-circuit}";
         CONSTANTS_MANIFEST = rollup-src;
 
         nativeBuildInputs = [

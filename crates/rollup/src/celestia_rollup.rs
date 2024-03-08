@@ -49,12 +49,12 @@ impl RollupBlueprint for CelestiaRollup {
     type NativeSpec = DefaultSpec<Risc0Verifier>;
 
     type StorageManager = ProverStorageManager<CelestiaSpec, DefaultStorageSpec>;
-    type ZkRuntime = Runtime<Self::ZkContext, Self::DaSpec>;
+    type ZkRuntime = Runtime<Self::ZkSpec, Self::DaSpec>;
 
-    type NativeRuntime = Runtime<Self::NativeContext, Self::DaSpec>;
+    type NativeRuntime = Runtime<Self::NativeSpec, Self::DaSpec>;
 
-    type NativeKernel = BasicKernel<Self::NativeContext, Self::DaSpec>;
-    type ZkKernel = BasicKernel<Self::ZkContext, Self::DaSpec>;
+    type NativeKernel = BasicKernel<Self::NativeSpec, Self::DaSpec>;
+    type ZkKernel = BasicKernel<Self::ZkSpec, Self::DaSpec>;
 
     type ProverService = ParallelProverService<
         <<Self::NativeSpec as Spec>::Storage as Storage>::Root,
@@ -82,7 +82,7 @@ impl RollupBlueprint for CelestiaRollup {
         #[allow(unused_mut)]
         let mut rpc_methods = sov_modules_rollup_blueprint::register_rpc::<
             Self::NativeRuntime,
-            Self::NativeContext,
+            Self::NativeSpec,
             Self::DaService,
         >(storage, ledger_db, da_service, sequencer)?;
 

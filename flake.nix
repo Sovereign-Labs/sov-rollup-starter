@@ -65,12 +65,17 @@
                     sha256 = "sha256:05k8d47zcrascjwwas9pnzg6qz5ambxvfh485flxsn6l7hxq3jf0";
                 };
 
+                risc0-circuit = builtins.fetchurl {
+                    url = "https://risc0-artifacts.s3.us-west-2.amazonaws.com/zkr/ae5736a42189aec2f04936c3aee4b5441e48b26b4fa1fae28657cf50cdf3cae4.zip";
+                    sha256 = "sha256:1r6ayg6m1ksphvigm8agdfr4h7j4npjaxhrn97qc5bl946j3cmxf";
+                };
+
                 risc0-rust = import ./nix/risc0.nix {
                     inherit nixpkgs rust-bin risc0-rust-tarball;
                 };
 
                 rollup-packages = import ./nix/rollup.nix {
-                    inherit nixpkgs rust-bin risc0-rust;
+                    inherit nixpkgs rust-bin risc0-rust risc0-circuit;
                     inherit (inputs) sovereign-sdk-src risc0-cycle-macros-src;
                 };
 
