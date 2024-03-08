@@ -2144,6 +2144,7 @@ dependencies = [
 [[package]]
 name = "risc0-cycle-utils"
 version = "0.3.0"
+source = "git+https://github.com/Sovereign-Labs/risc0-cycle-macros.git?rev=98948b8ee0e3edffcee7f3bd95a9d93c5c0941af#98948b8ee0e3edffcee7f3bd95a9d93c5c0941af"
 dependencies = [
  "bytes",
  "risc0-zkvm",
@@ -2623,6 +2624,7 @@ dependencies = [
  "ibc-core",
  "prost",
  "serde",
+ "serde_json",
  "sha2 0.10.8",
  "sov-celestia-client",
  "sov-chain-state",
@@ -2646,6 +2648,7 @@ dependencies = [
  "ibc-core",
  "prost",
  "serde",
+ "serde_json",
  "sov-bank",
  "sov-modules-api",
  "sov-rollup-interface",
@@ -3453,7 +3456,3 @@ dependencies = [
  "quote",
  "syn 2.0.52",
 ]
-
-[[patch.unused]]
-name = "risc0-cycle-macros"
-version = "0.3.0"

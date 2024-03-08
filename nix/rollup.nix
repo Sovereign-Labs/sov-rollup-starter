@@ -101,6 +101,7 @@ let
                 "sha2-0.10.8" = "sha256-vuFQFlbDXEW+n9+Nx2VeWanggCSd6NZ+GVEDFS9qZ2M=";
                 "sov-celestia-client-0.1.0" = "sha256-5o3GYYXfpcqI5qyCSzIKbYmm/wj2Zs+k+6WoVctvfW0=";
                 "tendermint-0.32.0" = "sha256-FtY7a+hBvQryATrs3mykCWFRe8ABTT6cuf5oh9IBElQ=";
+                "risc0-cycle-utils-0.3.0" = "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=";
             };
         };
 
@@ -144,6 +145,7 @@ let
                 "ibc-0.50.0" = "sha256-8iWoYw9xX1D/Z+H7IVUP4AoEI4LjL3jzseAOvPBDFbU=";
                 "ibc-proto-0.41.0" = "sha256-OXqtIFDK5KdYW39EkNGGtfuDvOAMjmxzfnSpm1NWpRc=";
                 "sov-celestia-client-0.1.0" = "sha256-5o3GYYXfpcqI5qyCSzIKbYmm/wj2Zs+k+6WoVctvfW0=";
+                "risc0-cycle-utils-0.3.0" = "sha256-tl6TvAUghcJvlnbD1iYH4mHjgSEtNKsAYN9ZZP69pyc=";
             };
         };
 

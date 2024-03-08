@@ -35,9 +35,6 @@ sov-modules-api      = { path = "../../../../vendor/sovereign-sdk/module-system/
 sov-state            = { path = "../../../../vendor/sovereign-sdk/module-system/sov-state" }
 sov-rollup-interface = { path = "../../../../vendor/sovereign-sdk/rollup-interface" }
 
-[patch.'https://github.com/Sovereign-Labs/risc0-cycle-macros.git']
-risc0-cycle-utils    = { path = "../../../../vendor/risc0-cycle-macros/crates/utils" }
-
 [profile.release]
 debug = 1
 lto = true

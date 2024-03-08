@@ -68,6 +68,3 @@ sov-state            = { path = "./vendor/sovereign-sdk/module-system/sov-state"
 sov-bank             = { path = "./vendor/sovereign-sdk/module-system/module-implementations/sov-bank" }
 sov-chain-state      = { path = "./vendor/sovereign-sdk/module-system/module-implementations/sov-chain-state" }
 sov-rollup-interface = { path = "./vendor/sovereign-sdk/rollup-interface" }
-
-[patch.'https://github.com/Sovereign-Labs/risc0-cycle-macros.git']
-risc0-cycle-utils    = { path = "./vendor/risc0-cycle-macros/crates/utils" }

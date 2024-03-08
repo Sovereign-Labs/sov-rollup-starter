@@ -3808,6 +3808,7 @@ dependencies = [
 [[package]]
 name = "risc0-cycle-utils"
 version = "0.3.0"
+source = "git+https://github.com/Sovereign-Labs/risc0-cycle-macros.git?rev=98948b8ee0e3edffcee7f3bd95a9d93c5c0941af#98948b8ee0e3edffcee7f3bd95a9d93c5c0941af"
 dependencies = [
  "bytes",
  "risc0-zkvm",
