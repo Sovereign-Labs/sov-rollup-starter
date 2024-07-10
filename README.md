@@ -130,7 +130,7 @@ _Blessed values:_
 
 Note also that:
 
-- The `base_fee_per_gas` parameter (whose initial value `INITIAL_GAS_LIMIT` is set by the rollup in the `constants.toml`) roughtly corresponds to the rollup's gas price and is an internal parameter of the rollup.
+- The `base_fee_per_gas` parameter (whose initial value `INITIAL_GAS_LIMIT` is set by the rollup in the `constants.toml` - see [here](https://github.com/Sovereign-Labs/sovereign-sdk-wip/blob/nightly/constants.toml)) roughtly corresponds to the rollup's gas price and is an internal parameter of the rollup.
 - A batch can consume up to `INITIAL_GAS_LIMIT` gas units of gas, and the gas target is `1/ELASTICITY_MULTIPLIER` times that value (for each dimension).
 - The `base_fee_per_gas` is dynamically adjusted based on the gas consumption of the batch. The adjustment follows the EIP-1559 which makes it goes down if the batch consumes more gas than the target (and respectively up if the batch consumes less gas than the target).
 
